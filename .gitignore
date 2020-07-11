@@ -4,6 +4,7 @@ node_modules
 # next.js
 .next
 .env*.local
+.env.development
 
 # testing
 coverage
@@ -16,3 +17,7 @@ yarn-error.log*
 # misc
 .DS_Store
 .vscode
+
+#pages
+pages/profile-sg.tsx
+pages/profile-ssr.tsx

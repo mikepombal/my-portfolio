@@ -1,16 +1,9 @@
-import Head from 'next/head';
+import Layout from '../components/Layout';
 
-export const Home = (): JSX.Element => (
-  <div className="container">
-    <Head>
-      <title>Portfolio</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
-
-    <main>
-      <h1 className="title">Welcome to my portfolio</h1>
-    </main>
-  </div>
+const Home = () => (
+  <Layout>
+    <h1>Index Page</h1>
+  </Layout>
 );
 
 export default Home;
