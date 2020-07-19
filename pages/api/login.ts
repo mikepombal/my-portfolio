@@ -1,4 +1,4 @@
-// import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 // import bcrypt from 'bcryptjs';
 import withSession from '../../lib/session';
 
@@ -26,22 +26,21 @@ import withSession from '../../lib/session';
 
 export default withSession(async (req, res) => {
   try {
-    console.log('*** LOGIN ***');
     const { username /*, password*/ } = await req.body;
 
-    // const loginToken = jwt.sign(
-    //   {
-    //     'https://hasura.io/jwt/claims': {
-    //       'x-hasura-allowed-roles': ['admin', 'login', 'user', 'anonymous'],
-    //       'x-hasura-default-role': 'login',
-    //     },
-    //   },
-    //   process.env.JWT_SECRET_KEY,
-    //   {
-    //     algorithm: process.env.JWT_SECRET_TYPE,
-    //     expiresIn: '1m',
-    //   }
-    // );
+    const loginToken = jwt.sign(
+      {
+        'https://hasura.io/jwt/claims': {
+          'x-hasura-allowed-roles': ['admin', 'login', 'user', 'anonymous'],
+          'x-hasura-default-role': 'login',
+        },
+      },
+      process.env.JWT_SECRET_KEY,
+      {
+        algorithm: process.env.JWT_SECRET_TYPE,
+        expiresIn: '1m',
+      }
+    );
 
     // const { data, errors } = await execute(
     //   { username },
@@ -72,7 +71,7 @@ export default withSession(async (req, res) => {
     //   }
     // );
 
-    const user = { isLoggedIn: true, username /*, token*/ };
+    const user = { isLoggedIn: true, username, token: loginToken };
     req.session.set('user', user);
     await req.session.save();
     res.json(user);
