@@ -56,22 +56,22 @@ export default withSession(async (req, res) => {
       return res.status(403).send('');
     }
 
-    // const token = jwt.sign(
-    //   {
-    //     'https://hasura.io/jwt/claims': {
-    //       'x-hasura-allowed-roles': ['admin', 'login', 'user', 'anonymous'],
-    //       'x-hasura-default-role': 'user',
-    //       'x-hasura-user-id': username,
-    //     },
-    //   },
-    //   process.env.JWT_SECRET_KEY,
-    //   {
-    //     algorithm: process.env.JWT_SECRET_TYPE,
-    //     expiresIn: '1d',
-    //   }
-    // );
+    const token = jwt.sign(
+      {
+        'https://hasura.io/jwt/claims': {
+          'x-hasura-allowed-roles': ['admin', 'login', 'user', 'anonymous'],
+          'x-hasura-default-role': 'user',
+          'x-hasura-user-id': username,
+        },
+      },
+      process.env.JWT_SECRET_KEY,
+      {
+        algorithm: process.env.JWT_SECRET_TYPE,
+        expiresIn: '1d',
+      }
+    );
 
-    const user = { isLoggedIn: true, username, data };
+    const user = { isLoggedIn: true, username, token };
     req.session.set('user', user);
     await req.session.save();
     res.json(user);
