@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-// import bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import withSession from '../../lib/session';
 
 const HASURA_OPERATION = `
@@ -26,7 +26,7 @@ const execute = async (variables, sessionVariables) => {
 
 export default withSession(async (req, res) => {
   try {
-    const { username /*, password*/ } = await req.body;
+    const { username, password } = await req.body;
 
     const loginToken = jwt.sign(
       {
@@ -47,14 +47,14 @@ export default withSession(async (req, res) => {
       { Authorization: `Bearer ${loginToken}` }
     );
 
-    // if (errors) {
-    //   console.warn(errors);
-    //   return res.status(401).send('');
-    // }
+    if (errors) {
+      console.warn(errors);
+      return res.status(401).send('');
+    }
 
-    // if (!bcrypt.compareSync(password, data.users_by_pk.password)) {
-    //   return res.status(403).send('');
-    // }
+    if (!bcrypt.compareSync(password, data.users_by_pk.password)) {
+      return res.status(403).send('');
+    }
 
     // const token = jwt.sign(
     //   {
@@ -71,7 +71,7 @@ export default withSession(async (req, res) => {
     //   }
     // );
 
-    const user = { isLoggedIn: true, username, data, errors };
+    const user = { isLoggedIn: true, username, data };
     req.session.set('user', user);
     await req.session.save();
     res.json(user);
