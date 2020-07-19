@@ -17,6 +17,7 @@ const Login = () => {
 
     const body = {
       username: e.currentTarget.username.value,
+      password: e.currentTarget.password.value,
     };
 
     try {
