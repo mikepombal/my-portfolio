@@ -2,27 +2,27 @@ import jwt from 'jsonwebtoken';
 // import bcrypt from 'bcryptjs';
 import withSession from '../../lib/session';
 
-// const HASURA_OPERATION = `
-//   query getUser($username: String!) {
-//     users_by_pk(username: $username){
-//       username
-//       password
-//     }
-//   }
-// `;
+const HASURA_OPERATION = `
+  query getUser($username: String!) {
+    users_by_pk(username: $username){
+      username
+      password
+    }
+  }
+`;
 
-// const execute = async (variables, sessionVariables) => {
-//   const fetchResponse = await fetch(process.env.HASURA_URL, {
-//     method: 'POST',
-//     body: JSON.stringify({
-//       query: HASURA_OPERATION,
-//       variables,
-//     }),
-//     headers: sessionVariables,
-//   });
-//   const result = await fetchResponse.json();
-//   return result;
-// };
+const execute = async (variables, sessionVariables) => {
+  const fetchResponse = await fetch(process.env.HASURA_URL, {
+    method: 'POST',
+    body: JSON.stringify({
+      query: HASURA_OPERATION,
+      variables,
+    }),
+    headers: sessionVariables,
+  });
+  const result = await fetchResponse.json();
+  return result;
+};
 
 export default withSession(async (req, res) => {
   try {
@@ -42,10 +42,10 @@ export default withSession(async (req, res) => {
       }
     );
 
-    // const { data, errors } = await execute(
-    //   { username },
-    //   { Authorization: `Bearer ${loginToken}` }
-    // );
+    const { data, errors } = await execute(
+      { username },
+      { Authorization: `Bearer ${loginToken}` }
+    );
 
     // if (errors) {
     //   console.warn(errors);
@@ -71,7 +71,7 @@ export default withSession(async (req, res) => {
     //   }
     // );
 
-    const user = { isLoggedIn: true, username, token: loginToken };
+    const user = { isLoggedIn: true, username, data, errors };
     req.session.set('user', user);
     await req.session.save();
     res.json(user);
