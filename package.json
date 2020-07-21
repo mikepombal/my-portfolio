@@ -26,7 +26,13 @@
     ]
   },
   "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
     "bcryptjs": "^2.4.3",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.10.4",
     "jsonwebtoken": "^8.5.1",
     "next": "latest",
     "next-iron-session": "^4.1.7",

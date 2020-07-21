@@ -71,7 +71,12 @@ export default withSession(async (req, res) => {
       }
     );
 
-    const user = { isLoggedIn: true, username, token };
+    const user = {
+      isLoggedIn: true,
+      username,
+      token,
+      graphql: process.env.HASURA_URL,
+    };
     req.session.set('user', user);
     await req.session.save();
     res.json(user);
