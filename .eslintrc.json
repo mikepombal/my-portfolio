@@ -40,5 +40,13 @@
         "allow": ["warn", "error"]
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["types/generated/graphql.tsx"],
+      "rules": {
+        "@typescript-eslint/camelcase": "off"
+      }
+    }
+  ]
 }
