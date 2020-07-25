@@ -1,17 +1,7 @@
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
-const ALL_TICKETS_QUERY = gql`
-  query allTickets {
-    tickets {
-      name
-      ticket
-    }
-  }
-`;
+import { useAllTicketsQuery } from '../types/generated/graphql';
 
 export default function TicketsList() {
-  const { loading, data } = useQuery(ALL_TICKETS_QUERY);
+  const { loading, data } = useAllTicketsQuery();
 
   return loading ? (
     <div>Loading</div>

@@ -19,3 +19,6 @@ yarn-error.log*
 #pages
 pages/profile-sg.tsx
 pages/profile-ssr.tsx
+
+#codegen
+codegen.js
