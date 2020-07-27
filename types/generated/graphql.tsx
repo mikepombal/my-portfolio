@@ -623,6 +623,20 @@ export enum Users_Update_Column {
   Username = 'username'
 }
 
+export type InsertTicketMutationVariables = Exact<{
+  ticket: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type InsertTicketMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_tickets_one?: Maybe<(
+    { __typename?: 'tickets' }
+    & Pick<Tickets, 'name' | 'ticket'>
+  )> }
+);
+
 export type AllTicketsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -635,6 +649,40 @@ export type AllTicketsQuery = (
 );
 
 
+export const InsertTicketDocument = gql`
+    mutation insertTicket($ticket: String!, $name: String!) {
+  insert_tickets_one(object: {name: $name, ticket: $ticket}) {
+    name
+    ticket
+  }
+}
+    `;
+export type InsertTicketMutationFn = ApolloReactCommon.MutationFunction<InsertTicketMutation, InsertTicketMutationVariables>;
+
+/**
+ * __useInsertTicketMutation__
+ *
+ * To run a mutation, you first call `useInsertTicketMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertTicketMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertTicketMutation, { data, loading, error }] = useInsertTicketMutation({
+ *   variables: {
+ *      ticket: // value for 'ticket'
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useInsertTicketMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<InsertTicketMutation, InsertTicketMutationVariables>) {
+        return ApolloReactHooks.useMutation<InsertTicketMutation, InsertTicketMutationVariables>(InsertTicketDocument, baseOptions);
+      }
+export type InsertTicketMutationHookResult = ReturnType<typeof useInsertTicketMutation>;
+export type InsertTicketMutationResult = ApolloReactCommon.MutationResult<InsertTicketMutation>;
+export type InsertTicketMutationOptions = ApolloReactCommon.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
 export const AllTicketsDocument = gql`
     query allTickets {
   tickets {

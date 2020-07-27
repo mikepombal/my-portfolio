@@ -1,18 +1,22 @@
 import useUser from '../lib/useUser';
 import Layout from '../components/Layout';
-import TicketsList from '../components/TicketsList';
+import TicketsList from '../components/tickets/TicketsList';
+import TicketForm from '../components/tickets/TicketForm';
 
 const Tickets = () => {
   const { user } = useUser({ redirectTo: '/login' });
 
-  if (!user || user.isLoggedIn === false) {
-    return <Layout>loading...</Layout>;
-  }
-
   return (
     <Layout>
-      <h1>Ticket</h1>
-      <TicketsList />
+      {!user || user.isLoggedIn === false ? (
+        <div>loading...</div>
+      ) : (
+        <>
+          <h1>Tickets</h1>
+          <TicketsList />
+          <TicketForm />
+        </>
+      )}
     </Layout>
   );
 };

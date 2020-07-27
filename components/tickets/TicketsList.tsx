@@ -1,6 +1,6 @@
-import { useAllTicketsQuery } from '../types/generated/graphql';
+import { useAllTicketsQuery } from '../../types/generated/graphql';
 
-export default function TicketsList() {
+const TicketsList = () => {
   const { loading, data } = useAllTicketsQuery();
 
   return loading ? (
@@ -12,4 +12,6 @@ export default function TicketsList() {
       ))}
     </ul>
   );
-}
+};
+
+export default TicketsList;

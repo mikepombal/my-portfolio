@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const ALL_TICKETS_QUERY = gql`
+gql`
   query allTickets {
     tickets {
       name
