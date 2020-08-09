@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 gql`
   query allTickets {
-    tickets {
+    tickets(order_by: { ticket: asc }) {
       name
       ticket
     }

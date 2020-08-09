@@ -685,7 +685,7 @@ export type InsertTicketMutationResult = ApolloReactCommon.MutationResult<Insert
 export type InsertTicketMutationOptions = ApolloReactCommon.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
 export const AllTicketsDocument = gql`
     query allTickets {
-  tickets {
+  tickets(order_by: {ticket: asc}) {
     name
     ticket
   }
