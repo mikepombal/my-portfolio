@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }) {
       }}
     >
       {!user || !user.isLoggedIn ? (
-        <Component {...pageProps} />
+        <Component {...pageProps} noApollo />
       ) : (
         <Apollo Component={Component} pageProps={pageProps} user={user} />
       )}

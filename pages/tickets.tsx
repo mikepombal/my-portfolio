@@ -3,12 +3,12 @@ import Layout from '../components/Layout';
 import TicketsList from '../components/tickets/TicketsList';
 import TicketForm from '../components/tickets/TicketForm';
 
-const Tickets = () => {
-  const { user } = useUser({ redirectTo: '/login' });
+const Tickets = ({ noApollo }) => {
+  useUser({ redirectTo: '/login' });
 
   return (
     <Layout>
-      {!user || user.isLoggedIn === false ? (
+      {noApollo ? (
         <div>loading...</div>
       ) : (
         <>
