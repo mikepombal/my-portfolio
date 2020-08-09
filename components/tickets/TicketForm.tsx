@@ -11,6 +11,7 @@ const TicketForm = () => {
   const onSubmit = (data: Tickets_Insert_Input) => {
     insertTicket({
       variables: { ticket: data.ticket, name: data.name },
+      refetchQueries: ['allTickets'],
     });
   };
 
