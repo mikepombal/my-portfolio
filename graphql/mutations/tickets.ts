@@ -8,3 +8,15 @@ gql`
     }
   }
 `;
+
+gql`
+  mutation updateTicket($ticket: String!, $name: String!) {
+    update_tickets_by_pk(
+      _set: { name: $name }
+      pk_columns: { ticket: $ticket }
+    ) {
+      ticket
+      name
+    }
+  }
+`;

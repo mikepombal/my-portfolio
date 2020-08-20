@@ -1,7 +1,6 @@
 import useUser from '../lib/useUser';
 import Layout from '../components/Layout';
-import TicketsList from '../components/tickets/TicketsList';
-import TicketForm from '../components/tickets/TicketForm';
+import TicketsManagement from '../components/tickets/TicketsManagement';
 
 const Tickets = ({ noApollo }) => {
   useUser({ redirectTo: '/login' });
@@ -13,8 +12,7 @@ const Tickets = ({ noApollo }) => {
       ) : (
         <>
           <h1>Tickets</h1>
-          <TicketsList />
-          <TicketForm />
+          <TicketsManagement />
         </>
       )}
     </Layout>

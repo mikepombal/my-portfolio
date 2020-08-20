@@ -1,19 +1,8 @@
 import { useForm } from 'react-hook-form';
-import {
-  Tickets_Insert_Input,
-  useInsertTicketMutation,
-} from '../../types/generated/graphql';
+import { Tickets_Insert_Input } from '../../types/generated/graphql';
 
-const TicketForm = () => {
+const TicketForm = ({ onSubmit, selectedTicket }) => {
   const { register, handleSubmit, errors } = useForm<Tickets_Insert_Input>();
-  const [insertTicket] = useInsertTicketMutation();
-
-  const onSubmit = (data: Tickets_Insert_Input) => {
-    insertTicket({
-      variables: { ticket: data.ticket, name: data.name },
-      refetchQueries: ['allTickets'],
-    });
-  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -23,6 +12,8 @@ const TicketForm = () => {
           type="text"
           id="ticket"
           name="ticket"
+          disabled={!!selectedTicket}
+          defaultValue={selectedTicket?.ticket}
           ref={register({ required: true })}
         />
         {errors.ticket?.type === 'required' && (
@@ -35,13 +26,16 @@ const TicketForm = () => {
           type="text"
           id="name"
           name="name"
+          defaultValue={selectedTicket?.name}
           ref={register({ required: true })}
         />
         {errors.name?.type === 'required' && (
           <div className="error">Your must enter a name.</div>
         )}
       </div>
-      <button type="submit">Add Ticket</button>
+      <button type="submit">
+        {selectedTicket ? 'Update Ticket' : 'Add Ticket'}
+      </button>
     </form>
   );
 };

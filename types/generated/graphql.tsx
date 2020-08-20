@@ -637,6 +637,20 @@ export type InsertTicketMutation = (
   )> }
 );
 
+export type UpdateTicketMutationVariables = Exact<{
+  ticket: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type UpdateTicketMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_tickets_by_pk?: Maybe<(
+    { __typename?: 'tickets' }
+    & Pick<Tickets, 'ticket' | 'name'>
+  )> }
+);
+
 export type AllTicketsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -683,6 +697,40 @@ export function useInsertTicketMutation(baseOptions?: ApolloReactHooks.MutationH
 export type InsertTicketMutationHookResult = ReturnType<typeof useInsertTicketMutation>;
 export type InsertTicketMutationResult = ApolloReactCommon.MutationResult<InsertTicketMutation>;
 export type InsertTicketMutationOptions = ApolloReactCommon.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
+export const UpdateTicketDocument = gql`
+    mutation updateTicket($ticket: String!, $name: String!) {
+  update_tickets_by_pk(_set: {name: $name}, pk_columns: {ticket: $ticket}) {
+    ticket
+    name
+  }
+}
+    `;
+export type UpdateTicketMutationFn = ApolloReactCommon.MutationFunction<UpdateTicketMutation, UpdateTicketMutationVariables>;
+
+/**
+ * __useUpdateTicketMutation__
+ *
+ * To run a mutation, you first call `useUpdateTicketMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTicketMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTicketMutation, { data, loading, error }] = useUpdateTicketMutation({
+ *   variables: {
+ *      ticket: // value for 'ticket'
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useUpdateTicketMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateTicketMutation, UpdateTicketMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateTicketMutation, UpdateTicketMutationVariables>(UpdateTicketDocument, baseOptions);
+      }
+export type UpdateTicketMutationHookResult = ReturnType<typeof useUpdateTicketMutation>;
+export type UpdateTicketMutationResult = ApolloReactCommon.MutationResult<UpdateTicketMutation>;
+export type UpdateTicketMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateTicketMutation, UpdateTicketMutationVariables>;
 export const AllTicketsDocument = gql`
     query allTickets {
   tickets(order_by: {ticket: asc}) {
