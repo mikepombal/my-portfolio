@@ -1,3 +1,4 @@
+import '../styles/index.css';
 import { SWRConfig } from 'swr';
 import { ApolloProvider } from '@apollo/client';
 import fetch from '../lib/fetchJson';
