@@ -29,7 +29,7 @@ const Nav = () => {
   const { user, mutateUser } = useUser();
   const router = useRouter();
   return (
-    <nav className="bg-indigo-900 flex-0 w-20 text-gray-400">
+    <nav className="bg-indigo-900 flex-0 flex-shrink-0 w-20 text-gray-400">
       <ul className="flex-col">
         <Li label="H" href="/" isSelected={router.route === '/'} />
         {!user?.isLoggedIn ? (

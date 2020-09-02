@@ -10,10 +10,12 @@ const Tickets = ({ noApollo }) => {
       {noApollo ? (
         <div>loading...</div>
       ) : (
-        <>
-          <h1>Tickets</h1>
+        <div className="w-full p-4">
+          <h1 className="w-full p-4 font-bold text-2xl border-indigo-700 border-4 rounded-lg bg-indigo-500 text-white">
+            Tickets
+          </h1>
           <TicketsManagement />
-        </>
+        </div>
       )}
     </Layout>
   );

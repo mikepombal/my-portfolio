@@ -27,7 +27,9 @@ const TicketsManagement = () => {
   return (
     <div>
       <TicketsList selectTicket={setSelectedTicket} />
-      <TicketForm onSubmit={onSubmit} selectedTicket={selectedTicket} />
+      {selectedTicket && (
+        <TicketForm onSubmit={onSubmit} selectedTicket={selectedTicket} />
+      )}
     </div>
   );
 };

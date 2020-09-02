@@ -1,19 +1,35 @@
 import { useAllTicketsQuery } from '../../types/generated/graphql';
 
+const commonStyle =
+  'flex justify-center items-center h-full border-r border-dashed border-gray-800';
+
 const TicketsList = ({ selectTicket }) => {
   const { loading, data } = useAllTicketsQuery();
 
   return loading ? (
     <div>Loading</div>
   ) : (
-    <ul>
-      {data.tickets.map((ticket) => (
-        <li key={ticket.ticket}>
-          {`${ticket.name} (${ticket.ticket})`}
-          <button onClick={() => selectTicket(ticket)}>edit</button>
-        </li>
-      ))}
-    </ul>
+    <>
+      <div className="mt-8 flex bg-green-300 font-bold h-10 border-2 border-gray-800">
+        <div className={`${commonStyle} w-24`}>Ticket</div>
+        <div className={`${commonStyle} w-64`}>Name</div>
+        <div className={`${commonStyle} w-16`}>Edit</div>
+      </div>
+      <ul className="border-l-2 border-r-2 border-b-2 border-gray-800">
+        {data?.tickets.map((ticket) => (
+          <li
+            key={ticket.ticket}
+            className="flex h-10 border-gray-800 border-dotted border-b"
+          >
+            <div className={`${commonStyle} w-24`}>{ticket.ticket}</div>
+            <div className={`${commonStyle} w-64`}>{ticket.name}</div>
+            <div className={`${commonStyle} w-16`}>
+              <button onClick={() => selectTicket(ticket)}>edit</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 
