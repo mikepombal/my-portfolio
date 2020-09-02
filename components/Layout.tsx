@@ -12,11 +12,14 @@ const Layout = ({ children }) => (
       <title>Portfolio</title>
     </Head>
 
-    <div className="flex w-screen h-screen bg-gray-200">
-      <Nav />
+    <>
+      <div className="flex w-screen h-screen bg-gray-200">
+        <Nav />
 
-      <main className="flex-grow">{children}</main>
-    </div>
+        <main className="flex-grow">{children}</main>
+      </div>
+      <div id="modal-root" />
+    </>
   </>
 );
 

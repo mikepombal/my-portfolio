@@ -6,6 +6,7 @@ import {
 } from '../../types/generated/graphql';
 import TicketsList from './TicketsList';
 import TicketForm from './TicketForm';
+import Modal from '../Modal';
 
 const TicketsManagement = () => {
   const [selectedTicket, setSelectedTicket] = useState(null);
@@ -28,7 +29,9 @@ const TicketsManagement = () => {
     <div>
       <TicketsList selectTicket={setSelectedTicket} />
       {selectedTicket && (
-        <TicketForm onSubmit={onSubmit} selectedTicket={selectedTicket} />
+        <Modal onCancel={() => setSelectedTicket(null)}>
+          <TicketForm onSubmit={onSubmit} selectedTicket={selectedTicket} />
+        </Modal>
       )}
     </div>
   );
