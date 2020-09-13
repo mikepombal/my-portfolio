@@ -18,16 +18,16 @@ const Modal: React.FC<Modal> = ({ children, onCancel }) => {
 
   const modal = (
     <div className="absolute top-0 right-0 bottom-0 left-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white rounded-lg overflow-hidden">
-        <div className="p-6">{children}</div>
-        <div className="p-6 bg-indigo-800 flex justify-center text-indigo-800 text-xl">
+      <div className="bg-gray-200 rounded-lg overflow-hidden flex flex-col">
+        <div className="flex justify-end">
           <button
-            className="bg-white rounded-full px-4 py-2 font-semibold"
             onClick={onCancel}
+            className="py-2 px-4 self text-2xl font-extrabold bg-indigo-800 text-white rounded-bl-lg"
           >
-            Cancel
+            X
           </button>
         </div>
+        {children}
       </div>
     </div>
   );
