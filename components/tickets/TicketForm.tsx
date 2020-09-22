@@ -2,12 +2,38 @@ import { useForm } from 'react-hook-form';
 import { Tickets_Insert_Input } from '../../types/generated/graphql';
 import { LegacyRef } from 'react';
 
+interface Component {
+  id: string;
+  defaultValue?: string;
+  componentRef: LegacyRef<HTMLInputElement>;
+  disabled?: boolean;
+}
+
+const getComponent: React.FC<Component> = ({
+  id,
+  defaultValue,
+  componentRef,
+  disabled,
+}) => {
+  return (
+    <input
+      type="text"
+      id={id}
+      name={id}
+      defaultValue={defaultValue}
+      ref={componentRef}
+      disabled={disabled}
+      className="w-56 p-2 rounded-md"
+    />
+  );
+};
+
 interface Field {
   id: string;
   label: string;
   defaultValue?: string;
   componentRef: LegacyRef<HTMLInputElement>;
-  errorLabel: string | void;
+  errorLabel?: string | void;
   disabled?: boolean;
 }
 const Field: React.FC<Field> = ({
@@ -26,20 +52,16 @@ const Field: React.FC<Field> = ({
     >
       {label}:
     </label>
-    <input
-      type="text"
-      id={id}
-      name={id}
-      defaultValue={defaultValue}
-      ref={componentRef}
-      disabled={disabled}
-      className="w-56 p-2 rounded-md"
-    />
+    {getComponent({ id, componentRef, defaultValue, disabled })}
     {errorLabel && <div className="error">Your must enter a name.</div>}
   </div>
 );
 
-const TicketForm = ({ onSubmit, selectedTicket }) => {
+interface TicketForm {
+  onSubmit: (data: Tickets_Insert_Input) => Promise<void>;
+  selectedTicket: Tickets_Insert_Input;
+}
+const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
   const { register, handleSubmit, errors } = useForm<Tickets_Insert_Input>();
 
   return (
@@ -64,33 +86,18 @@ const TicketForm = ({ onSubmit, selectedTicket }) => {
             errors.ticket?.type === 'required' && 'You must enter a name.'
           }
         />
-        {/* <div className="field">
-          <label htmlFor="ticket">Ticket</label>
-          <input
-            type="text"
-            id="ticket"
-            name="ticket"
-            disabled={!!selectedTicket}
-            defaultValue={selectedTicket?.ticket}
-            ref={register({ required: true })}
-          />
-          {errors.ticket?.type === 'required' && (
-            <div className="error">Your must enter a ticket.</div>
-          )}
-        </div> */}
-        {/* <div className="field">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            defaultValue={selectedTicket?.name}
-            ref={register({ required: true })}
-          />
-          {errors.name?.type === 'required' && (
-            <div className="error">Your must enter a name.</div>
-          )}
-        </div> */}
+        <Field
+          id="ticket_type"
+          label="Type"
+          defaultValue={selectedTicket?.ticket_type}
+          componentRef={register()}
+        />
+        <Field
+          id="market"
+          label="Market"
+          defaultValue={selectedTicket?.market}
+          componentRef={register()}
+        />
       </div>
       <div className="px-6 py-4 bg-indigo-800 flex justify-center text-indigo-800 text-xl">
         <button

@@ -21,7 +21,12 @@ const TicketsManagement = () => {
   const onSubmit = async (data: Tickets_Insert_Input) => {
     const action = selectedTicket ? updateTicket : insertTicket;
     await action({
-      variables: { ticket: data.ticket, name: data.name },
+      variables: {
+        ticket: data.ticket,
+        name: data.name,
+        ticket_type: data.ticket_type,
+        market: data.market,
+      },
       refetchQueries: ['allTickets'],
     });
     setSelectedTicket(null);

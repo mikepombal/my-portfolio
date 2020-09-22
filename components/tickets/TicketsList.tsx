@@ -13,6 +13,8 @@ const TicketsList = ({ selectTicket }) => {
       <div className="mt-8 flex bg-green-300 font-bold h-10 border-2 border-gray-800">
         <div className={`${commonStyle} w-24`}>Ticket</div>
         <div className={`${commonStyle} w-64`}>Name</div>
+        <div className={`${commonStyle} w-24`}>Type</div>
+        <div className={`${commonStyle} w-24`}>Market</div>
         <div className={`${commonStyle} w-16`}>Edit</div>
       </div>
       <ul className="border-l-2 border-r-2 border-b-2 border-gray-800">
@@ -23,6 +25,8 @@ const TicketsList = ({ selectTicket }) => {
           >
             <div className={`${commonStyle} w-24`}>{ticket.ticket}</div>
             <div className={`${commonStyle} w-64`}>{ticket.name}</div>
+            <div className={`${commonStyle} w-24`}>{ticket.ticket_type}</div>
+            <div className={`${commonStyle} w-24`}>{ticket.market}</div>
             <div className={`${commonStyle} w-16`}>
               <button onClick={() => selectTicket(ticket)}>edit</button>
             </div>

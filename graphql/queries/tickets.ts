@@ -5,6 +5,8 @@ gql`
     tickets(order_by: { ticket: asc }) {
       name
       ticket
+      ticket_type
+      market
     }
   }
 `;
