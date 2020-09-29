@@ -1,61 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { Tickets_Insert_Input } from '../../types/generated/graphql';
-import { LegacyRef } from 'react';
-
-interface Component {
-  id: string;
-  defaultValue?: string;
-  componentRef: LegacyRef<HTMLInputElement>;
-  disabled?: boolean;
-}
-
-const getComponent: React.FC<Component> = ({
-  id,
-  defaultValue,
-  componentRef,
-  disabled,
-}) => {
-  return (
-    <input
-      type="text"
-      id={id}
-      name={id}
-      defaultValue={defaultValue}
-      ref={componentRef}
-      disabled={disabled}
-      className="w-56 p-2 rounded-md"
-    />
-  );
-};
-
-interface Field {
-  id: string;
-  label: string;
-  defaultValue?: string;
-  componentRef: LegacyRef<HTMLInputElement>;
-  errorLabel?: string | void;
-  disabled?: boolean;
-}
-const Field: React.FC<Field> = ({
-  id,
-  label,
-  defaultValue = '',
-  componentRef,
-  errorLabel,
-  disabled = false,
-}) => (
-  <div className="field mb-2">
-    <label
-      htmlFor={id}
-      className="w-32 inline-block pr-4"
-      style={{ textAlign: 'end' }}
-    >
-      {label}:
-    </label>
-    {getComponent({ id, componentRef, defaultValue, disabled })}
-    {errorLabel && <div className="error">Your must enter a name.</div>}
-  </div>
-);
+import { Field, ComponentType } from '../form/Field';
 
 interface TicketForm {
   onSubmit: (data: Tickets_Insert_Input) => Promise<void>;
@@ -76,6 +21,7 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           errorLabel={
             errors.ticket?.type === 'required' && 'You must enter a ticket.'
           }
+          type={ComponentType.INPUT}
         />
         <Field
           id="name"
@@ -85,18 +31,21 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           errorLabel={
             errors.ticket?.type === 'required' && 'You must enter a name.'
           }
+          type={ComponentType.INPUT}
         />
         <Field
           id="ticket_type"
           label="Type"
           defaultValue={selectedTicket?.ticket_type}
           componentRef={register()}
+          type={ComponentType.SELECT}
         />
         <Field
           id="market"
           label="Market"
           defaultValue={selectedTicket?.market}
           componentRef={register()}
+          type={ComponentType.SELECT}
         />
       </div>
       <div className="px-6 py-4 bg-indigo-800 flex justify-center text-indigo-800 text-xl">
