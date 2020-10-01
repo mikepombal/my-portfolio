@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Tickets_Insert_Input,
+  InsertTicketMutationVariables,
   useInsertTicketMutation,
   useUpdateTicketMutation,
 } from '../../types/generated/graphql';
@@ -13,12 +13,12 @@ const TicketsManagement = () => {
   const [
     selectedTicket,
     setSelectedTicket,
-  ] = useState<Tickets_Insert_Input | null>(null);
+  ] = useState<InsertTicketMutationVariables | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [insertTicket] = useInsertTicketMutation();
   const [updateTicket] = useUpdateTicketMutation();
 
-  const onSubmit = async (data: Tickets_Insert_Input) => {
+  const onSubmit = async (data: InsertTicketMutationVariables) => {
     const action = selectedTicket ? updateTicket : insertTicket;
     await action({
       variables: {

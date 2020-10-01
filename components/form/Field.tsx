@@ -43,9 +43,9 @@ const getFieldComponent: React.FC<Component> = ({
 interface Field {
   id: string;
   label: string;
-  defaultValue?: string;
+  defaultValue: string;
   componentRef: LegacyRef<HTMLInputElement>;
-  errorLabel?: string | void;
+  errorLabel?: string | null;
   disabled?: boolean;
   type: ComponentType;
 }
@@ -75,6 +75,6 @@ export const Field: React.FC<Field> = ({
         type,
       })}
     </div>
-    {errorLabel && <div className="error">Your must enter a name.</div>}
+    {errorLabel && <div className="error">{errorLabel}</div>}
   </div>
 );
