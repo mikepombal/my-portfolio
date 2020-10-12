@@ -5,22 +5,29 @@ export enum ComponentType {
   'SELECT',
 }
 
+interface Input {
+  name: ComponentType.INPUT;
+  componentRef: LegacyRef<HTMLInputElement>;
+}
+
+interface Select {
+  name: ComponentType.SELECT;
+  componentRef: LegacyRef<HTMLSelectElement>;
+  options: Array<string>;
+}
+
+type TypeComponent = Input | Select;
+
 interface Component {
   id: string;
   defaultValue?: string;
-  componentRef: LegacyRef<HTMLInputElement>;
   disabled?: boolean;
-  type: ComponentType;
+  type: TypeComponent;
 }
 
-const getFieldComponent: React.FC<Component> = ({
-  id,
-  defaultValue,
-  componentRef,
-  disabled,
-  type,
-}) => {
-  switch (type) {
+const getFieldComponent: React.FC<Component> = (props) => {
+  const { id, defaultValue, disabled, type } = props;
+  switch (type.name) {
     case ComponentType.INPUT: {
       return (
         <input
@@ -28,14 +35,27 @@ const getFieldComponent: React.FC<Component> = ({
           id={id}
           name={id}
           defaultValue={defaultValue}
-          ref={componentRef}
+          ref={type.componentRef}
           disabled={disabled}
-          className="p-2"
+          className="p-2 w-full"
         />
       );
     }
     case ComponentType.SELECT: {
-      return <div className="p-2 bg-white">TBD</div>;
+      return (
+        <select
+          name={id}
+          ref={type.componentRef}
+          defaultValue={defaultValue}
+          className="p-2 w-full"
+        >
+          {type.options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      );
     }
   }
 };
@@ -44,37 +64,38 @@ interface Field {
   id: string;
   label: string;
   defaultValue: string;
-  componentRef: LegacyRef<HTMLInputElement>;
   errorLabel?: string | null;
   disabled?: boolean;
-  type: ComponentType;
+  type: TypeComponent;
 }
-export const Field: React.FC<Field> = ({
-  id,
-  label,
-  defaultValue = '',
-  componentRef,
-  errorLabel,
-  disabled = false,
-  type,
-}) => (
-  <div className="flex items-center mb-4">
-    <label
-      htmlFor={id}
-      className="w-32 inline-block pr-4"
-      style={{ textAlign: 'end' }}
-    >
-      {label}:
-    </label>
-    <div className="w-56 rounded-md">
-      {getFieldComponent({
-        id,
-        componentRef,
-        defaultValue,
-        disabled,
-        type,
-      })}
+
+export const Field: React.FC<Field> = (props) => {
+  const {
+    id,
+    label,
+    defaultValue = '',
+    errorLabel,
+    disabled = false,
+    type,
+  } = props;
+  return (
+    <div className="flex items-center mb-4">
+      <label
+        htmlFor={id}
+        className="w-32 inline-block pr-4"
+        style={{ textAlign: 'end' }}
+      >
+        {label}:
+      </label>
+      <div className="w-56 rounded-md">
+        {getFieldComponent({
+          id,
+          defaultValue,
+          disabled,
+          type,
+        })}
+      </div>
+      {errorLabel && <div className="error">{errorLabel}</div>}
     </div>
-    {errorLabel && <div className="error">{errorLabel}</div>}
-  </div>
-);
+  );
+};

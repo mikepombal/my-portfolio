@@ -1,5 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { InsertTicketMutationVariables } from '../../types/generated/graphql';
+import {
+  InsertTicketMutationVariables,
+  Market_Enum_Enum,
+  Ticket_Type_Enum_Enum,
+} from '../../types/generated/graphql';
 import { Field, ComponentType } from '../form/Field';
 
 interface TicketForm {
@@ -18,38 +22,50 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           id="ticket"
           label="Ticket"
           defaultValue={selectedTicket?.ticket || ''}
-          componentRef={register({ required: true })}
           disabled={!!selectedTicket}
           errorLabel={
             errors.ticket?.type === 'required'
               ? 'You must enter a ticket.'
               : null
           }
-          type={ComponentType.INPUT}
+          type={{
+            name: ComponentType.INPUT,
+            componentRef: register({ required: true }),
+          }}
         />
         <Field
           id="name"
           label="Name"
           defaultValue={selectedTicket?.name || ''}
-          componentRef={register({ required: true })}
           errorLabel={
             errors.ticket?.type === 'required' ? 'You must enter a name.' : null
           }
-          type={ComponentType.INPUT}
+          type={{
+            name: ComponentType.INPUT,
+            componentRef: register({ required: true }),
+          }}
         />
         <Field
           id="ticket_type"
           label="Type"
-          defaultValue={selectedTicket?.ticket_type || ''}
-          componentRef={register()}
-          type={ComponentType.SELECT}
+          defaultValue={
+            selectedTicket?.ticket_type || Ticket_Type_Enum_Enum.Div1
+          }
+          type={{
+            name: ComponentType.SELECT,
+            componentRef: register({ required: true }),
+            options: Object.values(Ticket_Type_Enum_Enum),
+          }}
         />
         <Field
           id="market"
           label="Market"
-          defaultValue={selectedTicket?.market || ''}
-          componentRef={register()}
-          type={ComponentType.SELECT}
+          defaultValue={selectedTicket?.market || Market_Enum_Enum.Lon}
+          type={{
+            name: ComponentType.SELECT,
+            componentRef: register({ required: true }),
+            options: Object.values(Market_Enum_Enum),
+          }}
         />
       </div>
       <div className="px-6 py-4 bg-indigo-800 flex justify-center text-indigo-800 text-xl">
