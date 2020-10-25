@@ -1,6 +1,9 @@
-import jwt from 'jsonwebtoken';
+import jwt, { Algorithm } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { Session } from 'next-iron-session';
 import withSession from '../../lib/session';
+import { User } from '../../types/common';
 
 const HASURA_OPERATION = `
   query getUser($username: String!) {
@@ -11,8 +14,11 @@ const HASURA_OPERATION = `
   }
 `;
 
-const execute = async (variables, sessionVariables) => {
-  const fetchResponse = await fetch(process.env.HASURA_URL, {
+const execute = async (
+  variables: { username: string },
+  sessionVariables: { Authorization: string }
+) => {
+  const fetchResponse = await fetch(process.env.HASURA_URL || '', {
     method: 'POST',
     body: JSON.stringify({
       query: HASURA_OPERATION,
@@ -24,9 +30,20 @@ const execute = async (variables, sessionVariables) => {
   return result;
 };
 
-export default withSession(async (req, res) => {
+interface Request extends NextApiRequest {
+  session: Session;
+}
+
+export default withSession(async (req: Request, res: NextApiResponse) => {
   try {
-    const { username, password } = await req.body;
+    const {
+      username,
+      password,
+    }: { username: string; password: string } = await req.body;
+
+    if (!process.env.JWT_SECRET_KEY) {
+      return res.status(401).send('Missing JWT_SECRET_KEY');
+    }
 
     const loginToken = jwt.sign(
       {
@@ -37,7 +54,7 @@ export default withSession(async (req, res) => {
       },
       process.env.JWT_SECRET_KEY,
       {
-        algorithm: process.env.JWT_SECRET_TYPE,
+        algorithm: process.env.JWT_SECRET_TYPE as Algorithm,
         expiresIn: '1m',
       }
     );
@@ -66,12 +83,12 @@ export default withSession(async (req, res) => {
       },
       process.env.JWT_SECRET_KEY,
       {
-        algorithm: process.env.JWT_SECRET_TYPE,
+        algorithm: process.env.JWT_SECRET_TYPE as Algorithm,
         expiresIn: '1d',
       }
     );
 
-    const user = {
+    const user: User = {
       isLoggedIn: true,
       username,
       token,

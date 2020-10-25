@@ -1,12 +1,18 @@
 import '../styles/index.css';
+import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
 import { ApolloProvider } from '@apollo/client';
 import fetch from '../lib/fetchJson';
 import useUser from '../lib/useUser';
 import { useApollo } from '../lib/apolloClient';
+import { User } from '../types/common';
 
-const Apollo = ({ Component, pageProps, user }) => {
-  const apolloClient = useApollo(user, pageProps.initialApolloState);
+interface Apollo extends AppProps {
+  user: User;
+}
+
+const Apollo: React.FC<Apollo> = ({ Component, pageProps, user }) => {
+  const apolloClient = useApollo(user, pageProps.initialApolloState as {});
 
   return (
     <ApolloProvider client={apolloClient}>
@@ -15,7 +21,7 @@ const Apollo = ({ Component, pageProps, user }) => {
   );
 };
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   const { user } = useUser();
 
   return (
@@ -30,7 +36,12 @@ function MyApp({ Component, pageProps }) {
       {!user || !user.isLoggedIn ? (
         <Component {...pageProps} noApollo />
       ) : (
-        <Apollo Component={Component} pageProps={pageProps} user={user} />
+        <Apollo
+          Component={Component}
+          pageProps={pageProps}
+          user={user}
+          router={router}
+        />
       )}
     </SWRConfig>
   );

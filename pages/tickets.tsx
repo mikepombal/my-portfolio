@@ -2,7 +2,7 @@ import useUser from '../lib/useUser';
 import Layout from '../components/Layout';
 import TicketsManagement from '../components/tickets/TicketsManagement';
 
-const Tickets = ({ noApollo }) => {
+const Tickets: React.FC<{ noApollo: boolean }> = ({ noApollo }) => {
   useUser({ redirectTo: '/login' });
 
   return (

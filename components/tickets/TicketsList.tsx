@@ -1,9 +1,16 @@
-import { useAllTicketsQuery } from '../../types/generated/graphql';
+import {
+  useAllTicketsQuery,
+  InsertTicketMutationVariables,
+} from '../../types/generated/graphql';
 
 const commonStyle =
   'flex justify-center items-center h-full border-r border-dashed border-gray-800';
 
-const TicketsList = ({ selectTicket }) => {
+interface Prop {
+  selectTicket: (arg0: InsertTicketMutationVariables) => void;
+}
+
+const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
   const { loading, data } = useAllTicketsQuery();
 
   return loading ? (

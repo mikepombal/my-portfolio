@@ -3,10 +3,10 @@ import Head from 'next/head';
 import Nav from './Nav';
 
 interface Prop {
-  node: React.ReactNode;
+  children: React.ReactNode;
 }
 
-const Layout = ({ children }) => (
+const Layout: React.FC<Prop> = ({ children }) => (
   <>
     <Head>
       <title>Portfolio</title>

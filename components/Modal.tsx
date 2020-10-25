@@ -6,7 +6,7 @@ interface Modal {
 }
 
 const Modal: React.FC<Modal> = ({ children, onCancel }) => {
-  const [domNode, setDomNode] = useState<HTMLElement>();
+  const [domNode, setDomNode] = useState<HTMLElement | null>(null);
   useEffect(() => {
     const modalRoot = document.getElementById('modal-root');
     setDomNode(modalRoot);

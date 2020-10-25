@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { concatPagination } from '@apollo/client/utilities';
+import { User } from '../types/common';
 
-let apolloClient;
+let apolloClient: ApolloClient<object>;
 
-function createApolloClient(user) {
+function createApolloClient(user: User) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
@@ -26,7 +27,10 @@ function createApolloClient(user) {
   });
 }
 
-export function initializeApollo(user, initialState = null) {
+export function initializeApollo(
+  user: User,
+  initialState: object | null = null
+) {
   const _apolloClient = apolloClient ?? createApolloClient(user);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -42,7 +46,7 @@ export function initializeApollo(user, initialState = null) {
   return _apolloClient;
 }
 
-export function useApollo(user, initialState) {
+export function useApollo(user: User, initialState: object | null) {
   const store = useMemo(() => initializeApollo(user, initialState), [
     initialState,
     user,

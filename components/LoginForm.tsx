@@ -2,10 +2,10 @@ import React from 'react';
 
 interface Props {
   errorMessage: string;
-  onSubmit: () => {};
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const LoginForm = ({ errorMessage, onSubmit }) => (
+const LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => (
   <form onSubmit={onSubmit}>
     <label>
       <span>Type your GitHub username</span>
