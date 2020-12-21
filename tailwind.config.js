@@ -4,8 +4,5 @@ module.exports = {
     extend: {},
   },
   variants: {},
-  plugins: [],
-  future: {
-    removeDeprecatedGapUtilities: true,
-  },
+  plugins: []
 };
