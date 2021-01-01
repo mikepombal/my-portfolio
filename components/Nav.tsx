@@ -1,5 +1,6 @@
 import React, { MouseEvent } from 'react';
 import Link from 'next/link';
+import { version } from '../package.json';
 import useUser from '../lib/useUser';
 import { useRouter } from 'next/router';
 import fetchJson from '../lib/fetchJson';
@@ -29,8 +30,8 @@ const Nav = () => {
   const { user, mutateUser } = useUser();
   const router = useRouter();
   return (
-    <nav className="bg-indigo-900 flex-0 flex-shrink-0 w-20 text-gray-400">
-      <ul className="flex-col">
+    <nav className="bg-indigo-900 flex flex-col flex-shrink-0 w-20 text-gray-400">
+      <ul className="flex-col flex-grow-1">
         <Li label="H" href="/" isSelected={router.route === '/'} />
         {!user?.isLoggedIn ? (
           <Li
@@ -57,6 +58,7 @@ const Nav = () => {
           </>
         )}
       </ul>
+      <div className="h-12 flex justify-center items-center">{version}</div>
     </nav>
   );
 };
