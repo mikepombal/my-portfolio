@@ -9,7 +9,7 @@ import TicketForm from './TicketForm';
 import Modal from '../Modal';
 import Button from '../Button';
 
-const TicketsManagement = () => {
+const TicketsManagement = (): JSX.Element => {
   const [
     selectedTicket,
     setSelectedTicket,

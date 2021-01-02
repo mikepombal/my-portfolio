@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default async function fetcher(input: RequestInfo, init?: RequestInit) {
   try {
     const response = await fetch(input, init);
@@ -11,8 +12,10 @@ export default async function fetcher(input: RequestInfo, init?: RequestInit) {
     }
 
     const error = new Error(response.statusText);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     error.response = response;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     error.data = data;
     throw error;

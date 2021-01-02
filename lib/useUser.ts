@@ -8,6 +8,7 @@ interface Props {
   redirectIfFound?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function useUser({
   redirectTo = null,
   redirectIfFound = false,

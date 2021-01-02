@@ -26,7 +26,7 @@ const Li: React.FC<LiProps> = ({ label, href, isSelected, onClick }) => (
   </li>
 );
 
-const Nav = () => {
+const Nav = (): JSX.Element => {
   const { user, mutateUser } = useUser();
   const router = useRouter();
   return (

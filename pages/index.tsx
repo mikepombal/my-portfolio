@@ -1,6 +1,6 @@
 import Layout from '../components/Layout';
 
-const Home = () => (
+const Home = (): JSX.Element => (
   <Layout>
     <h1>Index Page</h1>
   </Layout>

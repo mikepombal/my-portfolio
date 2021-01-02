@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import LoginForm from '../components/LoginForm';
 import fetchJson from '../lib/fetchJson';
 
-const Login = () => {
+const Login = (): JSX.Element => {
   const { mutateUser } = useUser({
     redirectTo: '/',
     redirectIfFound: true,
