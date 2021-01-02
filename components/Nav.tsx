@@ -31,7 +31,7 @@ const Nav = () => {
   const router = useRouter();
   return (
     <nav className="bg-indigo-900 flex flex-col flex-shrink-0 w-20 text-gray-400">
-      <ul className="flex-col flex-grow-1">
+      <ul className="flex-col flex-1">
         <Li label="H" href="/" isSelected={router.route === '/'} />
         {!user?.isLoggedIn ? (
           <Li
