@@ -9,7 +9,7 @@ export default withSession(async (req: NextApiRequest, res: NextApiResponse) => 
   if (!process.env.JWT_SECRET_KEY) {
     return res.status(401).send('Missing JWT_SECRET_KEY');
   }
-  if (req.body.apiToken !== process.env.API_TOKEN) {
+  if (req.headers.apitoken !== process.env.API_TOKEN) {
     return res.status(401).send('Please provide the api token');
   }
 
