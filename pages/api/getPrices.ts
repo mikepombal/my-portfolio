@@ -9,49 +9,50 @@ export default withSession(async (req: NextApiRequest, res: NextApiResponse) => 
   if (!process.env.JWT_SECRET_KEY) {
     return res.status(401).send('Missing JWT_SECRET_KEY');
   }
-  if (req.body.apiToken !== process.env.API_TOKEN) {
-    return res.status(401).send('Please provide the api token');
-  }
+  res.json({ req: req.body });
+  // if (req.body.apiToken !== process.env.API_TOKEN) {
+  //   return res.status(401).send('Please provide the api token');
+  // }
 
-  const token = jwt.sign(
-    {
-      'https://hasura.io/jwt/claims': {
-        'x-hasura-allowed-roles': ['admin', 'login', 'user', 'anonymous', 'api'],
-        'x-hasura-default-role': 'api',
-      },
-    },
-    process.env.JWT_SECRET_KEY,
-    {
-      algorithm: process.env.JWT_SECRET_TYPE as Algorithm,
-      expiresIn: '1m',
-    }
-  );
+  // const token = jwt.sign(
+  //   {
+  //     'https://hasura.io/jwt/claims': {
+  //       'x-hasura-allowed-roles': ['admin', 'login', 'user', 'anonymous', 'api'],
+  //       'x-hasura-default-role': 'api',
+  //     },
+  //   },
+  //   process.env.JWT_SECRET_KEY,
+  //   {
+  //     algorithm: process.env.JWT_SECRET_TYPE as Algorithm,
+  //     expiresIn: '1m',
+  //   }
+  // );
 
-  const client = new ApolloClient({
-    link: new HttpLink({
-      uri: 'https://mikepombal-portfolio.herokuapp.com/v1/graphql',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      credentials: 'same-origin',
-    }),
-    cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            allPosts: concatPagination(),
-          },
-        },
-      },
-    })
-  });
+  // const client = new ApolloClient({
+  //   link: new HttpLink({
+  //     uri: 'https://mikepombal-portfolio.herokuapp.com/v1/graphql',
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //     credentials: 'same-origin',
+  //   }),
+  //   cache: new InMemoryCache({
+  //     typePolicies: {
+  //       Query: {
+  //         fields: {
+  //           allPosts: concatPagination(),
+  //         },
+  //       },
+  //     },
+  //   })
+  // });
 
-  const variables: InsertLogMutationVariables = {
-    contract: 'getPrices',
-    detail: 'Test'
-  };
-  const result = await client.mutate<InsertLogMutation, InsertLogMutationVariables>({ mutation: InsertLogDocument, variables });
+  // const variables: InsertLogMutationVariables = {
+  //   contract: 'getPrices',
+  //   detail: 'Test'
+  // };
+  // const result = await client.mutate<InsertLogMutation, InsertLogMutationVariables>({ mutation: InsertLogDocument, variables });
 
 
-  res.json({ test: JSON.stringify(result) });
+  // res.json({ test: JSON.stringify(result) });
 });
