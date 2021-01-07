@@ -1,6 +1,5 @@
-import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -11,6 +10,19 @@ export type Scalars = {
   Int: number;
   Float: number;
   timestamptz: any;
+};
+
+/** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Int']>;
+  _gt?: Maybe<Scalars['Int']>;
+  _gte?: Maybe<Scalars['Int']>;
+  _in?: Maybe<Array<Scalars['Int']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Int']>;
+  _lte?: Maybe<Scalars['Int']>;
+  _neq?: Maybe<Scalars['Int']>;
+  _nin?: Maybe<Array<Scalars['Int']>>;
 };
 
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
@@ -30,6 +42,290 @@ export type String_Comparison_Exp = {
   _nlike?: Maybe<Scalars['String']>;
   _nsimilar?: Maybe<Scalars['String']>;
   _similar?: Maybe<Scalars['String']>;
+};
+
+/**
+ * for log purpose
+ * 
+ * 
+ * columns and relationships of "log"
+ */
+export type Log = {
+  __typename?: 'log';
+  contract: Scalars['String'];
+  detail: Scalars['String'];
+  id: Scalars['Int'];
+  timestamp: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "log" */
+export type Log_Aggregate = {
+  __typename?: 'log_aggregate';
+  aggregate?: Maybe<Log_Aggregate_Fields>;
+  nodes: Array<Log>;
+};
+
+/** aggregate fields of "log" */
+export type Log_Aggregate_Fields = {
+  __typename?: 'log_aggregate_fields';
+  avg?: Maybe<Log_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Log_Max_Fields>;
+  min?: Maybe<Log_Min_Fields>;
+  stddev?: Maybe<Log_Stddev_Fields>;
+  stddev_pop?: Maybe<Log_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Log_Stddev_Samp_Fields>;
+  sum?: Maybe<Log_Sum_Fields>;
+  var_pop?: Maybe<Log_Var_Pop_Fields>;
+  var_samp?: Maybe<Log_Var_Samp_Fields>;
+  variance?: Maybe<Log_Variance_Fields>;
+};
+
+
+/** aggregate fields of "log" */
+export type Log_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Log_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "log" */
+export type Log_Aggregate_Order_By = {
+  avg?: Maybe<Log_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Log_Max_Order_By>;
+  min?: Maybe<Log_Min_Order_By>;
+  stddev?: Maybe<Log_Stddev_Order_By>;
+  stddev_pop?: Maybe<Log_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Log_Stddev_Samp_Order_By>;
+  sum?: Maybe<Log_Sum_Order_By>;
+  var_pop?: Maybe<Log_Var_Pop_Order_By>;
+  var_samp?: Maybe<Log_Var_Samp_Order_By>;
+  variance?: Maybe<Log_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "log" */
+export type Log_Arr_Rel_Insert_Input = {
+  data: Array<Log_Insert_Input>;
+  on_conflict?: Maybe<Log_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Log_Avg_Fields = {
+  __typename?: 'log_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "log" */
+export type Log_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "log". All fields are combined with a logical 'AND'. */
+export type Log_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Log_Bool_Exp>>>;
+  _not?: Maybe<Log_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Log_Bool_Exp>>>;
+  contract?: Maybe<String_Comparison_Exp>;
+  detail?: Maybe<String_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  timestamp?: Maybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "log" */
+export enum Log_Constraint {
+  /** unique or primary key constraint */
+  LogPkey = 'log_pkey'
+}
+
+/** input type for incrementing integer column in table "log" */
+export type Log_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "log" */
+export type Log_Insert_Input = {
+  contract?: Maybe<Scalars['String']>;
+  detail?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Log_Max_Fields = {
+  __typename?: 'log_max_fields';
+  contract?: Maybe<Scalars['String']>;
+  detail?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by max() on columns of table "log" */
+export type Log_Max_Order_By = {
+  contract?: Maybe<Order_By>;
+  detail?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  timestamp?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Log_Min_Fields = {
+  __typename?: 'log_min_fields';
+  contract?: Maybe<Scalars['String']>;
+  detail?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "log" */
+export type Log_Min_Order_By = {
+  contract?: Maybe<Order_By>;
+  detail?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  timestamp?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "log" */
+export type Log_Mutation_Response = {
+  __typename?: 'log_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Log>;
+};
+
+/** input type for inserting object relation for remote table "log" */
+export type Log_Obj_Rel_Insert_Input = {
+  data: Log_Insert_Input;
+  on_conflict?: Maybe<Log_On_Conflict>;
+};
+
+/** on conflict condition type for table "log" */
+export type Log_On_Conflict = {
+  constraint: Log_Constraint;
+  update_columns: Array<Log_Update_Column>;
+  where?: Maybe<Log_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "log" */
+export type Log_Order_By = {
+  contract?: Maybe<Order_By>;
+  detail?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  timestamp?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "log" */
+export type Log_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "log" */
+export enum Log_Select_Column {
+  /** column name */
+  Contract = 'contract',
+  /** column name */
+  Detail = 'detail',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Timestamp = 'timestamp'
+}
+
+/** input type for updating data in table "log" */
+export type Log_Set_Input = {
+  contract?: Maybe<Scalars['String']>;
+  detail?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Log_Stddev_Fields = {
+  __typename?: 'log_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "log" */
+export type Log_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Log_Stddev_Pop_Fields = {
+  __typename?: 'log_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "log" */
+export type Log_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Log_Stddev_Samp_Fields = {
+  __typename?: 'log_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "log" */
+export type Log_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Log_Sum_Fields = {
+  __typename?: 'log_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "log" */
+export type Log_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** update columns of table "log" */
+export enum Log_Update_Column {
+  /** column name */
+  Contract = 'contract',
+  /** column name */
+  Detail = 'detail',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Timestamp = 'timestamp'
+}
+
+/** aggregate var_pop on columns */
+export type Log_Var_Pop_Fields = {
+  __typename?: 'log_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "log" */
+export type Log_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Log_Var_Samp_Fields = {
+  __typename?: 'log_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "log" */
+export type Log_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Log_Variance_Fields = {
+  __typename?: 'log_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "log" */
+export type Log_Variance_Order_By = {
+  id?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "market_enum" */
@@ -181,6 +477,10 @@ export enum Market_Enum_Update_Column {
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "log" */
+  delete_log?: Maybe<Log_Mutation_Response>;
+  /** delete single row from the table: "log" */
+  delete_log_by_pk?: Maybe<Log>;
   /** delete data from the table: "market_enum" */
   delete_market_enum?: Maybe<Market_Enum_Mutation_Response>;
   /** delete single row from the table: "market_enum" */
@@ -197,6 +497,10 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "log" */
+  insert_log?: Maybe<Log_Mutation_Response>;
+  /** insert a single row into the table: "log" */
+  insert_log_one?: Maybe<Log>;
   /** insert data into the table: "market_enum" */
   insert_market_enum?: Maybe<Market_Enum_Mutation_Response>;
   /** insert a single row into the table: "market_enum" */
@@ -213,6 +517,10 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "log" */
+  update_log?: Maybe<Log_Mutation_Response>;
+  /** update single row of the table: "log" */
+  update_log_by_pk?: Maybe<Log>;
   /** update data of the table: "market_enum" */
   update_market_enum?: Maybe<Market_Enum_Mutation_Response>;
   /** update single row of the table: "market_enum" */
@@ -229,6 +537,18 @@ export type Mutation_Root = {
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
   update_users_by_pk?: Maybe<Users>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_LogArgs = {
+  where: Log_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Log_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -277,6 +597,20 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   username: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_LogArgs = {
+  objects: Array<Log_Insert_Input>;
+  on_conflict?: Maybe<Log_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Log_OneArgs = {
+  object: Log_Insert_Input;
+  on_conflict?: Maybe<Log_On_Conflict>;
 };
 
 
@@ -333,6 +667,22 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: Maybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_LogArgs = {
+  _inc?: Maybe<Log_Inc_Input>;
+  _set?: Maybe<Log_Set_Input>;
+  where: Log_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Log_By_PkArgs = {
+  _inc?: Maybe<Log_Inc_Input>;
+  _set?: Maybe<Log_Set_Input>;
+  pk_columns: Log_Pk_Columns_Input;
 };
 
 
@@ -410,6 +760,12 @@ export enum Order_By {
 /** query root */
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "log" */
+  log: Array<Log>;
+  /** fetch aggregated fields from the table: "log" */
+  log_aggregate: Log_Aggregate;
+  /** fetch data from the table: "log" using primary key columns */
+  log_by_pk?: Maybe<Log>;
   /** fetch data from the table: "market_enum" */
   market_enum: Array<Market_Enum>;
   /** fetch aggregated fields from the table: "market_enum" */
@@ -434,6 +790,32 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+/** query root */
+export type Query_RootLogArgs = {
+  distinct_on?: Maybe<Array<Log_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Log_Order_By>>;
+  where?: Maybe<Log_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootLog_AggregateArgs = {
+  distinct_on?: Maybe<Array<Log_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Log_Order_By>>;
+  where?: Maybe<Log_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootLog_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -543,6 +925,12 @@ export type Query_RootUsers_By_PkArgs = {
 /** subscription root */
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "log" */
+  log: Array<Log>;
+  /** fetch aggregated fields from the table: "log" */
+  log_aggregate: Log_Aggregate;
+  /** fetch data from the table: "log" using primary key columns */
+  log_by_pk?: Maybe<Log>;
   /** fetch data from the table: "market_enum" */
   market_enum: Array<Market_Enum>;
   /** fetch aggregated fields from the table: "market_enum" */
@@ -567,6 +955,32 @@ export type Subscription_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+/** subscription root */
+export type Subscription_RootLogArgs = {
+  distinct_on?: Maybe<Array<Log_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Log_Order_By>>;
+  where?: Maybe<Log_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootLog_AggregateArgs = {
+  distinct_on?: Maybe<Array<Log_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Log_Order_By>>;
+  where?: Maybe<Log_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootLog_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -1166,6 +1580,20 @@ export enum Users_Update_Column {
   Username = 'username'
 }
 
+export type InsertLogMutationVariables = Exact<{
+  contract: Scalars['String'];
+  detail: Scalars['String'];
+}>;
+
+
+export type InsertLogMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_log_one?: Maybe<(
+    { __typename?: 'log' }
+    & Pick<Log, 'id' | 'timestamp' | 'contract' | 'detail'>
+  )> }
+);
+
 export type InsertTicketMutationVariables = Exact<{
   ticket: Scalars['String'];
   name: Scalars['String'];
@@ -1210,6 +1638,42 @@ export type AllTicketsQuery = (
 );
 
 
+export const InsertLogDocument = gql`
+    mutation insertLog($contract: String!, $detail: String!) {
+  insert_log_one(object: {contract: $contract, detail: $detail}) {
+    id
+    timestamp
+    contract
+    detail
+  }
+}
+    `;
+export type InsertLogMutationFn = Apollo.MutationFunction<InsertLogMutation, InsertLogMutationVariables>;
+
+/**
+ * __useInsertLogMutation__
+ *
+ * To run a mutation, you first call `useInsertLogMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertLogMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertLogMutation, { data, loading, error }] = useInsertLogMutation({
+ *   variables: {
+ *      contract: // value for 'contract'
+ *      detail: // value for 'detail'
+ *   },
+ * });
+ */
+export function useInsertLogMutation(baseOptions?: Apollo.MutationHookOptions<InsertLogMutation, InsertLogMutationVariables>) {
+        return Apollo.useMutation<InsertLogMutation, InsertLogMutationVariables>(InsertLogDocument, baseOptions);
+      }
+export type InsertLogMutationHookResult = ReturnType<typeof useInsertLogMutation>;
+export type InsertLogMutationResult = Apollo.MutationResult<InsertLogMutation>;
+export type InsertLogMutationOptions = Apollo.BaseMutationOptions<InsertLogMutation, InsertLogMutationVariables>;
 export const InsertTicketDocument = gql`
     mutation insertTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!) {
   insert_tickets_one(object: {name: $name, ticket: $ticket, ticket_type: $ticket_type, market: $market}) {
@@ -1220,7 +1684,7 @@ export const InsertTicketDocument = gql`
   }
 }
     `;
-export type InsertTicketMutationFn = ApolloReactCommon.MutationFunction<InsertTicketMutation, InsertTicketMutationVariables>;
+export type InsertTicketMutationFn = Apollo.MutationFunction<InsertTicketMutation, InsertTicketMutationVariables>;
 
 /**
  * __useInsertTicketMutation__
@@ -1242,12 +1706,12 @@ export type InsertTicketMutationFn = ApolloReactCommon.MutationFunction<InsertTi
  *   },
  * });
  */
-export function useInsertTicketMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<InsertTicketMutation, InsertTicketMutationVariables>) {
-        return ApolloReactHooks.useMutation<InsertTicketMutation, InsertTicketMutationVariables>(InsertTicketDocument, baseOptions);
+export function useInsertTicketMutation(baseOptions?: Apollo.MutationHookOptions<InsertTicketMutation, InsertTicketMutationVariables>) {
+        return Apollo.useMutation<InsertTicketMutation, InsertTicketMutationVariables>(InsertTicketDocument, baseOptions);
       }
 export type InsertTicketMutationHookResult = ReturnType<typeof useInsertTicketMutation>;
-export type InsertTicketMutationResult = ApolloReactCommon.MutationResult<InsertTicketMutation>;
-export type InsertTicketMutationOptions = ApolloReactCommon.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
+export type InsertTicketMutationResult = Apollo.MutationResult<InsertTicketMutation>;
+export type InsertTicketMutationOptions = Apollo.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
 export const UpdateTicketDocument = gql`
     mutation updateTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!) {
   update_tickets_by_pk(_set: {name: $name, ticket_type: $ticket_type, market: $market}, pk_columns: {ticket: $ticket}) {
@@ -1258,7 +1722,7 @@ export const UpdateTicketDocument = gql`
   }
 }
     `;
-export type UpdateTicketMutationFn = ApolloReactCommon.MutationFunction<UpdateTicketMutation, UpdateTicketMutationVariables>;
+export type UpdateTicketMutationFn = Apollo.MutationFunction<UpdateTicketMutation, UpdateTicketMutationVariables>;
 
 /**
  * __useUpdateTicketMutation__
@@ -1280,12 +1744,12 @@ export type UpdateTicketMutationFn = ApolloReactCommon.MutationFunction<UpdateTi
  *   },
  * });
  */
-export function useUpdateTicketMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateTicketMutation, UpdateTicketMutationVariables>) {
-        return ApolloReactHooks.useMutation<UpdateTicketMutation, UpdateTicketMutationVariables>(UpdateTicketDocument, baseOptions);
+export function useUpdateTicketMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTicketMutation, UpdateTicketMutationVariables>) {
+        return Apollo.useMutation<UpdateTicketMutation, UpdateTicketMutationVariables>(UpdateTicketDocument, baseOptions);
       }
 export type UpdateTicketMutationHookResult = ReturnType<typeof useUpdateTicketMutation>;
-export type UpdateTicketMutationResult = ApolloReactCommon.MutationResult<UpdateTicketMutation>;
-export type UpdateTicketMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateTicketMutation, UpdateTicketMutationVariables>;
+export type UpdateTicketMutationResult = Apollo.MutationResult<UpdateTicketMutation>;
+export type UpdateTicketMutationOptions = Apollo.BaseMutationOptions<UpdateTicketMutation, UpdateTicketMutationVariables>;
 export const AllTicketsDocument = gql`
     query allTickets {
   tickets(order_by: {ticket: asc}) {
@@ -1312,12 +1776,12 @@ export const AllTicketsDocument = gql`
  *   },
  * });
  */
-export function useAllTicketsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<AllTicketsQuery, AllTicketsQueryVariables>) {
-        return ApolloReactHooks.useQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, baseOptions);
+export function useAllTicketsQuery(baseOptions?: Apollo.QueryHookOptions<AllTicketsQuery, AllTicketsQueryVariables>) {
+        return Apollo.useQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, baseOptions);
       }
-export function useAllTicketsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AllTicketsQuery, AllTicketsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, baseOptions);
+export function useAllTicketsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTicketsQuery, AllTicketsQueryVariables>) {
+          return Apollo.useLazyQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, baseOptions);
         }
 export type AllTicketsQueryHookResult = ReturnType<typeof useAllTicketsQuery>;
 export type AllTicketsLazyQueryHookResult = ReturnType<typeof useAllTicketsLazyQuery>;
-export type AllTicketsQueryResult = ApolloReactCommon.QueryResult<AllTicketsQuery, AllTicketsQueryVariables>;
+export type AllTicketsQueryResult = Apollo.QueryResult<AllTicketsQuery, AllTicketsQueryVariables>;
