@@ -47,7 +47,7 @@ export default withSession(async (req: NextApiRequest, res: NextApiResponse) => 
   });
 
   const variables: InsertLogMutationVariables = {
-    contract: 'getPrices',
+    contract: 'updatePrices',
     detail: 'Test'
   };
   const result = await client.mutate<InsertLogMutation, InsertLogMutationVariables>({ mutation: InsertLogDocument, variables });
