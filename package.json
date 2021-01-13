@@ -34,6 +34,7 @@
     "@graphql-codegen/typescript": "^1.17.4",
     "@graphql-codegen/typescript-operations": "^1.17.4",
     "@graphql-codegen/typescript-react-apollo": "^2.2.1",
+    "alphavantage": "^2.2.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
