@@ -2,8 +2,11 @@ import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client/core';
 import { concatPagination } from '@apollo/client/utilities';
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt, { Algorithm } from 'jsonwebtoken';
+import _alpha from 'alphavantage';
 import withSession from '../../lib/session';
-import { InsertLogMutation, InsertLogMutationVariables, InsertLogDocument } from '../../types/generated/graphql';
+import { InsertLogMutation, InsertLogMutationVariables, InsertLogDocument, PricesToUpdateQuery, PricesToUpdateDocument } from '../../types/generated/graphql';
+
+const alpha = _alpha({ key: process.env.ALPHA_VANTAGE_KEY || '' });
 
 export default withSession(async (req: NextApiRequest, res: NextApiResponse) => {
   if (!process.env.JWT_SECRET_KEY) {
@@ -46,9 +49,21 @@ export default withSession(async (req: NextApiRequest, res: NextApiResponse) => 
     })
   });
 
+  // Get the list of tickets to be updated
+  const tickets = await client.query<PricesToUpdateQuery>({ query: PricesToUpdateDocument });
+
+  if (!tickets.data) {
+    return res.status(200).send('No tickets to be updated');
+  }
+  const ticketsToUpdate = tickets.data.prices_update_due.reduce<string[]>((acc, ticket) => ticket.ticket ? [...acc, ticket.ticket]: acc, []);
+
+  const prices = await Promise.all(ticketsToUpdate.map(ticket => alpha.data.quote(ticket)));
+
+  const detail = prices.reduce<string>((acc, price) => price["Global Quote"]["01. symbol"] &&  `${acc} ${price["Global Quote"]["01. symbol"]}: ${price["Global Quote"]["05. price"]}, `, '');
+
   const variables: InsertLogMutationVariables = {
     contract: 'updatePrices',
-    detail: 'Test'
+    detail
   };
   const result = await client.mutate<InsertLogMutation, InsertLogMutationVariables>({ mutation: InsertLogDocument, variables });
 

@@ -12,6 +12,19 @@ export type Scalars = {
   timestamptz: any;
 };
 
+/** expression to compare columns of type Boolean. All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Boolean']>;
+  _gt?: Maybe<Scalars['Boolean']>;
+  _gte?: Maybe<Scalars['Boolean']>;
+  _in?: Maybe<Array<Scalars['Boolean']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Boolean']>;
+  _lte?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Scalars['Boolean']>;
+  _nin?: Maybe<Array<Scalars['Boolean']>>;
+};
+
 /** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: Maybe<Scalars['Int']>;
@@ -485,6 +498,8 @@ export type Mutation_Root = {
   delete_market_enum?: Maybe<Market_Enum_Mutation_Response>;
   /** delete single row from the table: "market_enum" */
   delete_market_enum_by_pk?: Maybe<Market_Enum>;
+  /** delete data from the table: "prices_update_due" */
+  delete_prices_update_due?: Maybe<Prices_Update_Due_Mutation_Response>;
   /** delete data from the table: "ticket_type_enum" */
   delete_ticket_type_enum?: Maybe<Ticket_Type_Enum_Mutation_Response>;
   /** delete single row from the table: "ticket_type_enum" */
@@ -561,6 +576,12 @@ export type Mutation_RootDelete_Market_EnumArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Market_Enum_By_PkArgs = {
   market: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Prices_Update_DueArgs = {
+  where: Prices_Update_Due_Bool_Exp;
 };
 
 
@@ -757,6 +778,91 @@ export enum Order_By {
   DescNullsLast = 'desc_nulls_last'
 }
 
+/** columns and relationships of "prices_update_due" */
+export type Prices_Update_Due = {
+  __typename?: 'prices_update_due';
+  ticket?: Maybe<Scalars['String']>;
+};
+
+/** aggregated selection of "prices_update_due" */
+export type Prices_Update_Due_Aggregate = {
+  __typename?: 'prices_update_due_aggregate';
+  aggregate?: Maybe<Prices_Update_Due_Aggregate_Fields>;
+  nodes: Array<Prices_Update_Due>;
+};
+
+/** aggregate fields of "prices_update_due" */
+export type Prices_Update_Due_Aggregate_Fields = {
+  __typename?: 'prices_update_due_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Prices_Update_Due_Max_Fields>;
+  min?: Maybe<Prices_Update_Due_Min_Fields>;
+};
+
+
+/** aggregate fields of "prices_update_due" */
+export type Prices_Update_Due_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Prices_Update_Due_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "prices_update_due" */
+export type Prices_Update_Due_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Prices_Update_Due_Max_Order_By>;
+  min?: Maybe<Prices_Update_Due_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "prices_update_due". All fields are combined with a logical 'AND'. */
+export type Prices_Update_Due_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Prices_Update_Due_Bool_Exp>>>;
+  _not?: Maybe<Prices_Update_Due_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Prices_Update_Due_Bool_Exp>>>;
+  ticket?: Maybe<String_Comparison_Exp>;
+};
+
+/** aggregate max on columns */
+export type Prices_Update_Due_Max_Fields = {
+  __typename?: 'prices_update_due_max_fields';
+  ticket?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "prices_update_due" */
+export type Prices_Update_Due_Max_Order_By = {
+  ticket?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Prices_Update_Due_Min_Fields = {
+  __typename?: 'prices_update_due_min_fields';
+  ticket?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "prices_update_due" */
+export type Prices_Update_Due_Min_Order_By = {
+  ticket?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "prices_update_due" */
+export type Prices_Update_Due_Mutation_Response = {
+  __typename?: 'prices_update_due_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Prices_Update_Due>;
+};
+
+/** ordering options when selecting data from "prices_update_due" */
+export type Prices_Update_Due_Order_By = {
+  ticket?: Maybe<Order_By>;
+};
+
+/** select columns of table "prices_update_due" */
+export enum Prices_Update_Due_Select_Column {
+  /** column name */
+  Ticket = 'ticket'
+}
+
 /** query root */
 export type Query_Root = {
   __typename?: 'query_root';
@@ -772,6 +878,10 @@ export type Query_Root = {
   market_enum_aggregate: Market_Enum_Aggregate;
   /** fetch data from the table: "market_enum" using primary key columns */
   market_enum_by_pk?: Maybe<Market_Enum>;
+  /** fetch data from the table: "prices_update_due" */
+  prices_update_due: Array<Prices_Update_Due>;
+  /** fetch aggregated fields from the table: "prices_update_due" */
+  prices_update_due_aggregate: Prices_Update_Due_Aggregate;
   /** fetch data from the table: "ticket_type_enum" */
   ticket_type_enum: Array<Ticket_Type_Enum>;
   /** fetch aggregated fields from the table: "ticket_type_enum" */
@@ -842,6 +952,26 @@ export type Query_RootMarket_Enum_AggregateArgs = {
 /** query root */
 export type Query_RootMarket_Enum_By_PkArgs = {
   market: Scalars['String'];
+};
+
+
+/** query root */
+export type Query_RootPrices_Update_DueArgs = {
+  distinct_on?: Maybe<Array<Prices_Update_Due_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Prices_Update_Due_Order_By>>;
+  where?: Maybe<Prices_Update_Due_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootPrices_Update_Due_AggregateArgs = {
+  distinct_on?: Maybe<Array<Prices_Update_Due_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Prices_Update_Due_Order_By>>;
+  where?: Maybe<Prices_Update_Due_Bool_Exp>;
 };
 
 
@@ -937,6 +1067,10 @@ export type Subscription_Root = {
   market_enum_aggregate: Market_Enum_Aggregate;
   /** fetch data from the table: "market_enum" using primary key columns */
   market_enum_by_pk?: Maybe<Market_Enum>;
+  /** fetch data from the table: "prices_update_due" */
+  prices_update_due: Array<Prices_Update_Due>;
+  /** fetch aggregated fields from the table: "prices_update_due" */
+  prices_update_due_aggregate: Prices_Update_Due_Aggregate;
   /** fetch data from the table: "ticket_type_enum" */
   ticket_type_enum: Array<Ticket_Type_Enum>;
   /** fetch aggregated fields from the table: "ticket_type_enum" */
@@ -1007,6 +1141,26 @@ export type Subscription_RootMarket_Enum_AggregateArgs = {
 /** subscription root */
 export type Subscription_RootMarket_Enum_By_PkArgs = {
   market: Scalars['String'];
+};
+
+
+/** subscription root */
+export type Subscription_RootPrices_Update_DueArgs = {
+  distinct_on?: Maybe<Array<Prices_Update_Due_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Prices_Update_Due_Order_By>>;
+  where?: Maybe<Prices_Update_Due_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootPrices_Update_Due_AggregateArgs = {
+  distinct_on?: Maybe<Array<Prices_Update_Due_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Prices_Update_Due_Order_By>>;
+  where?: Maybe<Prices_Update_Due_Bool_Exp>;
 };
 
 
@@ -1237,10 +1391,13 @@ export enum Ticket_Type_Enum_Update_Column {
 /** columns and relationships of "tickets" */
 export type Tickets = {
   __typename?: 'tickets';
+  latest_price?: Maybe<Scalars['String']>;
   market: Market_Enum_Enum;
   name: Scalars['String'];
+  price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket: Scalars['String'];
   ticket_type: Ticket_Type_Enum_Enum;
+  update_price: Scalars['Boolean'];
 };
 
 /** aggregated selection of "tickets" */
@@ -1283,10 +1440,13 @@ export type Tickets_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Tickets_Bool_Exp>>>;
   _not?: Maybe<Tickets_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Tickets_Bool_Exp>>>;
+  latest_price?: Maybe<String_Comparison_Exp>;
   market?: Maybe<Market_Enum_Enum_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
+  price_timestamp?: Maybe<Timestamptz_Comparison_Exp>;
   ticket?: Maybe<String_Comparison_Exp>;
   ticket_type?: Maybe<Ticket_Type_Enum_Enum_Comparison_Exp>;
+  update_price?: Maybe<Boolean_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "tickets" */
@@ -1297,35 +1457,46 @@ export enum Tickets_Constraint {
 
 /** input type for inserting data into table "tickets" */
 export type Tickets_Insert_Input = {
+  latest_price?: Maybe<Scalars['String']>;
   market?: Maybe<Market_Enum_Enum>;
   name?: Maybe<Scalars['String']>;
+  price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket?: Maybe<Scalars['String']>;
   ticket_type?: Maybe<Ticket_Type_Enum_Enum>;
+  update_price?: Maybe<Scalars['Boolean']>;
 };
 
 /** aggregate max on columns */
 export type Tickets_Max_Fields = {
   __typename?: 'tickets_max_fields';
+  latest_price?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "tickets" */
 export type Tickets_Max_Order_By = {
+  latest_price?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  price_timestamp?: Maybe<Order_By>;
   ticket?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Tickets_Min_Fields = {
   __typename?: 'tickets_min_fields';
+  latest_price?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "tickets" */
 export type Tickets_Min_Order_By = {
+  latest_price?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  price_timestamp?: Maybe<Order_By>;
   ticket?: Maybe<Order_By>;
 };
 
@@ -1353,10 +1524,13 @@ export type Tickets_On_Conflict = {
 
 /** ordering options when selecting data from "tickets" */
 export type Tickets_Order_By = {
+  latest_price?: Maybe<Order_By>;
   market?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
+  price_timestamp?: Maybe<Order_By>;
   ticket?: Maybe<Order_By>;
   ticket_type?: Maybe<Order_By>;
+  update_price?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: "tickets" */
@@ -1367,33 +1541,48 @@ export type Tickets_Pk_Columns_Input = {
 /** select columns of table "tickets" */
 export enum Tickets_Select_Column {
   /** column name */
+  LatestPrice = 'latest_price',
+  /** column name */
   Market = 'market',
   /** column name */
   Name = 'name',
   /** column name */
+  PriceTimestamp = 'price_timestamp',
+  /** column name */
   Ticket = 'ticket',
   /** column name */
-  TicketType = 'ticket_type'
+  TicketType = 'ticket_type',
+  /** column name */
+  UpdatePrice = 'update_price'
 }
 
 /** input type for updating data in table "tickets" */
 export type Tickets_Set_Input = {
+  latest_price?: Maybe<Scalars['String']>;
   market?: Maybe<Market_Enum_Enum>;
   name?: Maybe<Scalars['String']>;
+  price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket?: Maybe<Scalars['String']>;
   ticket_type?: Maybe<Ticket_Type_Enum_Enum>;
+  update_price?: Maybe<Scalars['Boolean']>;
 };
 
 /** update columns of table "tickets" */
 export enum Tickets_Update_Column {
   /** column name */
+  LatestPrice = 'latest_price',
+  /** column name */
   Market = 'market',
   /** column name */
   Name = 'name',
   /** column name */
+  PriceTimestamp = 'price_timestamp',
+  /** column name */
   Ticket = 'ticket',
   /** column name */
-  TicketType = 'ticket_type'
+  TicketType = 'ticket_type',
+  /** column name */
+  UpdatePrice = 'update_price'
 }
 
 
@@ -1637,6 +1826,17 @@ export type AllTicketsQuery = (
   )> }
 );
 
+export type PricesToUpdateQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PricesToUpdateQuery = (
+  { __typename?: 'query_root' }
+  & { prices_update_due: Array<(
+    { __typename?: 'prices_update_due' }
+    & Pick<Prices_Update_Due, 'ticket'>
+  )> }
+);
+
 
 export const InsertLogDocument = gql`
     mutation insertLog($contract: String!, $detail: String!) {
@@ -1785,3 +1985,35 @@ export function useAllTicketsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type AllTicketsQueryHookResult = ReturnType<typeof useAllTicketsQuery>;
 export type AllTicketsLazyQueryHookResult = ReturnType<typeof useAllTicketsLazyQuery>;
 export type AllTicketsQueryResult = Apollo.QueryResult<AllTicketsQuery, AllTicketsQueryVariables>;
+export const PricesToUpdateDocument = gql`
+    query pricesToUpdate {
+  prices_update_due {
+    ticket
+  }
+}
+    `;
+
+/**
+ * __usePricesToUpdateQuery__
+ *
+ * To run a query within a React component, call `usePricesToUpdateQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePricesToUpdateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePricesToUpdateQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePricesToUpdateQuery(baseOptions?: Apollo.QueryHookOptions<PricesToUpdateQuery, PricesToUpdateQueryVariables>) {
+        return Apollo.useQuery<PricesToUpdateQuery, PricesToUpdateQueryVariables>(PricesToUpdateDocument, baseOptions);
+      }
+export function usePricesToUpdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PricesToUpdateQuery, PricesToUpdateQueryVariables>) {
+          return Apollo.useLazyQuery<PricesToUpdateQuery, PricesToUpdateQueryVariables>(PricesToUpdateDocument, baseOptions);
+        }
+export type PricesToUpdateQueryHookResult = ReturnType<typeof usePricesToUpdateQuery>;
+export type PricesToUpdateLazyQueryHookResult = ReturnType<typeof usePricesToUpdateLazyQuery>;
+export type PricesToUpdateQueryResult = Apollo.QueryResult<PricesToUpdateQuery, PricesToUpdateQueryVariables>;

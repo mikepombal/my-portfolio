@@ -10,3 +10,11 @@ gql`
     }
   }
 `;
+
+gql`
+  query pricesToUpdate {
+    prices_update_due {
+      ticket
+    }
+  }
+`;
