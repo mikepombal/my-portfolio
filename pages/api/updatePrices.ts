@@ -7,6 +7,17 @@ import withSession from '../../lib/session';
 import { InsertLogMutation, InsertLogMutationVariables, InsertLogDocument, PricesToUpdateQuery, PricesToUpdateDocument } from '../../types/generated/graphql';
 
 const alpha = _alpha({ key: process.env.ALPHA_VANTAGE_KEY || '' });
+const LIMIT_ALPHA_CALLS = 5;
+
+const getPrices = async (tickets: Array<string>) => {
+  try {
+    const prices = await Promise.all(tickets.slice(0, LIMIT_ALPHA_CALLS).map(ticket => alpha.data.quote(ticket)));
+
+    return prices;
+  } catch (_) {
+    return [];
+  }
+}
 
 export default withSession(async (req: NextApiRequest, res: NextApiResponse) => {
   if (!process.env.JWT_SECRET_KEY) {
@@ -57,13 +68,29 @@ export default withSession(async (req: NextApiRequest, res: NextApiResponse) => 
   }
   const ticketsToUpdate = tickets.data.prices_update_due.reduce<string[]>((acc, ticket) => ticket.ticket ? [...acc, ticket.ticket]: acc, []);
 
-  const prices = await Promise.all(ticketsToUpdate.map(ticket => alpha.data.quote(ticket)));
+  const prices = await getPrices(ticketsToUpdate);
 
-  const detail = prices.reduce<string>((acc, price) => price["Global Quote"]["01. symbol"] &&  `${acc} ${price["Global Quote"]["01. symbol"]}: ${price["Global Quote"]["05. price"]}, `, '');
+  interface PricesResult {
+    ticketWithPrices: Array<{ ticket: string, price: string }>;
+    ticketsToProcess: Array<string>;
+  }
+  const { ticketWithPrices, ticketsToProcess: ticketWithNoPrices } = prices.reduce<PricesResult>((acc, item) => {
+    if (item["Global Quote"]["01. symbol"] && item["Global Quote"]["05. price"]) {
+      const ticket = item["Global Quote"]["01. symbol"];
+      return {
+        ticketWithPrices: [...acc.ticketWithPrices, { ticket, price: item["Global Quote"]["05. price"]}],
+        ticketsToProcess: acc.ticketsToProcess.filter(t => t !== ticket)
+      };
+    }
+    return acc;
+  }, { ticketWithPrices: [], ticketsToProcess: [...ticketsToUpdate] });
+
+  const ticketWithPricesLog = ticketWithPrices.reduce<string>((acc, item) => `${acc} ${item.ticket}: ${item.price}, `, 'Tickets with prices:');
+  const ticketWithNoPricesLog = ticketWithNoPrices.length > 0 ? `Tickets with no prices: [${ticketWithNoPrices.join(', ')}], ` : ''; 
 
   const variables: InsertLogMutationVariables = {
     contract: 'updatePrices',
-    detail
+    detail: ticketWithNoPricesLog + ticketWithPricesLog
   };
   const result = await client.mutate<InsertLogMutation, InsertLogMutationVariables>({ mutation: InsertLogDocument, variables });
 
