@@ -605,6 +605,7 @@ export type Mutation_RootDelete_TicketsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Tickets_By_PkArgs = {
+  market: Market_Enum_Enum;
   ticket: Scalars['String'];
 };
 
@@ -1023,6 +1024,7 @@ export type Query_RootTickets_AggregateArgs = {
 
 /** query root */
 export type Query_RootTickets_By_PkArgs = {
+  market: Market_Enum_Enum;
   ticket: Scalars['String'];
 };
 
@@ -1212,6 +1214,7 @@ export type Subscription_RootTickets_AggregateArgs = {
 
 /** subscription root */
 export type Subscription_RootTickets_By_PkArgs = {
+  market: Market_Enum_Enum;
   ticket: Scalars['String'];
 };
 
@@ -1535,6 +1538,7 @@ export type Tickets_Order_By = {
 
 /** primary key columns input for table: "tickets" */
 export type Tickets_Pk_Columns_Input = {
+  market: Market_Enum_Enum;
   ticket: Scalars['String'];
 };
 
@@ -1811,7 +1815,23 @@ export type UpdateTicketMutation = (
   { __typename?: 'mutation_root' }
   & { update_tickets_by_pk?: Maybe<(
     { __typename?: 'tickets' }
-    & Pick<Tickets, 'ticket' | 'name' | 'ticket_type' | 'market'>
+    & Pick<Tickets, 'ticket' | 'market' | 'name' | 'ticket_type'>
+  )> }
+);
+
+export type UpdateTicketPriceMutationVariables = Exact<{
+  ticket: Scalars['String'];
+  market: Market_Enum_Enum;
+  price: Scalars['String'];
+  timestamp: Scalars['timestamptz'];
+}>;
+
+
+export type UpdateTicketPriceMutation = (
+  { __typename?: 'mutation_root' }
+  & { update_tickets_by_pk?: Maybe<(
+    { __typename?: 'tickets' }
+    & Pick<Tickets, 'ticket' | 'market' | 'latest_price' | 'price_timestamp'>
   )> }
 );
 
@@ -1914,11 +1934,11 @@ export type InsertTicketMutationResult = Apollo.MutationResult<InsertTicketMutat
 export type InsertTicketMutationOptions = Apollo.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
 export const UpdateTicketDocument = gql`
     mutation updateTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!) {
-  update_tickets_by_pk(_set: {name: $name, ticket_type: $ticket_type, market: $market}, pk_columns: {ticket: $ticket}) {
+  update_tickets_by_pk(_set: {name: $name, ticket_type: $ticket_type}, pk_columns: {ticket: $ticket, market: $market}) {
     ticket
+    market
     name
     ticket_type
-    market
   }
 }
     `;
@@ -1950,6 +1970,44 @@ export function useUpdateTicketMutation(baseOptions?: Apollo.MutationHookOptions
 export type UpdateTicketMutationHookResult = ReturnType<typeof useUpdateTicketMutation>;
 export type UpdateTicketMutationResult = Apollo.MutationResult<UpdateTicketMutation>;
 export type UpdateTicketMutationOptions = Apollo.BaseMutationOptions<UpdateTicketMutation, UpdateTicketMutationVariables>;
+export const UpdateTicketPriceDocument = gql`
+    mutation updateTicketPrice($ticket: String!, $market: market_enum_enum!, $price: String!, $timestamp: timestamptz!) {
+  update_tickets_by_pk(_set: {latest_price: $price, price_timestamp: $timestamp}, pk_columns: {ticket: $ticket, market: $market}) {
+    ticket
+    market
+    latest_price
+    price_timestamp
+  }
+}
+    `;
+export type UpdateTicketPriceMutationFn = Apollo.MutationFunction<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>;
+
+/**
+ * __useUpdateTicketPriceMutation__
+ *
+ * To run a mutation, you first call `useUpdateTicketPriceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTicketPriceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTicketPriceMutation, { data, loading, error }] = useUpdateTicketPriceMutation({
+ *   variables: {
+ *      ticket: // value for 'ticket'
+ *      market: // value for 'market'
+ *      price: // value for 'price'
+ *      timestamp: // value for 'timestamp'
+ *   },
+ * });
+ */
+export function useUpdateTicketPriceMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>) {
+        return Apollo.useMutation<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>(UpdateTicketPriceDocument, baseOptions);
+      }
+export type UpdateTicketPriceMutationHookResult = ReturnType<typeof useUpdateTicketPriceMutation>;
+export type UpdateTicketPriceMutationResult = Apollo.MutationResult<UpdateTicketPriceMutation>;
+export type UpdateTicketPriceMutationOptions = Apollo.BaseMutationOptions<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>;
 export const AllTicketsDocument = gql`
     query allTickets {
   tickets(order_by: {ticket: asc}) {

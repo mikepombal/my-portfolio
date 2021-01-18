@@ -1,8 +1,10 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client/core';
+import { NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { concatPagination } from '@apollo/client/utilities';
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt, { Algorithm } from 'jsonwebtoken';
 import _alpha from 'alphavantage';
+import { PromiseValue } from '../../types/utils';
 import withSession from '../../lib/session';
 import {
   InsertLogMutation,
@@ -10,6 +12,10 @@ import {
   InsertLogDocument,
   PricesToUpdateQuery,
   PricesToUpdateDocument,
+  UpdateTicketPriceMutation,
+  UpdateTicketPriceMutationVariables,
+  UpdateTicketPriceDocument,
+  Market_Enum_Enum,
 } from '../../types/generated/graphql';
 
 const alpha = _alpha({ key: process.env.ALPHA_VANTAGE_KEY || '' });
@@ -27,6 +33,64 @@ const getPrices = async (tickets: Array<string>) => {
   } catch (_) {
     return [];
   }
+};
+
+interface TicketWithPrice {
+  symbol: string;
+  price: string;
+}
+interface PricesResult {
+  ticketsWithPrice: TicketWithPrice[];
+  ticketWithNoPrices: string[];
+}
+const checkPrices = (
+  prices: PromiseValue<ReturnType<typeof getPrices>>,
+  ticketsToUpdate: string[]
+) =>
+  prices.reduce<PricesResult>(
+    (acc, item) => {
+      if (
+        item['Global Quote']['01. symbol'] &&
+        item['Global Quote']['05. price']
+      ) {
+        const symbol = item['Global Quote']['01. symbol'];
+        return {
+          ticketsWithPrice: [
+            ...acc.ticketsWithPrice,
+            { symbol, price: item['Global Quote']['05. price'] },
+          ],
+          ticketWithNoPrices: acc.ticketWithNoPrices.filter(
+            (t) => t !== symbol
+          ),
+        };
+      }
+      return acc;
+    },
+    { ticketsWithPrice: [], ticketWithNoPrices: [...ticketsToUpdate] }
+  );
+
+const updateTicket = async (
+  { symbol, price }: TicketWithPrice,
+  client: ApolloClient<NormalizedCacheObject>
+) => {
+  const [_market, ticket] = symbol.split(':');
+  const market = Object.values(Market_Enum_Enum).find((x) => x === _market);
+
+  if (!market) {
+    return Promise.reject(`The maket "${_market}" is not supported!`);
+  }
+
+  const variables: UpdateTicketPriceMutationVariables = {
+    ticket,
+    market,
+    price,
+    timestamp: new Date().toISOString(),
+  };
+
+  return await client.mutate<
+    UpdateTicketPriceMutation,
+    UpdateTicketPriceMutationVariables
+  >({ mutation: UpdateTicketPriceDocument, variables });
 };
 
 export default withSession(
@@ -92,51 +156,38 @@ export default withSession(
 
     const prices = await getPrices(ticketsToUpdate);
 
-    interface PricesResult {
-      ticketWithPrices: Array<{ ticket: string; price: string }>;
-      ticketsToProcess: Array<string>;
-    }
-    const {
-      ticketWithPrices,
-      ticketsToProcess: ticketWithNoPrices,
-    } = prices.reduce<PricesResult>(
-      (acc, item) => {
-        if (
-          item['Global Quote']['01. symbol'] &&
-          item['Global Quote']['05. price']
-        ) {
-          const ticket = item['Global Quote']['01. symbol'];
-          return {
-            ticketWithPrices: [
-              ...acc.ticketWithPrices,
-              { ticket, price: item['Global Quote']['05. price'] },
-            ],
-            ticketsToProcess: acc.ticketsToProcess.filter((t) => t !== ticket),
-          };
-        }
-        return acc;
-      },
-      { ticketWithPrices: [], ticketsToProcess: [...ticketsToUpdate] }
+    const { ticketsWithPrice, ticketWithNoPrices } = checkPrices(
+      prices,
+      ticketsToUpdate
+    );
+
+    const result = await Promise.all(
+      ticketsWithPrice.map((ticket) => updateTicket(ticket, client))
     );
 
     // LOG the result
-    const ticketWithPricesLog = ticketWithPrices.reduce<string>(
-      (acc, item) => `${acc} ${item.ticket}: ${item.price}, `,
-      'Tickets with prices:'
-    );
+    const ticketsWithPriceLog =
+      ticketsWithPrice.length > 0
+        ? ticketsWithPrice.reduce<string>(
+            (acc, item) => `${acc} ${item.symbol}: ${item.price}, `,
+            'Tickets with prices:'
+          )
+        : '';
     const ticketWithNoPricesLog =
       ticketWithNoPrices.length > 0
         ? `Tickets with no prices: [${ticketWithNoPrices.join(', ')}], `
         : '';
 
-    const variables: InsertLogMutationVariables = {
-      contract: 'updatePrices',
-      detail: ticketWithNoPricesLog + ticketWithPricesLog,
-    };
-    const result = await client.mutate<
-      InsertLogMutation,
-      InsertLogMutationVariables
-    >({ mutation: InsertLogDocument, variables });
+    if (ticketsWithPriceLog || ticketWithNoPricesLog) {
+      const variables: InsertLogMutationVariables = {
+        contract: 'updatePrices',
+        detail: ticketWithNoPricesLog + ticketsWithPriceLog,
+      };
+      await client.mutate<InsertLogMutation, InsertLogMutationVariables>({
+        mutation: InsertLogDocument,
+        variables,
+      });
+    }
 
     res.json({ test: JSON.stringify(result) });
   }

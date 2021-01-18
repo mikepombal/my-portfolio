@@ -3005,6 +3005,20 @@
             "description": "delete single row from the table: \"tickets\"",
             "args": [
               {
+                "name": "market",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "market_enum_enum",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "ticket",
                 "description": null,
                 "type": {
@@ -5318,6 +5332,20 @@
             "description": "fetch data from the table: \"tickets\" using primary key columns",
             "args": [
               {
+                "name": "market",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "market_enum_enum",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "ticket",
                 "description": null,
                 "type": {
@@ -6507,6 +6535,20 @@
             "name": "tickets_by_pk",
             "description": "fetch data from the table: \"tickets\" using primary key columns",
             "args": [
+              {
+                "name": "market",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "market_enum_enum",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
               {
                 "name": "ticket",
                 "description": null,
@@ -8501,6 +8543,20 @@
         "description": "primary key columns input for table: \"tickets\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "market",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "market_enum_enum",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
           {
             "name": "ticket",
             "description": null,
