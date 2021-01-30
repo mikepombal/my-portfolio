@@ -6,16 +6,38 @@ interface Props {
 }
 
 const LoginForm: React.FC<Props> = ({ errorMessage, onSubmit }) => (
-  <form onSubmit={onSubmit}>
-    <label>
-      <span>Type your GitHub username</span>
-      <input type="text" name="username" required />
-      <input type="password" name="password" required />
-    </label>
+  <form
+    onSubmit={onSubmit}
+    className="w-full h-screen flex justify-center items-center flex-col text-lg"
+  >
+    <div className="mb-4">
+      <label className="w-32 inline-block">Username</label>
+      <input
+        type="text"
+        name="username"
+        required
+        className="w-56 rounded-md px-2 py-1"
+      />
+    </div>
+    <div className="mb-4">
+      <label className="w-32 inline-block">Password</label>
+      <input
+        type="password"
+        name="password"
+        required
+        className="w-56 rounded-md  px-2 py-1"
+      />
+    </div>
+    <div className="my-4 w-96 pl-36">
+      <button
+        type="submit"
+        className="px-6 py-2 bg-indigo-800 flex justify-center text-white text-xl rounded-full w-32"
+      >
+        Login
+      </button>
+    </div>
 
-    <button type="submit">Login</button>
-
-    {errorMessage && <p className="error">{errorMessage}</p>}
+    {errorMessage && <p className="text-red-600 my-4">{errorMessage}</p>}
   </form>
 );
 
