@@ -1,7 +1,9 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -59,8 +61,8 @@ export type String_Comparison_Exp = {
 
 /**
  * for log purpose
- * 
- * 
+ *
+ *
  * columns and relationships of "log"
  */
 export type Log = {
@@ -1842,7 +1844,7 @@ export type AllTicketsQuery = (
   { __typename?: 'query_root' }
   & { tickets: Array<(
     { __typename?: 'tickets' }
-    & Pick<Tickets, 'name' | 'ticket' | 'ticket_type' | 'market'>
+    & Pick<Tickets, 'name' | 'ticket' | 'ticket_type' | 'market' | 'latest_price'>
   )> }
 );
 
@@ -1896,7 +1898,9 @@ export type InsertLogMutationResult = Apollo.MutationResult<InsertLogMutation>;
 export type InsertLogMutationOptions = Apollo.BaseMutationOptions<InsertLogMutation, InsertLogMutationVariables>;
 export const InsertTicketDocument = gql`
     mutation insertTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!) {
-  insert_tickets_one(object: {name: $name, ticket: $ticket, ticket_type: $ticket_type, market: $market}) {
+  insert_tickets_one(
+    object: {name: $name, ticket: $ticket, ticket_type: $ticket_type, market: $market}
+  ) {
     ticket
     name
     ticket_type
@@ -1934,7 +1938,10 @@ export type InsertTicketMutationResult = Apollo.MutationResult<InsertTicketMutat
 export type InsertTicketMutationOptions = Apollo.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
 export const UpdateTicketDocument = gql`
     mutation updateTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!) {
-  update_tickets_by_pk(_set: {name: $name, ticket_type: $ticket_type}, pk_columns: {ticket: $ticket, market: $market}) {
+  update_tickets_by_pk(
+    _set: {name: $name, ticket_type: $ticket_type}
+    pk_columns: {ticket: $ticket, market: $market}
+  ) {
     ticket
     market
     name
@@ -1972,7 +1979,10 @@ export type UpdateTicketMutationResult = Apollo.MutationResult<UpdateTicketMutat
 export type UpdateTicketMutationOptions = Apollo.BaseMutationOptions<UpdateTicketMutation, UpdateTicketMutationVariables>;
 export const UpdateTicketPriceDocument = gql`
     mutation updateTicketPrice($ticket: String!, $market: market_enum_enum!, $price: String!, $timestamp: timestamptz!) {
-  update_tickets_by_pk(_set: {latest_price: $price, price_timestamp: $timestamp}, pk_columns: {ticket: $ticket, market: $market}) {
+  update_tickets_by_pk(
+    _set: {latest_price: $price, price_timestamp: $timestamp}
+    pk_columns: {ticket: $ticket, market: $market}
+  ) {
     ticket
     market
     latest_price
@@ -2015,6 +2025,7 @@ export const AllTicketsDocument = gql`
     ticket
     ticket_type
     market
+    latest_price
   }
 }
     `;

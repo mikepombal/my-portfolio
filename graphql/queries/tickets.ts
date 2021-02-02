@@ -7,6 +7,7 @@ gql`
       ticket
       ticket_type
       market
+      latest_price
     }
   }
 `;
