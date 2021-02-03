@@ -2,6 +2,7 @@ import {
   useAllTicketsQuery,
   InsertTicketMutationVariables,
 } from '../../types/generated/graphql';
+import Money from '../common/Money';
 
 const commonStyle =
   'flex justify-center items-center h-full border-r border-dashed border-gray-800';
@@ -35,7 +36,11 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
             <div className={`${commonStyle} w-64`}>{ticket.name}</div>
             <div className={`${commonStyle} w-24`}>{ticket.ticket_type}</div>
             <div className={`${commonStyle} w-24`}>{ticket.market}</div>
-            <div className={`${commonStyle} w-24`}>{ticket.latest_price}</div>
+            <div className={`${commonStyle} w-24`}>
+              {typeof ticket.latest_price === 'string' && (
+                <Money value={ticket.latest_price} market={ticket.market} />
+              )}
+            </div>
             <div className={`${commonStyle} w-16`}>
               <button onClick={() => selectTicket(ticket)}>edit</button>
             </div>
