@@ -11,6 +11,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  money: any;
+  numeric: any;
   timestamptz: any;
 };
 
@@ -58,6 +60,500 @@ export type String_Comparison_Exp = {
   _nsimilar?: Maybe<Scalars['String']>;
   _similar?: Maybe<Scalars['String']>;
 };
+
+/** columns and relationships of "activities" */
+export type Activities = {
+  __typename?: 'activities';
+  date: Scalars['timestamptz'];
+  id: Scalars['Int'];
+  market: Scalars['String'];
+  quantity: Scalars['numeric'];
+  ticket: Scalars['String'];
+  total_value: Scalars['money'];
+  type: Activity_Enum_Enum;
+};
+
+/** aggregated selection of "activities" */
+export type Activities_Aggregate = {
+  __typename?: 'activities_aggregate';
+  aggregate?: Maybe<Activities_Aggregate_Fields>;
+  nodes: Array<Activities>;
+};
+
+/** aggregate fields of "activities" */
+export type Activities_Aggregate_Fields = {
+  __typename?: 'activities_aggregate_fields';
+  avg?: Maybe<Activities_Avg_Fields>;
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Activities_Max_Fields>;
+  min?: Maybe<Activities_Min_Fields>;
+  stddev?: Maybe<Activities_Stddev_Fields>;
+  stddev_pop?: Maybe<Activities_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Activities_Stddev_Samp_Fields>;
+  sum?: Maybe<Activities_Sum_Fields>;
+  var_pop?: Maybe<Activities_Var_Pop_Fields>;
+  var_samp?: Maybe<Activities_Var_Samp_Fields>;
+  variance?: Maybe<Activities_Variance_Fields>;
+};
+
+
+/** aggregate fields of "activities" */
+export type Activities_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Activities_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "activities" */
+export type Activities_Aggregate_Order_By = {
+  avg?: Maybe<Activities_Avg_Order_By>;
+  count?: Maybe<Order_By>;
+  max?: Maybe<Activities_Max_Order_By>;
+  min?: Maybe<Activities_Min_Order_By>;
+  stddev?: Maybe<Activities_Stddev_Order_By>;
+  stddev_pop?: Maybe<Activities_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Activities_Stddev_Samp_Order_By>;
+  sum?: Maybe<Activities_Sum_Order_By>;
+  var_pop?: Maybe<Activities_Var_Pop_Order_By>;
+  var_samp?: Maybe<Activities_Var_Samp_Order_By>;
+  variance?: Maybe<Activities_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "activities" */
+export type Activities_Arr_Rel_Insert_Input = {
+  data: Array<Activities_Insert_Input>;
+  on_conflict?: Maybe<Activities_On_Conflict>;
+};
+
+/** aggregate avg on columns */
+export type Activities_Avg_Fields = {
+  __typename?: 'activities_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Float']>;
+  total_value?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "activities" */
+export type Activities_Avg_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "activities". All fields are combined with a logical 'AND'. */
+export type Activities_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Activities_Bool_Exp>>>;
+  _not?: Maybe<Activities_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Activities_Bool_Exp>>>;
+  date?: Maybe<Timestamptz_Comparison_Exp>;
+  id?: Maybe<Int_Comparison_Exp>;
+  market?: Maybe<String_Comparison_Exp>;
+  quantity?: Maybe<Numeric_Comparison_Exp>;
+  ticket?: Maybe<String_Comparison_Exp>;
+  total_value?: Maybe<Money_Comparison_Exp>;
+  type?: Maybe<Activity_Enum_Enum_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "activities" */
+export enum Activities_Constraint {
+  /** unique or primary key constraint */
+  ActivitiesPkey = 'activities_pkey'
+}
+
+/** input type for incrementing integer column in table "activities" */
+export type Activities_Inc_Input = {
+  id?: Maybe<Scalars['Int']>;
+  quantity?: Maybe<Scalars['numeric']>;
+  total_value?: Maybe<Scalars['money']>;
+};
+
+/** input type for inserting data into table "activities" */
+export type Activities_Insert_Input = {
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  market?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['numeric']>;
+  ticket?: Maybe<Scalars['String']>;
+  total_value?: Maybe<Scalars['money']>;
+  type?: Maybe<Activity_Enum_Enum>;
+};
+
+/** aggregate max on columns */
+export type Activities_Max_Fields = {
+  __typename?: 'activities_max_fields';
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  market?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['numeric']>;
+  ticket?: Maybe<Scalars['String']>;
+  total_value?: Maybe<Scalars['money']>;
+};
+
+/** order by max() on columns of table "activities" */
+export type Activities_Max_Order_By = {
+  date?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  market?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  ticket?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Activities_Min_Fields = {
+  __typename?: 'activities_min_fields';
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  market?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['numeric']>;
+  ticket?: Maybe<Scalars['String']>;
+  total_value?: Maybe<Scalars['money']>;
+};
+
+/** order by min() on columns of table "activities" */
+export type Activities_Min_Order_By = {
+  date?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  market?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  ticket?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "activities" */
+export type Activities_Mutation_Response = {
+  __typename?: 'activities_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Activities>;
+};
+
+/** input type for inserting object relation for remote table "activities" */
+export type Activities_Obj_Rel_Insert_Input = {
+  data: Activities_Insert_Input;
+  on_conflict?: Maybe<Activities_On_Conflict>;
+};
+
+/** on conflict condition type for table "activities" */
+export type Activities_On_Conflict = {
+  constraint: Activities_Constraint;
+  update_columns: Array<Activities_Update_Column>;
+  where?: Maybe<Activities_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "activities" */
+export type Activities_Order_By = {
+  date?: Maybe<Order_By>;
+  id?: Maybe<Order_By>;
+  market?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  ticket?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+  type?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "activities" */
+export type Activities_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "activities" */
+export enum Activities_Select_Column {
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Market = 'market',
+  /** column name */
+  Quantity = 'quantity',
+  /** column name */
+  Ticket = 'ticket',
+  /** column name */
+  TotalValue = 'total_value',
+  /** column name */
+  Type = 'type'
+}
+
+/** input type for updating data in table "activities" */
+export type Activities_Set_Input = {
+  date?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['Int']>;
+  market?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['numeric']>;
+  ticket?: Maybe<Scalars['String']>;
+  total_value?: Maybe<Scalars['money']>;
+  type?: Maybe<Activity_Enum_Enum>;
+};
+
+/** aggregate stddev on columns */
+export type Activities_Stddev_Fields = {
+  __typename?: 'activities_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Float']>;
+  total_value?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "activities" */
+export type Activities_Stddev_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Activities_Stddev_Pop_Fields = {
+  __typename?: 'activities_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Float']>;
+  total_value?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "activities" */
+export type Activities_Stddev_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Activities_Stddev_Samp_Fields = {
+  __typename?: 'activities_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Float']>;
+  total_value?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "activities" */
+export type Activities_Stddev_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Activities_Sum_Fields = {
+  __typename?: 'activities_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+  quantity?: Maybe<Scalars['numeric']>;
+  total_value?: Maybe<Scalars['money']>;
+};
+
+/** order by sum() on columns of table "activities" */
+export type Activities_Sum_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** update columns of table "activities" */
+export enum Activities_Update_Column {
+  /** column name */
+  Date = 'date',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Market = 'market',
+  /** column name */
+  Quantity = 'quantity',
+  /** column name */
+  Ticket = 'ticket',
+  /** column name */
+  TotalValue = 'total_value',
+  /** column name */
+  Type = 'type'
+}
+
+/** aggregate var_pop on columns */
+export type Activities_Var_Pop_Fields = {
+  __typename?: 'activities_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Float']>;
+  total_value?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "activities" */
+export type Activities_Var_Pop_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Activities_Var_Samp_Fields = {
+  __typename?: 'activities_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Float']>;
+  total_value?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "activities" */
+export type Activities_Var_Samp_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Activities_Variance_Fields = {
+  __typename?: 'activities_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+  quantity?: Maybe<Scalars['Float']>;
+  total_value?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "activities" */
+export type Activities_Variance_Order_By = {
+  id?: Maybe<Order_By>;
+  quantity?: Maybe<Order_By>;
+  total_value?: Maybe<Order_By>;
+};
+
+/** columns and relationships of "activity_enum" */
+export type Activity_Enum = {
+  __typename?: 'activity_enum';
+  type: Scalars['String'];
+};
+
+/** aggregated selection of "activity_enum" */
+export type Activity_Enum_Aggregate = {
+  __typename?: 'activity_enum_aggregate';
+  aggregate?: Maybe<Activity_Enum_Aggregate_Fields>;
+  nodes: Array<Activity_Enum>;
+};
+
+/** aggregate fields of "activity_enum" */
+export type Activity_Enum_Aggregate_Fields = {
+  __typename?: 'activity_enum_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Activity_Enum_Max_Fields>;
+  min?: Maybe<Activity_Enum_Min_Fields>;
+};
+
+
+/** aggregate fields of "activity_enum" */
+export type Activity_Enum_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Activity_Enum_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "activity_enum" */
+export type Activity_Enum_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Activity_Enum_Max_Order_By>;
+  min?: Maybe<Activity_Enum_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "activity_enum" */
+export type Activity_Enum_Arr_Rel_Insert_Input = {
+  data: Array<Activity_Enum_Insert_Input>;
+  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "activity_enum". All fields are combined with a logical 'AND'. */
+export type Activity_Enum_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Activity_Enum_Bool_Exp>>>;
+  _not?: Maybe<Activity_Enum_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Activity_Enum_Bool_Exp>>>;
+  type?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "activity_enum" */
+export enum Activity_Enum_Constraint {
+  /** unique or primary key constraint */
+  ActivityEnumPkey = 'activity_enum_pkey'
+}
+
+export enum Activity_Enum_Enum {
+  Buy = 'BUY',
+  Div = 'DIV',
+  Sell = 'SELL'
+}
+
+/** expression to compare columns of type activity_enum_enum. All fields are combined with logical 'AND'. */
+export type Activity_Enum_Enum_Comparison_Exp = {
+  _eq?: Maybe<Activity_Enum_Enum>;
+  _in?: Maybe<Array<Activity_Enum_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Activity_Enum_Enum>;
+  _nin?: Maybe<Array<Activity_Enum_Enum>>;
+};
+
+/** input type for inserting data into table "activity_enum" */
+export type Activity_Enum_Insert_Input = {
+  type?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Activity_Enum_Max_Fields = {
+  __typename?: 'activity_enum_max_fields';
+  type?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "activity_enum" */
+export type Activity_Enum_Max_Order_By = {
+  type?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Activity_Enum_Min_Fields = {
+  __typename?: 'activity_enum_min_fields';
+  type?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "activity_enum" */
+export type Activity_Enum_Min_Order_By = {
+  type?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "activity_enum" */
+export type Activity_Enum_Mutation_Response = {
+  __typename?: 'activity_enum_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Activity_Enum>;
+};
+
+/** input type for inserting object relation for remote table "activity_enum" */
+export type Activity_Enum_Obj_Rel_Insert_Input = {
+  data: Activity_Enum_Insert_Input;
+  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+};
+
+/** on conflict condition type for table "activity_enum" */
+export type Activity_Enum_On_Conflict = {
+  constraint: Activity_Enum_Constraint;
+  update_columns: Array<Activity_Enum_Update_Column>;
+  where?: Maybe<Activity_Enum_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "activity_enum" */
+export type Activity_Enum_Order_By = {
+  type?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "activity_enum" */
+export type Activity_Enum_Pk_Columns_Input = {
+  type: Scalars['String'];
+};
+
+/** select columns of table "activity_enum" */
+export enum Activity_Enum_Select_Column {
+  /** column name */
+  Type = 'type'
+}
+
+/** input type for updating data in table "activity_enum" */
+export type Activity_Enum_Set_Input = {
+  type?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "activity_enum" */
+export enum Activity_Enum_Update_Column {
+  /** column name */
+  Type = 'type'
+}
 
 /**
  * for log purpose
@@ -489,9 +985,31 @@ export enum Market_Enum_Update_Column {
   Market = 'market'
 }
 
+
+/** expression to compare columns of type money. All fields are combined with logical 'AND'. */
+export type Money_Comparison_Exp = {
+  _eq?: Maybe<Scalars['money']>;
+  _gt?: Maybe<Scalars['money']>;
+  _gte?: Maybe<Scalars['money']>;
+  _in?: Maybe<Array<Scalars['money']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['money']>;
+  _lte?: Maybe<Scalars['money']>;
+  _neq?: Maybe<Scalars['money']>;
+  _nin?: Maybe<Array<Scalars['money']>>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "activities" */
+  delete_activities?: Maybe<Activities_Mutation_Response>;
+  /** delete single row from the table: "activities" */
+  delete_activities_by_pk?: Maybe<Activities>;
+  /** delete data from the table: "activity_enum" */
+  delete_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
+  /** delete single row from the table: "activity_enum" */
+  delete_activity_enum_by_pk?: Maybe<Activity_Enum>;
   /** delete data from the table: "log" */
   delete_log?: Maybe<Log_Mutation_Response>;
   /** delete single row from the table: "log" */
@@ -514,6 +1032,14 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "activities" */
+  insert_activities?: Maybe<Activities_Mutation_Response>;
+  /** insert a single row into the table: "activities" */
+  insert_activities_one?: Maybe<Activities>;
+  /** insert data into the table: "activity_enum" */
+  insert_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
+  /** insert a single row into the table: "activity_enum" */
+  insert_activity_enum_one?: Maybe<Activity_Enum>;
   /** insert data into the table: "log" */
   insert_log?: Maybe<Log_Mutation_Response>;
   /** insert a single row into the table: "log" */
@@ -534,6 +1060,14 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "activities" */
+  update_activities?: Maybe<Activities_Mutation_Response>;
+  /** update single row of the table: "activities" */
+  update_activities_by_pk?: Maybe<Activities>;
+  /** update data of the table: "activity_enum" */
+  update_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
+  /** update single row of the table: "activity_enum" */
+  update_activity_enum_by_pk?: Maybe<Activity_Enum>;
   /** update data of the table: "log" */
   update_log?: Maybe<Log_Mutation_Response>;
   /** update single row of the table: "log" */
@@ -554,6 +1088,30 @@ export type Mutation_Root = {
   update_users?: Maybe<Users_Mutation_Response>;
   /** update single row of the table: "users" */
   update_users_by_pk?: Maybe<Users>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_ActivitiesArgs = {
+  where: Activities_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Activities_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Activity_EnumArgs = {
+  where: Activity_Enum_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Activity_Enum_By_PkArgs = {
+  type: Scalars['String'];
 };
 
 
@@ -621,6 +1179,34 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   username: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_ActivitiesArgs = {
+  objects: Array<Activities_Insert_Input>;
+  on_conflict?: Maybe<Activities_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Activities_OneArgs = {
+  object: Activities_Insert_Input;
+  on_conflict?: Maybe<Activities_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Activity_EnumArgs = {
+  objects: Array<Activity_Enum_Insert_Input>;
+  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Activity_Enum_OneArgs = {
+  object: Activity_Enum_Insert_Input;
+  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
 };
 
 
@@ -695,6 +1281,36 @@ export type Mutation_RootInsert_Users_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_ActivitiesArgs = {
+  _inc?: Maybe<Activities_Inc_Input>;
+  _set?: Maybe<Activities_Set_Input>;
+  where: Activities_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Activities_By_PkArgs = {
+  _inc?: Maybe<Activities_Inc_Input>;
+  _set?: Maybe<Activities_Set_Input>;
+  pk_columns: Activities_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Activity_EnumArgs = {
+  _set?: Maybe<Activity_Enum_Set_Input>;
+  where: Activity_Enum_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Activity_Enum_By_PkArgs = {
+  _set?: Maybe<Activity_Enum_Set_Input>;
+  pk_columns: Activity_Enum_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_LogArgs = {
   _inc?: Maybe<Log_Inc_Input>;
   _set?: Maybe<Log_Set_Input>;
@@ -763,6 +1379,20 @@ export type Mutation_RootUpdate_UsersArgs = {
 export type Mutation_RootUpdate_Users_By_PkArgs = {
   _set?: Maybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
+};
+
+
+/** expression to compare columns of type numeric. All fields are combined with logical 'AND'. */
+export type Numeric_Comparison_Exp = {
+  _eq?: Maybe<Scalars['numeric']>;
+  _gt?: Maybe<Scalars['numeric']>;
+  _gte?: Maybe<Scalars['numeric']>;
+  _in?: Maybe<Array<Scalars['numeric']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['numeric']>;
+  _lte?: Maybe<Scalars['numeric']>;
+  _neq?: Maybe<Scalars['numeric']>;
+  _nin?: Maybe<Array<Scalars['numeric']>>;
 };
 
 /** column ordering options */
@@ -869,6 +1499,18 @@ export enum Prices_Update_Due_Select_Column {
 /** query root */
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "activities" */
+  activities: Array<Activities>;
+  /** fetch aggregated fields from the table: "activities" */
+  activities_aggregate: Activities_Aggregate;
+  /** fetch data from the table: "activities" using primary key columns */
+  activities_by_pk?: Maybe<Activities>;
+  /** fetch data from the table: "activity_enum" */
+  activity_enum: Array<Activity_Enum>;
+  /** fetch aggregated fields from the table: "activity_enum" */
+  activity_enum_aggregate: Activity_Enum_Aggregate;
+  /** fetch data from the table: "activity_enum" using primary key columns */
+  activity_enum_by_pk?: Maybe<Activity_Enum>;
   /** fetch data from the table: "log" */
   log: Array<Log>;
   /** fetch aggregated fields from the table: "log" */
@@ -903,6 +1545,58 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+/** query root */
+export type Query_RootActivitiesArgs = {
+  distinct_on?: Maybe<Array<Activities_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activities_Order_By>>;
+  where?: Maybe<Activities_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootActivities_AggregateArgs = {
+  distinct_on?: Maybe<Array<Activities_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activities_Order_By>>;
+  where?: Maybe<Activities_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootActivities_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** query root */
+export type Query_RootActivity_EnumArgs = {
+  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
+  where?: Maybe<Activity_Enum_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootActivity_Enum_AggregateArgs = {
+  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
+  where?: Maybe<Activity_Enum_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootActivity_Enum_By_PkArgs = {
+  type: Scalars['String'];
 };
 
 
@@ -1059,6 +1753,18 @@ export type Query_RootUsers_By_PkArgs = {
 /** subscription root */
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "activities" */
+  activities: Array<Activities>;
+  /** fetch aggregated fields from the table: "activities" */
+  activities_aggregate: Activities_Aggregate;
+  /** fetch data from the table: "activities" using primary key columns */
+  activities_by_pk?: Maybe<Activities>;
+  /** fetch data from the table: "activity_enum" */
+  activity_enum: Array<Activity_Enum>;
+  /** fetch aggregated fields from the table: "activity_enum" */
+  activity_enum_aggregate: Activity_Enum_Aggregate;
+  /** fetch data from the table: "activity_enum" using primary key columns */
+  activity_enum_by_pk?: Maybe<Activity_Enum>;
   /** fetch data from the table: "log" */
   log: Array<Log>;
   /** fetch aggregated fields from the table: "log" */
@@ -1093,6 +1799,58 @@ export type Subscription_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+/** subscription root */
+export type Subscription_RootActivitiesArgs = {
+  distinct_on?: Maybe<Array<Activities_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activities_Order_By>>;
+  where?: Maybe<Activities_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootActivities_AggregateArgs = {
+  distinct_on?: Maybe<Array<Activities_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activities_Order_By>>;
+  where?: Maybe<Activities_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootActivities_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** subscription root */
+export type Subscription_RootActivity_EnumArgs = {
+  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
+  where?: Maybe<Activity_Enum_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootActivity_Enum_AggregateArgs = {
+  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
+  where?: Maybe<Activity_Enum_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootActivity_Enum_By_PkArgs = {
+  type: Scalars['String'];
 };
 
 
