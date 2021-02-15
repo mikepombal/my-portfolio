@@ -47,6 +47,12 @@ const Nav = (): JSX.Element => {
               isSelected={router.route === '/tickets'}
             />
             <Li
+              label="Act."
+              href="/activities"
+              isSelected={router.route === '/activities'}
+            />
+
+            <Li
               label="Out"
               href="/api/logout"
               onClick={async (e) => {
