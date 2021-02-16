@@ -2595,6 +2595,17 @@ export type UpdateTicketPriceMutation = (
   )> }
 );
 
+export type AllActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllActivitiesQuery = (
+  { __typename?: 'query_root' }
+  & { activities: Array<(
+    { __typename?: 'activities' }
+    & Pick<Activities, 'id' | 'date' | 'ticket' | 'market' | 'type' | 'quantity' | 'total_value'>
+  )> }
+);
+
 export type AllTicketsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2776,6 +2787,44 @@ export function useUpdateTicketPriceMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateTicketPriceMutationHookResult = ReturnType<typeof useUpdateTicketPriceMutation>;
 export type UpdateTicketPriceMutationResult = Apollo.MutationResult<UpdateTicketPriceMutation>;
 export type UpdateTicketPriceMutationOptions = Apollo.BaseMutationOptions<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>;
+export const AllActivitiesDocument = gql`
+    query allActivities {
+  activities(order_by: {date: desc}, limit: 100) {
+    id
+    date
+    ticket
+    market
+    type
+    quantity
+    total_value
+  }
+}
+    `;
+
+/**
+ * __useAllActivitiesQuery__
+ *
+ * To run a query within a React component, call `useAllActivitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllActivitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllActivitiesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllActivitiesQuery(baseOptions?: Apollo.QueryHookOptions<AllActivitiesQuery, AllActivitiesQueryVariables>) {
+        return Apollo.useQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, baseOptions);
+      }
+export function useAllActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllActivitiesQuery, AllActivitiesQueryVariables>) {
+          return Apollo.useLazyQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, baseOptions);
+        }
+export type AllActivitiesQueryHookResult = ReturnType<typeof useAllActivitiesQuery>;
+export type AllActivitiesLazyQueryHookResult = ReturnType<typeof useAllActivitiesLazyQuery>;
+export type AllActivitiesQueryResult = Apollo.QueryResult<AllActivitiesQuery, AllActivitiesQueryVariables>;
 export const AllTicketsDocument = gql`
     query allTickets {
   tickets(order_by: {ticket: asc}) {
