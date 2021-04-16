@@ -11,7 +11,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  money: any;
   numeric: any;
   timestamptz: any;
 };
@@ -69,7 +68,7 @@ export type Activities = {
   market: Scalars['String'];
   quantity: Scalars['numeric'];
   ticket: Scalars['String'];
-  total_value: Scalars['money'];
+  total_value: Scalars['numeric'];
   type: Activity_Enum_Enum;
 };
 
@@ -149,7 +148,7 @@ export type Activities_Bool_Exp = {
   market?: Maybe<String_Comparison_Exp>;
   quantity?: Maybe<Numeric_Comparison_Exp>;
   ticket?: Maybe<String_Comparison_Exp>;
-  total_value?: Maybe<Money_Comparison_Exp>;
+  total_value?: Maybe<Numeric_Comparison_Exp>;
   type?: Maybe<Activity_Enum_Enum_Comparison_Exp>;
 };
 
@@ -163,7 +162,7 @@ export enum Activities_Constraint {
 export type Activities_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
-  total_value?: Maybe<Scalars['money']>;
+  total_value?: Maybe<Scalars['numeric']>;
 };
 
 /** input type for inserting data into table "activities" */
@@ -173,7 +172,7 @@ export type Activities_Insert_Input = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['money']>;
+  total_value?: Maybe<Scalars['numeric']>;
   type?: Maybe<Activity_Enum_Enum>;
 };
 
@@ -185,7 +184,7 @@ export type Activities_Max_Fields = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['money']>;
+  total_value?: Maybe<Scalars['numeric']>;
 };
 
 /** order by max() on columns of table "activities" */
@@ -206,7 +205,7 @@ export type Activities_Min_Fields = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['money']>;
+  total_value?: Maybe<Scalars['numeric']>;
 };
 
 /** order by min() on columns of table "activities" */
@@ -282,7 +281,7 @@ export type Activities_Set_Input = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['money']>;
+  total_value?: Maybe<Scalars['numeric']>;
   type?: Maybe<Activity_Enum_Enum>;
 };
 
@@ -336,7 +335,7 @@ export type Activities_Sum_Fields = {
   __typename?: 'activities_sum_fields';
   id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
-  total_value?: Maybe<Scalars['money']>;
+  total_value?: Maybe<Scalars['numeric']>;
 };
 
 /** order by sum() on columns of table "activities" */
@@ -984,20 +983,6 @@ export enum Market_Enum_Update_Column {
   /** column name */
   Market = 'market'
 }
-
-
-/** expression to compare columns of type money. All fields are combined with logical 'AND'. */
-export type Money_Comparison_Exp = {
-  _eq?: Maybe<Scalars['money']>;
-  _gt?: Maybe<Scalars['money']>;
-  _gte?: Maybe<Scalars['money']>;
-  _in?: Maybe<Array<Scalars['money']>>;
-  _is_null?: Maybe<Scalars['Boolean']>;
-  _lt?: Maybe<Scalars['money']>;
-  _lte?: Maybe<Scalars['money']>;
-  _neq?: Maybe<Scalars['money']>;
-  _nin?: Maybe<Array<Scalars['money']>>;
-};
 
 /** mutation root */
 export type Mutation_Root = {
@@ -2533,6 +2518,24 @@ export enum Users_Update_Column {
   Username = 'username'
 }
 
+export type InsertActivityMutationVariables = Exact<{
+  date: Scalars['timestamptz'];
+  ticket: Scalars['String'];
+  market: Scalars['String'];
+  totalValue: Scalars['numeric'];
+  quantity: Scalars['numeric'];
+  type: Activity_Enum_Enum;
+}>;
+
+
+export type InsertActivityMutation = (
+  { __typename?: 'mutation_root' }
+  & { insert_activities_one?: Maybe<(
+    { __typename?: 'activities' }
+    & Pick<Activities, 'id' | 'ticket' | 'market' | 'type' | 'quantity' | 'total_value' | 'date'>
+  )> }
+);
+
 export type InsertLogMutationVariables = Exact<{
   contract: Scalars['String'];
   detail: Scalars['String'];
@@ -2629,6 +2632,51 @@ export type PricesToUpdateQuery = (
 );
 
 
+export const InsertActivityDocument = gql`
+    mutation insertActivity($date: timestamptz!, $ticket: String!, $market: String!, $totalValue: numeric!, $quantity: numeric!, $type: activity_enum_enum!) {
+  insert_activities_one(
+    object: {date: $date, market: $market, quantity: $quantity, ticket: $ticket, total_value: $totalValue, type: $type}
+  ) {
+    id
+    ticket
+    market
+    type
+    quantity
+    total_value
+    date
+  }
+}
+    `;
+export type InsertActivityMutationFn = Apollo.MutationFunction<InsertActivityMutation, InsertActivityMutationVariables>;
+
+/**
+ * __useInsertActivityMutation__
+ *
+ * To run a mutation, you first call `useInsertActivityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertActivityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertActivityMutation, { data, loading, error }] = useInsertActivityMutation({
+ *   variables: {
+ *      date: // value for 'date'
+ *      ticket: // value for 'ticket'
+ *      market: // value for 'market'
+ *      totalValue: // value for 'totalValue'
+ *      quantity: // value for 'quantity'
+ *      type: // value for 'type'
+ *   },
+ * });
+ */
+export function useInsertActivityMutation(baseOptions?: Apollo.MutationHookOptions<InsertActivityMutation, InsertActivityMutationVariables>) {
+        return Apollo.useMutation<InsertActivityMutation, InsertActivityMutationVariables>(InsertActivityDocument, baseOptions);
+      }
+export type InsertActivityMutationHookResult = ReturnType<typeof useInsertActivityMutation>;
+export type InsertActivityMutationResult = Apollo.MutationResult<InsertActivityMutation>;
+export type InsertActivityMutationOptions = Apollo.BaseMutationOptions<InsertActivityMutation, InsertActivityMutationVariables>;
 export const InsertLogDocument = gql`
     mutation insertLog($contract: String!, $detail: String!) {
   insert_log_one(object: {contract: $contract, detail: $detail}) {
