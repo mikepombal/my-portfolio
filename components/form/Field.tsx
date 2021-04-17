@@ -1,40 +1,81 @@
 import { LegacyRef } from 'react';
 
 export enum ComponentType {
-  'INPUT',
+  'TEXT',
+  'NUMBER',
+  'MONEY',
   'SELECT',
+  'DATETIME',
 }
 
-interface Input {
-  name: ComponentType.INPUT;
+interface Text {
+  name: ComponentType.TEXT;
   componentRef: LegacyRef<HTMLInputElement>;
+  defaultValue?: string;
 }
 
+interface Num {
+  name: ComponentType.NUMBER;
+  componentRef: LegacyRef<HTMLInputElement>;
+  defaultValue?: number;
+}
+interface Date {
+  name: ComponentType.DATETIME;
+  componentRef: LegacyRef<HTMLInputElement>;
+  defaultValue?: string;
+}
 interface Select {
   name: ComponentType.SELECT;
   componentRef: LegacyRef<HTMLSelectElement>;
   options: Array<string>;
+  defaultValue?: string;
 }
 
-type TypeComponent = Input | Select;
+type TypeComponent = Text | Num | Date | Select;
 
 interface Component {
   id: string;
-  defaultValue?: string;
   disabled?: boolean;
   type: TypeComponent;
 }
 
 const getFieldComponent: React.FC<Component> = (props) => {
-  const { id, defaultValue, disabled, type } = props;
+  const { id, disabled, type } = props;
   switch (type.name) {
-    case ComponentType.INPUT: {
+    case ComponentType.TEXT: {
       return (
         <input
           type="text"
           id={id}
           name={id}
-          defaultValue={defaultValue}
+          defaultValue={type.defaultValue}
+          ref={type.componentRef}
+          disabled={disabled}
+          className="p-2 w-full"
+        />
+      );
+    }
+    case ComponentType.NUMBER: {
+      return (
+        <input
+          type="number"
+          step="0.00000001"
+          id={id}
+          name={id}
+          defaultValue={type.defaultValue}
+          ref={type.componentRef}
+          disabled={disabled}
+          className="p-2 w-full"
+        />
+      );
+    }
+    case ComponentType.DATETIME: {
+      return (
+        <input
+          type="datetime-local"
+          id={id}
+          name={id}
+          defaultValue={type.defaultValue || new Date().toLocaleString()}
           ref={type.componentRef}
           disabled={disabled}
           className="p-2 w-full"
@@ -46,7 +87,7 @@ const getFieldComponent: React.FC<Component> = (props) => {
         <select
           name={id}
           ref={type.componentRef}
-          defaultValue={defaultValue}
+          defaultValue={type.defaultValue}
           className="p-2 w-full"
         >
           {type.options.map((option) => (
@@ -63,21 +104,13 @@ const getFieldComponent: React.FC<Component> = (props) => {
 interface Field {
   id: string;
   label: string;
-  defaultValue: string;
   errorLabel?: string | null;
   disabled?: boolean;
   type: TypeComponent;
 }
 
 export const Field: React.FC<Field> = (props) => {
-  const {
-    id,
-    label,
-    defaultValue = '',
-    errorLabel,
-    disabled = false,
-    type,
-  } = props;
+  const { id, label, errorLabel, disabled = false, type } = props;
   return (
     <div className="flex items-center mb-4">
       <label
@@ -90,7 +123,6 @@ export const Field: React.FC<Field> = (props) => {
       <div className="w-56 rounded-md">
         {getFieldComponent({
           id,
-          defaultValue,
           disabled,
           type,
         })}

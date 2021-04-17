@@ -9,7 +9,7 @@ gql`
       market
       type
       quantity
-      total_value
+      totalValue
     }
   }
 `;

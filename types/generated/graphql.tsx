@@ -68,7 +68,7 @@ export type Activities = {
   market: Scalars['String'];
   quantity: Scalars['numeric'];
   ticket: Scalars['String'];
-  total_value: Scalars['numeric'];
+  totalValue: Scalars['numeric'];
   type: Activity_Enum_Enum;
 };
 
@@ -128,14 +128,14 @@ export type Activities_Avg_Fields = {
   __typename?: 'activities_avg_fields';
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  total_value?: Maybe<Scalars['Float']>;
+  totalValue?: Maybe<Scalars['Float']>;
 };
 
 /** order by avg() on columns of table "activities" */
 export type Activities_Avg_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "activities". All fields are combined with a logical 'AND'. */
@@ -148,7 +148,7 @@ export type Activities_Bool_Exp = {
   market?: Maybe<String_Comparison_Exp>;
   quantity?: Maybe<Numeric_Comparison_Exp>;
   ticket?: Maybe<String_Comparison_Exp>;
-  total_value?: Maybe<Numeric_Comparison_Exp>;
+  totalValue?: Maybe<Numeric_Comparison_Exp>;
   type?: Maybe<Activity_Enum_Enum_Comparison_Exp>;
 };
 
@@ -162,7 +162,7 @@ export enum Activities_Constraint {
 export type Activities_Inc_Input = {
   id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
-  total_value?: Maybe<Scalars['numeric']>;
+  totalValue?: Maybe<Scalars['numeric']>;
 };
 
 /** input type for inserting data into table "activities" */
@@ -172,7 +172,7 @@ export type Activities_Insert_Input = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['numeric']>;
+  totalValue?: Maybe<Scalars['numeric']>;
   type?: Maybe<Activity_Enum_Enum>;
 };
 
@@ -184,7 +184,7 @@ export type Activities_Max_Fields = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['numeric']>;
+  totalValue?: Maybe<Scalars['numeric']>;
 };
 
 /** order by max() on columns of table "activities" */
@@ -194,7 +194,7 @@ export type Activities_Max_Order_By = {
   market?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
   ticket?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -205,7 +205,7 @@ export type Activities_Min_Fields = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['numeric']>;
+  totalValue?: Maybe<Scalars['numeric']>;
 };
 
 /** order by min() on columns of table "activities" */
@@ -215,7 +215,7 @@ export type Activities_Min_Order_By = {
   market?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
   ticket?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "activities" */
@@ -247,7 +247,7 @@ export type Activities_Order_By = {
   market?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
   ticket?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
 };
 
@@ -269,7 +269,7 @@ export enum Activities_Select_Column {
   /** column name */
   Ticket = 'ticket',
   /** column name */
-  TotalValue = 'total_value',
+  TotalValue = 'totalValue',
   /** column name */
   Type = 'type'
 }
@@ -281,7 +281,7 @@ export type Activities_Set_Input = {
   market?: Maybe<Scalars['String']>;
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
-  total_value?: Maybe<Scalars['numeric']>;
+  totalValue?: Maybe<Scalars['numeric']>;
   type?: Maybe<Activity_Enum_Enum>;
 };
 
@@ -290,14 +290,14 @@ export type Activities_Stddev_Fields = {
   __typename?: 'activities_stddev_fields';
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  total_value?: Maybe<Scalars['Float']>;
+  totalValue?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev() on columns of table "activities" */
 export type Activities_Stddev_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
@@ -305,14 +305,14 @@ export type Activities_Stddev_Pop_Fields = {
   __typename?: 'activities_stddev_pop_fields';
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  total_value?: Maybe<Scalars['Float']>;
+  totalValue?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_pop() on columns of table "activities" */
 export type Activities_Stddev_Pop_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** aggregate stddev_samp on columns */
@@ -320,14 +320,14 @@ export type Activities_Stddev_Samp_Fields = {
   __typename?: 'activities_stddev_samp_fields';
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  total_value?: Maybe<Scalars['Float']>;
+  totalValue?: Maybe<Scalars['Float']>;
 };
 
 /** order by stddev_samp() on columns of table "activities" */
 export type Activities_Stddev_Samp_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** aggregate sum on columns */
@@ -335,14 +335,14 @@ export type Activities_Sum_Fields = {
   __typename?: 'activities_sum_fields';
   id?: Maybe<Scalars['Int']>;
   quantity?: Maybe<Scalars['numeric']>;
-  total_value?: Maybe<Scalars['numeric']>;
+  totalValue?: Maybe<Scalars['numeric']>;
 };
 
 /** order by sum() on columns of table "activities" */
 export type Activities_Sum_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** update columns of table "activities" */
@@ -358,7 +358,7 @@ export enum Activities_Update_Column {
   /** column name */
   Ticket = 'ticket',
   /** column name */
-  TotalValue = 'total_value',
+  TotalValue = 'totalValue',
   /** column name */
   Type = 'type'
 }
@@ -368,14 +368,14 @@ export type Activities_Var_Pop_Fields = {
   __typename?: 'activities_var_pop_fields';
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  total_value?: Maybe<Scalars['Float']>;
+  totalValue?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_pop() on columns of table "activities" */
 export type Activities_Var_Pop_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
@@ -383,14 +383,14 @@ export type Activities_Var_Samp_Fields = {
   __typename?: 'activities_var_samp_fields';
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  total_value?: Maybe<Scalars['Float']>;
+  totalValue?: Maybe<Scalars['Float']>;
 };
 
 /** order by var_samp() on columns of table "activities" */
 export type Activities_Var_Samp_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** aggregate variance on columns */
@@ -398,14 +398,14 @@ export type Activities_Variance_Fields = {
   __typename?: 'activities_variance_fields';
   id?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Float']>;
-  total_value?: Maybe<Scalars['Float']>;
+  totalValue?: Maybe<Scalars['Float']>;
 };
 
 /** order by variance() on columns of table "activities" */
 export type Activities_Variance_Order_By = {
   id?: Maybe<Order_By>;
   quantity?: Maybe<Order_By>;
-  total_value?: Maybe<Order_By>;
+  totalValue?: Maybe<Order_By>;
 };
 
 /** columns and relationships of "activity_enum" */
@@ -2532,7 +2532,7 @@ export type InsertActivityMutation = (
   { __typename?: 'mutation_root' }
   & { insert_activities_one?: Maybe<(
     { __typename?: 'activities' }
-    & Pick<Activities, 'id' | 'ticket' | 'market' | 'type' | 'quantity' | 'total_value' | 'date'>
+    & Pick<Activities, 'id' | 'ticket' | 'market' | 'type' | 'quantity' | 'totalValue' | 'date'>
   )> }
 );
 
@@ -2605,7 +2605,7 @@ export type AllActivitiesQuery = (
   { __typename?: 'query_root' }
   & { activities: Array<(
     { __typename?: 'activities' }
-    & Pick<Activities, 'id' | 'date' | 'ticket' | 'market' | 'type' | 'quantity' | 'total_value'>
+    & Pick<Activities, 'id' | 'date' | 'ticket' | 'market' | 'type' | 'quantity' | 'totalValue'>
   )> }
 );
 
@@ -2635,14 +2635,14 @@ export type PricesToUpdateQuery = (
 export const InsertActivityDocument = gql`
     mutation insertActivity($date: timestamptz!, $ticket: String!, $market: String!, $totalValue: numeric!, $quantity: numeric!, $type: activity_enum_enum!) {
   insert_activities_one(
-    object: {date: $date, market: $market, quantity: $quantity, ticket: $ticket, total_value: $totalValue, type: $type}
+    object: {date: $date, market: $market, quantity: $quantity, ticket: $ticket, totalValue: $totalValue, type: $type}
   ) {
     id
     ticket
     market
     type
     quantity
-    total_value
+    totalValue
     date
   }
 }
@@ -2844,7 +2844,7 @@ export const AllActivitiesDocument = gql`
     market
     type
     quantity
-    total_value
+    totalValue
   }
 }
     `;

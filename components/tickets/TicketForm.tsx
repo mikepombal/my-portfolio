@@ -11,9 +11,11 @@ interface TicketForm {
   selectedTicket: InsertTicketMutationVariables | null;
 }
 const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
-  const { register, handleSubmit, errors } = useForm<
-    InsertTicketMutationVariables
-  >();
+  const {
+    register,
+    handleSubmit,
+    errors,
+  } = useForm<InsertTicketMutationVariables>();
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -21,7 +23,6 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
         <Field
           id="ticket"
           label="Ticket"
-          defaultValue={selectedTicket?.ticket || ''}
           disabled={!!selectedTicket}
           errorLabel={
             errors.ticket?.type === 'required'
@@ -29,42 +30,42 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
               : null
           }
           type={{
-            name: ComponentType.INPUT,
+            name: ComponentType.TEXT,
             componentRef: register({ required: true }),
+            defaultValue: selectedTicket?.ticket || '',
           }}
         />
         <Field
           id="name"
           label="Name"
-          defaultValue={selectedTicket?.name || ''}
           errorLabel={
             errors.ticket?.type === 'required' ? 'You must enter a name.' : null
           }
           type={{
-            name: ComponentType.INPUT,
+            name: ComponentType.TEXT,
             componentRef: register({ required: true }),
+            defaultValue: selectedTicket?.name || '',
           }}
         />
         <Field
           id="ticket_type"
           label="Type"
-          defaultValue={
-            selectedTicket?.ticket_type || Ticket_Type_Enum_Enum.Div1
-          }
           type={{
             name: ComponentType.SELECT,
             componentRef: register({ required: true }),
             options: Object.values(Ticket_Type_Enum_Enum),
+            defaultValue:
+              selectedTicket?.ticket_type || Ticket_Type_Enum_Enum.Div1,
           }}
         />
         <Field
           id="market"
           label="Market"
-          defaultValue={selectedTicket?.market || Market_Enum_Enum.Lon}
           type={{
             name: ComponentType.SELECT,
             componentRef: register({ required: true }),
             options: Object.values(Market_Enum_Enum),
+            defaultValue: selectedTicket?.market || Market_Enum_Enum.Lon,
           }}
         />
       </div>

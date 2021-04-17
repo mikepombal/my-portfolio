@@ -24,12 +24,14 @@ const ActivitiesList: React.FC = () => {
             key={activity.id}
             className="flex h-10 border-gray-800 border-dotted border-b"
           >
-            <div className={`${commonStyle} w-24`}>{activity.date}</div>
+            <div className={`${commonStyle} w-24`}>
+              {new Date(activity.date).toLocaleDateString()}
+            </div>
             <div className={`${commonStyle} w-24`}>{activity.ticket}</div>
             <div className={`${commonStyle} w-24`}>{activity.market}</div>
             <div className={`${commonStyle} w-24`}>{activity.type}</div>
             <div className={`${commonStyle} w-24`}>{activity.quantity}</div>
-            <div className={`${commonStyle} w-24`}>{activity.total_value}</div>
+            <div className={`${commonStyle} w-24`}>{activity.totalValue}</div>
           </li>
         ))}
       </ul>

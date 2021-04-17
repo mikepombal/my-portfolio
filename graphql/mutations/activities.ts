@@ -15,7 +15,7 @@ gql`
         market: $market
         quantity: $quantity
         ticket: $ticket
-        total_value: $totalValue
+        totalValue: $totalValue
         type: $type
       }
     ) {
@@ -24,7 +24,7 @@ gql`
       market
       type
       quantity
-      total_value
+      totalValue
       date
     }
   }
