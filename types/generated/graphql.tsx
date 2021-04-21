@@ -2631,6 +2631,20 @@ export type PricesToUpdateQuery = (
   )> }
 );
 
+export type GetTicketQueryVariables = Exact<{
+  market: Market_Enum_Enum;
+  ticket: Scalars['String'];
+}>;
+
+
+export type GetTicketQuery = (
+  { __typename?: 'query_root' }
+  & { tickets_by_pk?: Maybe<(
+    { __typename?: 'tickets' }
+    & Pick<Tickets, 'market' | 'ticket' | 'name' | 'ticket_type' | 'latest_price'>
+  )> }
+);
+
 
 export const InsertActivityDocument = gql`
     mutation insertActivity($date: timestamptz!, $ticket: String!, $market: String!, $totalValue: numeric!, $quantity: numeric!, $type: activity_enum_enum!) {
@@ -2941,3 +2955,41 @@ export function usePricesToUpdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type PricesToUpdateQueryHookResult = ReturnType<typeof usePricesToUpdateQuery>;
 export type PricesToUpdateLazyQueryHookResult = ReturnType<typeof usePricesToUpdateLazyQuery>;
 export type PricesToUpdateQueryResult = Apollo.QueryResult<PricesToUpdateQuery, PricesToUpdateQueryVariables>;
+export const GetTicketDocument = gql`
+    query getTicket($market: market_enum_enum!, $ticket: String!) {
+  tickets_by_pk(market: $market, ticket: $ticket) {
+    market
+    ticket
+    name
+    ticket_type
+    latest_price
+  }
+}
+    `;
+
+/**
+ * __useGetTicketQuery__
+ *
+ * To run a query within a React component, call `useGetTicketQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTicketQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTicketQuery({
+ *   variables: {
+ *      market: // value for 'market'
+ *      ticket: // value for 'ticket'
+ *   },
+ * });
+ */
+export function useGetTicketQuery(baseOptions: Apollo.QueryHookOptions<GetTicketQuery, GetTicketQueryVariables>) {
+        return Apollo.useQuery<GetTicketQuery, GetTicketQueryVariables>(GetTicketDocument, baseOptions);
+      }
+export function useGetTicketLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTicketQuery, GetTicketQueryVariables>) {
+          return Apollo.useLazyQuery<GetTicketQuery, GetTicketQueryVariables>(GetTicketDocument, baseOptions);
+        }
+export type GetTicketQueryHookResult = ReturnType<typeof useGetTicketQuery>;
+export type GetTicketLazyQueryHookResult = ReturnType<typeof useGetTicketLazyQuery>;
+export type GetTicketQueryResult = Apollo.QueryResult<GetTicketQuery, GetTicketQueryVariables>;
