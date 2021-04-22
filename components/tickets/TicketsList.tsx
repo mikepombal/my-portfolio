@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import {
   useAllTicketsQuery,
   InsertTicketMutationVariables,
@@ -24,6 +25,7 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
         <div className={`${commonStyle} w-24`}>Type</div>
         <div className={`${commonStyle} w-24`}>Market</div>
         <div className={`${commonStyle} w-24`}>Latest</div>
+        <div className={`${commonStyle} w-20`}>Holdings</div>
         <div className={`${commonStyle} w-16`}>Edit</div>
       </div>
       <ul className="border-l-2 border-r-2 border-b-2 border-gray-800">
@@ -41,6 +43,11 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
                 <Money value={ticket.latest_price} market={ticket.market} />
               )}
             </div>
+            <Link href={`/portfolio/${ticket.market}/${ticket.ticket}`}>
+              <div className={`${commonStyle} w-20 cursor-pointer`}>
+                holdings
+              </div>
+            </Link>
             <div className={`${commonStyle} w-16`}>
               <button onClick={() => selectTicket(ticket)}>edit</button>
             </div>
