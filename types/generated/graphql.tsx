@@ -2609,6 +2609,20 @@ export type AllActivitiesQuery = (
   )> }
 );
 
+export type GetActivitiesForTicketQueryVariables = Exact<{
+  market: Scalars['String'];
+  ticket: Scalars['String'];
+}>;
+
+
+export type GetActivitiesForTicketQuery = (
+  { __typename?: 'query_root' }
+  & { activities: Array<(
+    { __typename?: 'activities' }
+    & Pick<Activities, 'market' | 'ticket' | 'type' | 'quantity' | 'totalValue'>
+  )> }
+);
+
 export type AllTicketsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2887,6 +2901,47 @@ export function useAllActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type AllActivitiesQueryHookResult = ReturnType<typeof useAllActivitiesQuery>;
 export type AllActivitiesLazyQueryHookResult = ReturnType<typeof useAllActivitiesLazyQuery>;
 export type AllActivitiesQueryResult = Apollo.QueryResult<AllActivitiesQuery, AllActivitiesQueryVariables>;
+export const GetActivitiesForTicketDocument = gql`
+    query getActivitiesForTicket($market: String!, $ticket: String!) {
+  activities(
+    where: {market: {_eq: $market}, ticket: {_eq: $ticket}}
+    order_by: {date: asc}
+  ) {
+    market
+    ticket
+    type
+    quantity
+    totalValue
+  }
+}
+    `;
+
+/**
+ * __useGetActivitiesForTicketQuery__
+ *
+ * To run a query within a React component, call `useGetActivitiesForTicketQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetActivitiesForTicketQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetActivitiesForTicketQuery({
+ *   variables: {
+ *      market: // value for 'market'
+ *      ticket: // value for 'ticket'
+ *   },
+ * });
+ */
+export function useGetActivitiesForTicketQuery(baseOptions: Apollo.QueryHookOptions<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>) {
+        return Apollo.useQuery<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>(GetActivitiesForTicketDocument, baseOptions);
+      }
+export function useGetActivitiesForTicketLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>) {
+          return Apollo.useLazyQuery<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>(GetActivitiesForTicketDocument, baseOptions);
+        }
+export type GetActivitiesForTicketQueryHookResult = ReturnType<typeof useGetActivitiesForTicketQuery>;
+export type GetActivitiesForTicketLazyQueryHookResult = ReturnType<typeof useGetActivitiesForTicketLazyQuery>;
+export type GetActivitiesForTicketQueryResult = Apollo.QueryResult<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>;
 export const AllTicketsDocument = gql`
     query allTickets {
   tickets(order_by: {ticket: asc}) {

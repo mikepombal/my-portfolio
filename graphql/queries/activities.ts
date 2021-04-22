@@ -13,3 +13,18 @@ gql`
     }
   }
 `;
+
+gql`
+  query getActivitiesForTicket($market: String!, $ticket: String!) {
+    activities(
+      where: { market: { _eq: $market }, ticket: { _eq: $ticket } }
+      order_by: { date: asc }
+    ) {
+      market
+      ticket
+      type
+      quantity
+      totalValue
+    }
+  }
+`;

@@ -4,6 +4,7 @@ import {
   Market_Enum_Enum,
 } from '../../types/generated/graphql';
 import Money from '../common/Money';
+import { TicketsList } from './TicketsList';
 
 interface TextProps {
   children: ReactNode;
@@ -39,17 +40,20 @@ const TicketHoldings: React.FC<TicketHoldingsProps> = ({
 
   const d = data.tickets_by_pk;
   return (
-    <div className="flex">
-      <Text>{`${d.market}:${d.ticket}`}</Text>
-      <Text className="flex-auto">{d.name}</Text>
-      <Text>
-        {d.latest_price ? (
-          <Money value={d.latest_price} market={market as Market_Enum_Enum} />
-        ) : (
-          'N/A'
-        )}
-      </Text>
-    </div>
+    <>
+      <div className="flex">
+        <Text>{`${d.market}:${d.ticket}`}</Text>
+        <Text className="flex-auto">{d.name}</Text>
+        <Text>
+          {d.latest_price ? (
+            <Money value={d.latest_price} market={market as Market_Enum_Enum} />
+          ) : (
+            'N/A'
+          )}
+        </Text>
+      </div>
+      <TicketsList market={market} ticket={ticket} />
+    </>
   );
 };
 
