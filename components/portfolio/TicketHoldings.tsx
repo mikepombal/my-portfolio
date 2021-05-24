@@ -1,22 +1,10 @@
-import { ReactNode } from 'react';
 import {
   useGetTicketQuery,
   Market_Enum_Enum,
 } from '../../types/generated/graphql';
 import Money from '../common/Money';
+import { Text } from './Text';
 import { TicketsList } from './TicketsList';
-
-interface TextProps {
-  children: ReactNode;
-  className?: string;
-}
-const Text: React.FC<TextProps> = ({ children, className }) => (
-  <div
-    className={`p-4 m-2 font-bold text-2xl border-green-700 border-4 rounded-lg bg-green-600 text-white ${className}`}
-  >
-    {children}
-  </div>
-);
 
 interface TicketHoldingsProps {
   market: string;
@@ -45,6 +33,7 @@ const TicketHoldings: React.FC<TicketHoldingsProps> = ({
         <Text>{`${d.market}:${d.ticket}`}</Text>
         <Text className="flex-auto">{d.name}</Text>
         <Text>
+          Current:{' '}
           {d.latest_price ? (
             <Money value={d.latest_price} market={market as Market_Enum_Enum} />
           ) : (
@@ -52,7 +41,11 @@ const TicketHoldings: React.FC<TicketHoldingsProps> = ({
           )}
         </Text>
       </div>
-      <TicketsList market={market} ticket={ticket} />
+      <TicketsList
+        market={market}
+        ticket={ticket}
+        value={d.latest_price ?? undefined}
+      />
     </>
   );
 };
