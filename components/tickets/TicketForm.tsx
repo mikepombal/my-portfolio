@@ -14,7 +14,7 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
   const {
     register,
     handleSubmit,
-    errors,
+    formState: { errors },
   } = useForm<InsertTicketMutationVariables>();
 
   return (
@@ -31,7 +31,7 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           }
           type={{
             name: ComponentType.TEXT,
-            componentRef: register({ required: true }),
+            registration: register('ticket', { required: true }),
             defaultValue: selectedTicket?.ticket || '',
           }}
         />
@@ -43,7 +43,7 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           }
           type={{
             name: ComponentType.TEXT,
-            componentRef: register({ required: true }),
+            registration: register('name', { required: true }),
             defaultValue: selectedTicket?.name || '',
           }}
         />
@@ -52,7 +52,7 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           label="Type"
           type={{
             name: ComponentType.SELECT,
-            componentRef: register({ required: true }),
+            registration: register('ticket_type', { required: true }),
             options: Object.values(Ticket_Type_Enum_Enum),
             defaultValue:
               selectedTicket?.ticket_type || Ticket_Type_Enum_Enum.Div1,
@@ -63,7 +63,7 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           label="Market"
           type={{
             name: ComponentType.SELECT,
-            componentRef: register({ required: true }),
+            registration: register('market', { required: true }),
             options: Object.values(Market_Enum_Enum),
             defaultValue: selectedTicket?.market || Market_Enum_Enum.Lon,
           }}

@@ -1,4 +1,4 @@
-import { LegacyRef } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 export enum ComponentType {
   'TEXT',
@@ -10,25 +10,29 @@ export enum ComponentType {
 
 interface Text {
   name: ComponentType.TEXT;
-  componentRef: LegacyRef<HTMLInputElement>;
+  // componentRef: LegacyRef<HTMLInputElement>;
   defaultValue?: string;
+  registration: UseFormRegisterReturn;
 }
 
 interface Num {
   name: ComponentType.NUMBER;
-  componentRef: LegacyRef<HTMLInputElement>;
+  // componentRef: LegacyRef<HTMLInputElement>;
   defaultValue?: number;
+  registration: UseFormRegisterReturn;
 }
 interface Date {
   name: ComponentType.DATETIME;
-  componentRef: LegacyRef<HTMLInputElement>;
+  // componentRef: LegacyRef<HTMLInputElement>;
   defaultValue?: string;
+  registration: UseFormRegisterReturn;
 }
 interface Select {
   name: ComponentType.SELECT;
-  componentRef: LegacyRef<HTMLSelectElement>;
+  // componentRef: LegacyRef<HTMLSelectElement>;
   options: Array<string>;
   defaultValue?: string;
+  registration: UseFormRegisterReturn;
 }
 
 type TypeComponent = Text | Num | Date | Select;
@@ -47,11 +51,10 @@ const getFieldComponent: React.FC<Component> = (props) => {
         <input
           type="text"
           id={id}
-          name={id}
           defaultValue={type.defaultValue}
-          ref={type.componentRef}
           disabled={disabled}
           className="p-2 w-full"
+          {...type.registration}
         />
       );
     }
@@ -61,11 +64,10 @@ const getFieldComponent: React.FC<Component> = (props) => {
           type="number"
           step="0.00000001"
           id={id}
-          name={id}
           defaultValue={type.defaultValue}
-          ref={type.componentRef}
           disabled={disabled}
           className="p-2 w-full"
+          {...type.registration}
         />
       );
     }
@@ -74,21 +76,19 @@ const getFieldComponent: React.FC<Component> = (props) => {
         <input
           type="datetime-local"
           id={id}
-          name={id}
           defaultValue={type.defaultValue || new Date().toLocaleString()}
-          ref={type.componentRef}
           disabled={disabled}
           className="p-2 w-full"
+          {...type.registration}
         />
       );
     }
     case ComponentType.SELECT: {
       return (
         <select
-          name={id}
-          ref={type.componentRef}
           defaultValue={type.defaultValue}
           className="p-2 w-full"
+          {...type.registration}
         >
           {type.options.map((option) => (
             <option key={option} value={option}>

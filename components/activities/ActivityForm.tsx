@@ -14,7 +14,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
   const {
     register,
     handleSubmit,
-    errors,
+    formState: { errors },
   } = useForm<InsertActivityMutationVariables>();
 
   return (
@@ -30,7 +30,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           }
           type={{
             name: ComponentType.DATETIME,
-            componentRef: register({ required: true }),
+            registration: register('date', { required: true }),
             defaultValue: getIsoCurrentDateTime(),
           }}
         />
@@ -44,7 +44,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           }
           type={{
             name: ComponentType.TEXT,
-            componentRef: register({ required: true }),
+            registration: register('ticket', { required: true }),
             defaultValue: '',
           }}
         />
@@ -53,7 +53,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           label="Market"
           type={{
             name: ComponentType.SELECT,
-            componentRef: register({ required: true }),
+            registration: register('market', { required: true }),
             options: Object.values(Market_Enum_Enum),
             defaultValue: Market_Enum_Enum.Lon,
           }}
@@ -63,7 +63,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           label="Activity"
           type={{
             name: ComponentType.SELECT,
-            componentRef: register({ required: true }),
+            registration: register('type', { required: true }),
             options: Object.values(Activity_Enum_Enum),
             defaultValue: Activity_Enum_Enum.Buy,
           }}
@@ -78,7 +78,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           }
           type={{
             name: ComponentType.NUMBER,
-            componentRef: register({ required: true }),
+            registration: register('quantity', { required: true }),
             defaultValue: 0,
           }}
         />
@@ -92,7 +92,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           }
           type={{
             name: ComponentType.NUMBER,
-            componentRef: register({ required: true }),
+            registration: register('totalValue', { required: true }),
             defaultValue: 0.0,
           }}
         />
