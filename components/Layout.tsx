@@ -16,7 +16,7 @@ const Layout: React.FC<Prop> = ({ children }) => (
       <div className="flex w-screen h-screen bg-gray-200">
         <Nav />
 
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow overflow-scroll">{children}</main>
       </div>
       <div id="modal-root" />
     </>
