@@ -155,9 +155,9 @@ export const TicketsList: React.FC<TicketsListProps> = ({
           />
           {value && (
             <div
-              className={`border-l-4 border-dashed border-${
-                diff || 0 < 0 ? 'red' : 'green'
-              }-400 absolute`}
+              className={`border-l-4 border-dashed ${
+                diff || 0 < 0 ? 'border-red-400' : 'border-green-400'
+              } absolute`}
               style={{
                 width: '0',
                 height: '100%',

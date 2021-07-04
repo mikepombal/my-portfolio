@@ -10,26 +10,22 @@ export enum ComponentType {
 
 interface Text {
   name: ComponentType.TEXT;
-  // componentRef: LegacyRef<HTMLInputElement>;
   defaultValue?: string;
   registration: UseFormRegisterReturn;
 }
 
 interface Num {
   name: ComponentType.NUMBER;
-  // componentRef: LegacyRef<HTMLInputElement>;
   defaultValue?: number;
   registration: UseFormRegisterReturn;
 }
 interface Date {
   name: ComponentType.DATETIME;
-  // componentRef: LegacyRef<HTMLInputElement>;
   defaultValue?: string;
   registration: UseFormRegisterReturn;
 }
 interface Select {
   name: ComponentType.SELECT;
-  // componentRef: LegacyRef<HTMLSelectElement>;
   options: Array<string>;
   defaultValue?: string;
   registration: UseFormRegisterReturn;
