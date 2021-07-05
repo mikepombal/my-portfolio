@@ -1,6 +1,7 @@
 import {
   useGetTicketQuery,
   Market_Enum_Enum,
+  Currency_Enum,
 } from '../../types/generated/graphql';
 import Money from '../common/Money';
 import { Text } from './Text';
@@ -35,7 +36,7 @@ const TicketHoldings: React.FC<TicketHoldingsProps> = ({
         <Text>
           Current:{' '}
           {d.latest_price ? (
-            <Money value={d.latest_price} market={market as Market_Enum_Enum} />
+            <Money value={d.latest_price} currency={d.currency} />
           ) : (
             'N/A'
           )}
@@ -44,7 +45,12 @@ const TicketHoldings: React.FC<TicketHoldingsProps> = ({
       <TicketsList
         market={market}
         ticket={ticket}
-        value={d.latest_price ?? undefined}
+        value={
+          d.latest_price
+            ? parseFloat(d.latest_price) *
+              (d.currency !== Currency_Enum.Gbx ? 100 : 1)
+            : undefined
+        }
       />
     </>
   );

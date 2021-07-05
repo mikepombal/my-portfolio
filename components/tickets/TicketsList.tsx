@@ -42,7 +42,7 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
             <div className={`${commonStyle} w-24`}>{ticket.currency}</div>
             <div className={`${commonStyle} w-24`}>
               {typeof ticket.latest_price === 'string' && (
-                <Money value={ticket.latest_price} market={ticket.market} />
+                <Money value={ticket.latest_price} currency={ticket.currency} />
               )}
             </div>
             <Link href={`/portfolio/${ticket.market}/${ticket.ticket}`}>

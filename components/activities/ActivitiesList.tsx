@@ -1,4 +1,9 @@
-import { useAllActivitiesQuery } from '../../types/generated/graphql';
+import {
+  useAllActivitiesQuery,
+  Activity_Enum_Enum,
+  Currency_Enum,
+} from '../../types/generated/graphql';
+import Money from '../common/Money';
 
 const commonStyle =
   'flex justify-center items-center h-full border-r border-dashed border-gray-800';
@@ -22,7 +27,9 @@ const ActivitiesList: React.FC = () => {
         {data?.activities.map((activity) => (
           <li
             key={activity.id}
-            className="flex h-10 border-gray-800 border-dotted border-b"
+            className={`flex h-10 border-gray-800 border-dotted border-b ${
+              activity.type === Activity_Enum_Enum.Div ? 'bg-green-200' : ''
+            }`}
           >
             <div className={`${commonStyle} w-24`}>
               {new Date(activity.date).toLocaleDateString()}
@@ -31,7 +38,9 @@ const ActivitiesList: React.FC = () => {
             <div className={`${commonStyle} w-24`}>{activity.market}</div>
             <div className={`${commonStyle} w-24`}>{activity.type}</div>
             <div className={`${commonStyle} w-24`}>{activity.quantity}</div>
-            <div className={`${commonStyle} w-24`}>{activity.totalValue}</div>
+            <div className={`${commonStyle} w-24`}>
+              <Money value={activity.totalValue} currency={Currency_Enum.Gbx} />
+            </div>
           </li>
         ))}
       </ul>

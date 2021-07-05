@@ -1,21 +1,23 @@
-import { Market_Enum_Enum } from '../../types/generated/graphql';
+import { Currency_Enum } from '../../types/generated/graphql';
 
 interface Money {
   value: string;
-  market: Market_Enum_Enum;
+  currency: Currency_Enum;
 }
 
-const formatValue = ({ value, market }: Money): string => {
-  switch (market) {
-    case Market_Enum_Enum.Lon: {
-      return (parseFloat(value) / 100).toLocaleString(undefined, {
+const formatValue = ({ value, currency }: Money): string => {
+  switch (currency) {
+    case Currency_Enum.Gbx:
+    case Currency_Enum.Gbp: {
+      return (
+        parseFloat(value) / (currency === Currency_Enum.Gbx ? 100 : 1)
+      ).toLocaleString(undefined, {
         style: 'currency',
         currency: 'GBP',
         currencyDisplay: 'narrowSymbol',
       });
     }
-    case Market_Enum_Enum.Nyse:
-    case Market_Enum_Enum.Nasdaq: {
+    case Currency_Enum.Usd: {
       return parseFloat(value).toLocaleString(undefined, {
         style: 'currency',
         currency: 'USD',
