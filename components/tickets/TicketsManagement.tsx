@@ -26,6 +26,7 @@ const TicketsManagement = (): JSX.Element => {
         name: data.name,
         ticket_type: data.ticket_type,
         market: data.market,
+        currency: data.currency,
       },
       refetchQueries: ['allTickets'],
     });

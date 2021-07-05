@@ -24,7 +24,7 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
         <Field
           id="ticket"
           label="Ticket"
-          disabled={!!selectedTicket}
+          readOnly={!!selectedTicket}
           errorLabel={
             errors.ticket?.type === 'required'
               ? 'You must enter a ticket.'

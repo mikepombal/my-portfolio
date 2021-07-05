@@ -35,12 +35,12 @@ type TypeComponent = Text | Num | Date | Select;
 
 interface Component {
   id: string;
-  disabled?: boolean;
+  readOnly?: boolean;
   type: TypeComponent;
 }
 
 const getFieldComponent: React.FC<Component> = (props) => {
-  const { id, disabled, type } = props;
+  const { id, readOnly, type } = props;
   switch (type.name) {
     case ComponentType.TEXT: {
       return (
@@ -48,8 +48,8 @@ const getFieldComponent: React.FC<Component> = (props) => {
           type="text"
           id={id}
           defaultValue={type.defaultValue}
-          disabled={disabled}
-          className="p-2 w-full"
+          readOnly={readOnly}
+          className={`p-2 w-full ${readOnly && 'bg-green-300'}`}
           {...type.registration}
         />
       );
@@ -61,8 +61,8 @@ const getFieldComponent: React.FC<Component> = (props) => {
           step="0.00000001"
           id={id}
           defaultValue={type.defaultValue}
-          disabled={disabled}
-          className="p-2 w-full"
+          readOnly={readOnly}
+          className={`p-2 w-full ${readOnly && 'bg-green-300'}`}
           {...type.registration}
         />
       );
@@ -73,8 +73,8 @@ const getFieldComponent: React.FC<Component> = (props) => {
           type="datetime-local"
           id={id}
           defaultValue={type.defaultValue || new Date().toLocaleString()}
-          disabled={disabled}
-          className="p-2 w-full"
+          readOnly={readOnly}
+          className={`p-2 w-full ${readOnly && 'bg-green-300'}`}
           {...type.registration}
         />
       );
@@ -83,7 +83,7 @@ const getFieldComponent: React.FC<Component> = (props) => {
       return (
         <select
           defaultValue={type.defaultValue}
-          className="p-2 w-full"
+          className={`p-2 w-full ${readOnly && 'bg-green-300'}`}
           {...type.registration}
         >
           {type.options.map((option) => (
@@ -101,12 +101,12 @@ interface Field {
   id: string;
   label: string;
   errorLabel?: string | null;
-  disabled?: boolean;
+  readOnly?: boolean;
   type: TypeComponent;
 }
 
 export const Field: React.FC<Field> = (props) => {
-  const { id, label, errorLabel, disabled = false, type } = props;
+  const { id, label, errorLabel, readOnly = false, type } = props;
   return (
     <div className="flex items-center mb-4">
       <label
@@ -119,7 +119,7 @@ export const Field: React.FC<Field> = (props) => {
       <div className="w-56 rounded-md">
         {getFieldComponent({
           id,
-          disabled,
+          readOnly,
           type,
         })}
       </div>
