@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import {
+  Currency_Enum,
   InsertTicketMutationVariables,
   Market_Enum_Enum,
   Ticket_Type_Enum_Enum,
@@ -66,6 +67,16 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
             registration: register('market', { required: true }),
             options: Object.values(Market_Enum_Enum),
             defaultValue: selectedTicket?.market || Market_Enum_Enum.Lon,
+          }}
+        />
+        <Field
+          id="currency"
+          label="Currency"
+          type={{
+            name: ComponentType.SELECT,
+            registration: register('currency', { required: true }),
+            options: Object.values(Currency_Enum),
+            defaultValue: selectedTicket?.currency || Currency_Enum.Gbx,
           }}
         />
       </div>

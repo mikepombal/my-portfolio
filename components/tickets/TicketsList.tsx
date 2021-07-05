@@ -24,6 +24,7 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
         <div className={`${commonStyle} w-64`}>Name</div>
         <div className={`${commonStyle} w-24`}>Type</div>
         <div className={`${commonStyle} w-24`}>Market</div>
+        <div className={`${commonStyle} w-24`}>Currency</div>
         <div className={`${commonStyle} w-24`}>Latest</div>
         <div className={`${commonStyle} w-20`}>Holdings</div>
         <div className={`${commonStyle} w-16`}>Edit</div>
@@ -38,6 +39,7 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
             <div className={`${commonStyle} w-64`}>{ticket.name}</div>
             <div className={`${commonStyle} w-24`}>{ticket.ticket_type}</div>
             <div className={`${commonStyle} w-24`}>{ticket.market}</div>
+            <div className={`${commonStyle} w-24`}>{ticket.currency}</div>
             <div className={`${commonStyle} w-24`}>
               {typeof ticket.latest_price === 'string' && (
                 <Money value={ticket.latest_price} market={ticket.market} />

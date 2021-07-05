@@ -8,6 +8,7 @@ gql`
       ticket_type
       market
       latest_price
+      currency
     }
   }
 `;
@@ -28,6 +29,7 @@ gql`
       name
       ticket_type
       latest_price
+      currency
     }
   }
 `;

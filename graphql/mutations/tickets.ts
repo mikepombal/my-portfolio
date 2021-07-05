@@ -6,6 +6,7 @@ gql`
     $name: String!
     $ticket_type: ticket_type_enum_enum!
     $market: market_enum_enum!
+    $currency: currency_enum!
   ) {
     insert_tickets_one(
       object: {
@@ -13,12 +14,14 @@ gql`
         ticket: $ticket
         ticket_type: $ticket_type
         market: $market
+        currency: $currency
       }
     ) {
       ticket
       name
       ticket_type
       market
+      currency
     }
   }
 `;
@@ -29,15 +32,17 @@ gql`
     $name: String!
     $ticket_type: ticket_type_enum_enum!
     $market: market_enum_enum!
+    $currency: currency_enum!
   ) {
     update_tickets_by_pk(
-      _set: { name: $name, ticket_type: $ticket_type }
+      _set: { name: $name, ticket_type: $ticket_type, currency: $currency }
       pk_columns: { ticket: $ticket, market: $market }
     ) {
       ticket
       market
       name
       ticket_type
+      currency
     }
   }
 `;

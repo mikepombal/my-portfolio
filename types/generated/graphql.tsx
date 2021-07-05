@@ -4,6 +4,7 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -554,6 +555,168 @@ export enum Activity_Enum_Update_Column {
   Type = 'type'
 }
 
+/** columns and relationships of "currency" */
+export type Currency = {
+  __typename?: 'currency';
+  currency: Scalars['String'];
+  description: Scalars['String'];
+};
+
+/** aggregated selection of "currency" */
+export type Currency_Aggregate = {
+  __typename?: 'currency_aggregate';
+  aggregate?: Maybe<Currency_Aggregate_Fields>;
+  nodes: Array<Currency>;
+};
+
+/** aggregate fields of "currency" */
+export type Currency_Aggregate_Fields = {
+  __typename?: 'currency_aggregate_fields';
+  count?: Maybe<Scalars['Int']>;
+  max?: Maybe<Currency_Max_Fields>;
+  min?: Maybe<Currency_Min_Fields>;
+};
+
+
+/** aggregate fields of "currency" */
+export type Currency_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Currency_Select_Column>>;
+  distinct?: Maybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "currency" */
+export type Currency_Aggregate_Order_By = {
+  count?: Maybe<Order_By>;
+  max?: Maybe<Currency_Max_Order_By>;
+  min?: Maybe<Currency_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "currency" */
+export type Currency_Arr_Rel_Insert_Input = {
+  data: Array<Currency_Insert_Input>;
+  on_conflict?: Maybe<Currency_On_Conflict>;
+};
+
+/** Boolean expression to filter rows from the table "currency". All fields are combined with a logical 'AND'. */
+export type Currency_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Currency_Bool_Exp>>>;
+  _not?: Maybe<Currency_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Currency_Bool_Exp>>>;
+  currency?: Maybe<String_Comparison_Exp>;
+  description?: Maybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "currency" */
+export enum Currency_Constraint {
+  /** unique or primary key constraint */
+  CurrencyPkey = 'currency_pkey'
+}
+
+export enum Currency_Enum {
+  /** British Pound Sterling */
+  Gbp = 'GBP',
+  /** British Penny Sterling */
+  Gbx = 'GBX',
+  /** US Dollar */
+  Usd = 'USD'
+}
+
+/** expression to compare columns of type currency_enum. All fields are combined with logical 'AND'. */
+export type Currency_Enum_Comparison_Exp = {
+  _eq?: Maybe<Currency_Enum>;
+  _in?: Maybe<Array<Currency_Enum>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _neq?: Maybe<Currency_Enum>;
+  _nin?: Maybe<Array<Currency_Enum>>;
+};
+
+/** input type for inserting data into table "currency" */
+export type Currency_Insert_Input = {
+  currency?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type Currency_Max_Fields = {
+  __typename?: 'currency_max_fields';
+  currency?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "currency" */
+export type Currency_Max_Order_By = {
+  currency?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Currency_Min_Fields = {
+  __typename?: 'currency_min_fields';
+  currency?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "currency" */
+export type Currency_Min_Order_By = {
+  currency?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+};
+
+/** response of any mutation on the table "currency" */
+export type Currency_Mutation_Response = {
+  __typename?: 'currency_mutation_response';
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data of the affected rows by the mutation */
+  returning: Array<Currency>;
+};
+
+/** input type for inserting object relation for remote table "currency" */
+export type Currency_Obj_Rel_Insert_Input = {
+  data: Currency_Insert_Input;
+  on_conflict?: Maybe<Currency_On_Conflict>;
+};
+
+/** on conflict condition type for table "currency" */
+export type Currency_On_Conflict = {
+  constraint: Currency_Constraint;
+  update_columns: Array<Currency_Update_Column>;
+  where?: Maybe<Currency_Bool_Exp>;
+};
+
+/** ordering options when selecting data from "currency" */
+export type Currency_Order_By = {
+  currency?: Maybe<Order_By>;
+  description?: Maybe<Order_By>;
+};
+
+/** primary key columns input for table: "currency" */
+export type Currency_Pk_Columns_Input = {
+  currency: Scalars['String'];
+};
+
+/** select columns of table "currency" */
+export enum Currency_Select_Column {
+  /** column name */
+  Currency = 'currency',
+  /** column name */
+  Description = 'description'
+}
+
+/** input type for updating data in table "currency" */
+export type Currency_Set_Input = {
+  currency?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+/** update columns of table "currency" */
+export enum Currency_Update_Column {
+  /** column name */
+  Currency = 'currency',
+  /** column name */
+  Description = 'description'
+}
+
 /**
  * for log purpose
  *
@@ -995,6 +1158,10 @@ export type Mutation_Root = {
   delete_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
   /** delete single row from the table: "activity_enum" */
   delete_activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** delete data from the table: "currency" */
+  delete_currency?: Maybe<Currency_Mutation_Response>;
+  /** delete single row from the table: "currency" */
+  delete_currency_by_pk?: Maybe<Currency>;
   /** delete data from the table: "log" */
   delete_log?: Maybe<Log_Mutation_Response>;
   /** delete single row from the table: "log" */
@@ -1025,6 +1192,10 @@ export type Mutation_Root = {
   insert_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
   /** insert a single row into the table: "activity_enum" */
   insert_activity_enum_one?: Maybe<Activity_Enum>;
+  /** insert data into the table: "currency" */
+  insert_currency?: Maybe<Currency_Mutation_Response>;
+  /** insert a single row into the table: "currency" */
+  insert_currency_one?: Maybe<Currency>;
   /** insert data into the table: "log" */
   insert_log?: Maybe<Log_Mutation_Response>;
   /** insert a single row into the table: "log" */
@@ -1053,6 +1224,10 @@ export type Mutation_Root = {
   update_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
   /** update single row of the table: "activity_enum" */
   update_activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** update data of the table: "currency" */
+  update_currency?: Maybe<Currency_Mutation_Response>;
+  /** update single row of the table: "currency" */
+  update_currency_by_pk?: Maybe<Currency>;
   /** update data of the table: "log" */
   update_log?: Maybe<Log_Mutation_Response>;
   /** update single row of the table: "log" */
@@ -1097,6 +1272,18 @@ export type Mutation_RootDelete_Activity_EnumArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Activity_Enum_By_PkArgs = {
   type: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CurrencyArgs = {
+  where: Currency_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Currency_By_PkArgs = {
+  currency: Scalars['String'];
 };
 
 
@@ -1192,6 +1379,20 @@ export type Mutation_RootInsert_Activity_EnumArgs = {
 export type Mutation_RootInsert_Activity_Enum_OneArgs = {
   object: Activity_Enum_Insert_Input;
   on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_CurrencyArgs = {
+  objects: Array<Currency_Insert_Input>;
+  on_conflict?: Maybe<Currency_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Currency_OneArgs = {
+  object: Currency_Insert_Input;
+  on_conflict?: Maybe<Currency_On_Conflict>;
 };
 
 
@@ -1292,6 +1493,20 @@ export type Mutation_RootUpdate_Activity_EnumArgs = {
 export type Mutation_RootUpdate_Activity_Enum_By_PkArgs = {
   _set?: Maybe<Activity_Enum_Set_Input>;
   pk_columns: Activity_Enum_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_CurrencyArgs = {
+  _set?: Maybe<Currency_Set_Input>;
+  where: Currency_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Currency_By_PkArgs = {
+  _set?: Maybe<Currency_Set_Input>;
+  pk_columns: Currency_Pk_Columns_Input;
 };
 
 
@@ -1496,6 +1711,12 @@ export type Query_Root = {
   activity_enum_aggregate: Activity_Enum_Aggregate;
   /** fetch data from the table: "activity_enum" using primary key columns */
   activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** fetch data from the table: "currency" */
+  currency: Array<Currency>;
+  /** fetch aggregated fields from the table: "currency" */
+  currency_aggregate: Currency_Aggregate;
+  /** fetch data from the table: "currency" using primary key columns */
+  currency_by_pk?: Maybe<Currency>;
   /** fetch data from the table: "log" */
   log: Array<Log>;
   /** fetch aggregated fields from the table: "log" */
@@ -1582,6 +1803,32 @@ export type Query_RootActivity_Enum_AggregateArgs = {
 /** query root */
 export type Query_RootActivity_Enum_By_PkArgs = {
   type: Scalars['String'];
+};
+
+
+/** query root */
+export type Query_RootCurrencyArgs = {
+  distinct_on?: Maybe<Array<Currency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Currency_Order_By>>;
+  where?: Maybe<Currency_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootCurrency_AggregateArgs = {
+  distinct_on?: Maybe<Array<Currency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Currency_Order_By>>;
+  where?: Maybe<Currency_Bool_Exp>;
+};
+
+
+/** query root */
+export type Query_RootCurrency_By_PkArgs = {
+  currency: Scalars['String'];
 };
 
 
@@ -1750,6 +1997,12 @@ export type Subscription_Root = {
   activity_enum_aggregate: Activity_Enum_Aggregate;
   /** fetch data from the table: "activity_enum" using primary key columns */
   activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** fetch data from the table: "currency" */
+  currency: Array<Currency>;
+  /** fetch aggregated fields from the table: "currency" */
+  currency_aggregate: Currency_Aggregate;
+  /** fetch data from the table: "currency" using primary key columns */
+  currency_by_pk?: Maybe<Currency>;
   /** fetch data from the table: "log" */
   log: Array<Log>;
   /** fetch aggregated fields from the table: "log" */
@@ -1836,6 +2089,32 @@ export type Subscription_RootActivity_Enum_AggregateArgs = {
 /** subscription root */
 export type Subscription_RootActivity_Enum_By_PkArgs = {
   type: Scalars['String'];
+};
+
+
+/** subscription root */
+export type Subscription_RootCurrencyArgs = {
+  distinct_on?: Maybe<Array<Currency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Currency_Order_By>>;
+  where?: Maybe<Currency_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootCurrency_AggregateArgs = {
+  distinct_on?: Maybe<Array<Currency_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Currency_Order_By>>;
+  where?: Maybe<Currency_Bool_Exp>;
+};
+
+
+/** subscription root */
+export type Subscription_RootCurrency_By_PkArgs = {
+  currency: Scalars['String'];
 };
 
 
@@ -2139,6 +2418,7 @@ export enum Ticket_Type_Enum_Update_Column {
 /** columns and relationships of "tickets" */
 export type Tickets = {
   __typename?: 'tickets';
+  currency: Currency_Enum;
   latest_price?: Maybe<Scalars['String']>;
   market: Market_Enum_Enum;
   name: Scalars['String'];
@@ -2188,6 +2468,7 @@ export type Tickets_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Tickets_Bool_Exp>>>;
   _not?: Maybe<Tickets_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Tickets_Bool_Exp>>>;
+  currency?: Maybe<Currency_Enum_Comparison_Exp>;
   latest_price?: Maybe<String_Comparison_Exp>;
   market?: Maybe<Market_Enum_Enum_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
@@ -2205,6 +2486,7 @@ export enum Tickets_Constraint {
 
 /** input type for inserting data into table "tickets" */
 export type Tickets_Insert_Input = {
+  currency?: Maybe<Currency_Enum>;
   latest_price?: Maybe<Scalars['String']>;
   market?: Maybe<Market_Enum_Enum>;
   name?: Maybe<Scalars['String']>;
@@ -2272,6 +2554,7 @@ export type Tickets_On_Conflict = {
 
 /** ordering options when selecting data from "tickets" */
 export type Tickets_Order_By = {
+  currency?: Maybe<Order_By>;
   latest_price?: Maybe<Order_By>;
   market?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
@@ -2290,6 +2573,8 @@ export type Tickets_Pk_Columns_Input = {
 /** select columns of table "tickets" */
 export enum Tickets_Select_Column {
   /** column name */
+  Currency = 'currency',
+  /** column name */
   LatestPrice = 'latest_price',
   /** column name */
   Market = 'market',
@@ -2307,6 +2592,7 @@ export enum Tickets_Select_Column {
 
 /** input type for updating data in table "tickets" */
 export type Tickets_Set_Input = {
+  currency?: Maybe<Currency_Enum>;
   latest_price?: Maybe<Scalars['String']>;
   market?: Maybe<Market_Enum_Enum>;
   name?: Maybe<Scalars['String']>;
@@ -2318,6 +2604,8 @@ export type Tickets_Set_Input = {
 
 /** update columns of table "tickets" */
 export enum Tickets_Update_Column {
+  /** column name */
+  Currency = 'currency',
   /** column name */
   LatestPrice = 'latest_price',
   /** column name */
@@ -2555,6 +2843,7 @@ export type InsertTicketMutationVariables = Exact<{
   name: Scalars['String'];
   ticket_type: Ticket_Type_Enum_Enum;
   market: Market_Enum_Enum;
+  currency: Currency_Enum;
 }>;
 
 
@@ -2562,7 +2851,7 @@ export type InsertTicketMutation = (
   { __typename?: 'mutation_root' }
   & { insert_tickets_one?: Maybe<(
     { __typename?: 'tickets' }
-    & Pick<Tickets, 'ticket' | 'name' | 'ticket_type' | 'market'>
+    & Pick<Tickets, 'ticket' | 'name' | 'ticket_type' | 'market' | 'currency'>
   )> }
 );
 
@@ -2571,6 +2860,7 @@ export type UpdateTicketMutationVariables = Exact<{
   name: Scalars['String'];
   ticket_type: Ticket_Type_Enum_Enum;
   market: Market_Enum_Enum;
+  currency: Currency_Enum;
 }>;
 
 
@@ -2578,7 +2868,7 @@ export type UpdateTicketMutation = (
   { __typename?: 'mutation_root' }
   & { update_tickets_by_pk?: Maybe<(
     { __typename?: 'tickets' }
-    & Pick<Tickets, 'ticket' | 'market' | 'name' | 'ticket_type'>
+    & Pick<Tickets, 'ticket' | 'market' | 'name' | 'ticket_type' | 'currency'>
   )> }
 );
 
@@ -2630,7 +2920,7 @@ export type AllTicketsQuery = (
   { __typename?: 'query_root' }
   & { tickets: Array<(
     { __typename?: 'tickets' }
-    & Pick<Tickets, 'name' | 'ticket' | 'ticket_type' | 'market' | 'latest_price'>
+    & Pick<Tickets, 'name' | 'ticket' | 'ticket_type' | 'market' | 'latest_price' | 'currency'>
   )> }
 );
 
@@ -2655,7 +2945,7 @@ export type GetTicketQuery = (
   { __typename?: 'query_root' }
   & { tickets_by_pk?: Maybe<(
     { __typename?: 'tickets' }
-    & Pick<Tickets, 'market' | 'ticket' | 'name' | 'ticket_type' | 'latest_price'>
+    & Pick<Tickets, 'market' | 'ticket' | 'name' | 'ticket_type' | 'latest_price' | 'currency'>
   )> }
 );
 
@@ -2700,7 +2990,8 @@ export type InsertActivityMutationFn = Apollo.MutationFunction<InsertActivityMut
  * });
  */
 export function useInsertActivityMutation(baseOptions?: Apollo.MutationHookOptions<InsertActivityMutation, InsertActivityMutationVariables>) {
-        return Apollo.useMutation<InsertActivityMutation, InsertActivityMutationVariables>(InsertActivityDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertActivityMutation, InsertActivityMutationVariables>(InsertActivityDocument, options);
       }
 export type InsertActivityMutationHookResult = ReturnType<typeof useInsertActivityMutation>;
 export type InsertActivityMutationResult = Apollo.MutationResult<InsertActivityMutation>;
@@ -2736,20 +3027,22 @@ export type InsertLogMutationFn = Apollo.MutationFunction<InsertLogMutation, Ins
  * });
  */
 export function useInsertLogMutation(baseOptions?: Apollo.MutationHookOptions<InsertLogMutation, InsertLogMutationVariables>) {
-        return Apollo.useMutation<InsertLogMutation, InsertLogMutationVariables>(InsertLogDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertLogMutation, InsertLogMutationVariables>(InsertLogDocument, options);
       }
 export type InsertLogMutationHookResult = ReturnType<typeof useInsertLogMutation>;
 export type InsertLogMutationResult = Apollo.MutationResult<InsertLogMutation>;
 export type InsertLogMutationOptions = Apollo.BaseMutationOptions<InsertLogMutation, InsertLogMutationVariables>;
 export const InsertTicketDocument = gql`
-    mutation insertTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!) {
+    mutation insertTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!, $currency: currency_enum!) {
   insert_tickets_one(
-    object: {name: $name, ticket: $ticket, ticket_type: $ticket_type, market: $market}
+    object: {name: $name, ticket: $ticket, ticket_type: $ticket_type, market: $market, currency: $currency}
   ) {
     ticket
     name
     ticket_type
     market
+    currency
   }
 }
     `;
@@ -2772,25 +3065,28 @@ export type InsertTicketMutationFn = Apollo.MutationFunction<InsertTicketMutatio
  *      name: // value for 'name'
  *      ticket_type: // value for 'ticket_type'
  *      market: // value for 'market'
+ *      currency: // value for 'currency'
  *   },
  * });
  */
 export function useInsertTicketMutation(baseOptions?: Apollo.MutationHookOptions<InsertTicketMutation, InsertTicketMutationVariables>) {
-        return Apollo.useMutation<InsertTicketMutation, InsertTicketMutationVariables>(InsertTicketDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertTicketMutation, InsertTicketMutationVariables>(InsertTicketDocument, options);
       }
 export type InsertTicketMutationHookResult = ReturnType<typeof useInsertTicketMutation>;
 export type InsertTicketMutationResult = Apollo.MutationResult<InsertTicketMutation>;
 export type InsertTicketMutationOptions = Apollo.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
 export const UpdateTicketDocument = gql`
-    mutation updateTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!) {
+    mutation updateTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!, $currency: currency_enum!) {
   update_tickets_by_pk(
-    _set: {name: $name, ticket_type: $ticket_type}
+    _set: {name: $name, ticket_type: $ticket_type, currency: $currency}
     pk_columns: {ticket: $ticket, market: $market}
   ) {
     ticket
     market
     name
     ticket_type
+    currency
   }
 }
     `;
@@ -2813,11 +3109,13 @@ export type UpdateTicketMutationFn = Apollo.MutationFunction<UpdateTicketMutatio
  *      name: // value for 'name'
  *      ticket_type: // value for 'ticket_type'
  *      market: // value for 'market'
+ *      currency: // value for 'currency'
  *   },
  * });
  */
 export function useUpdateTicketMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTicketMutation, UpdateTicketMutationVariables>) {
-        return Apollo.useMutation<UpdateTicketMutation, UpdateTicketMutationVariables>(UpdateTicketDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTicketMutation, UpdateTicketMutationVariables>(UpdateTicketDocument, options);
       }
 export type UpdateTicketMutationHookResult = ReturnType<typeof useUpdateTicketMutation>;
 export type UpdateTicketMutationResult = Apollo.MutationResult<UpdateTicketMutation>;
@@ -2858,7 +3156,8 @@ export type UpdateTicketPriceMutationFn = Apollo.MutationFunction<UpdateTicketPr
  * });
  */
 export function useUpdateTicketPriceMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>) {
-        return Apollo.useMutation<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>(UpdateTicketPriceDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTicketPriceMutation, UpdateTicketPriceMutationVariables>(UpdateTicketPriceDocument, options);
       }
 export type UpdateTicketPriceMutationHookResult = ReturnType<typeof useUpdateTicketPriceMutation>;
 export type UpdateTicketPriceMutationResult = Apollo.MutationResult<UpdateTicketPriceMutation>;
@@ -2893,10 +3192,12 @@ export const AllActivitiesDocument = gql`
  * });
  */
 export function useAllActivitiesQuery(baseOptions?: Apollo.QueryHookOptions<AllActivitiesQuery, AllActivitiesQueryVariables>) {
-        return Apollo.useQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, options);
       }
 export function useAllActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllActivitiesQuery, AllActivitiesQueryVariables>) {
-          return Apollo.useLazyQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, options);
         }
 export type AllActivitiesQueryHookResult = ReturnType<typeof useAllActivitiesQuery>;
 export type AllActivitiesLazyQueryHookResult = ReturnType<typeof useAllActivitiesLazyQuery>;
@@ -2934,10 +3235,12 @@ export const GetActivitiesForTicketDocument = gql`
  * });
  */
 export function useGetActivitiesForTicketQuery(baseOptions: Apollo.QueryHookOptions<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>) {
-        return Apollo.useQuery<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>(GetActivitiesForTicketDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>(GetActivitiesForTicketDocument, options);
       }
 export function useGetActivitiesForTicketLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>) {
-          return Apollo.useLazyQuery<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>(GetActivitiesForTicketDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetActivitiesForTicketQuery, GetActivitiesForTicketQueryVariables>(GetActivitiesForTicketDocument, options);
         }
 export type GetActivitiesForTicketQueryHookResult = ReturnType<typeof useGetActivitiesForTicketQuery>;
 export type GetActivitiesForTicketLazyQueryHookResult = ReturnType<typeof useGetActivitiesForTicketLazyQuery>;
@@ -2950,6 +3253,7 @@ export const AllTicketsDocument = gql`
     ticket_type
     market
     latest_price
+    currency
   }
 }
     `;
@@ -2970,10 +3274,12 @@ export const AllTicketsDocument = gql`
  * });
  */
 export function useAllTicketsQuery(baseOptions?: Apollo.QueryHookOptions<AllTicketsQuery, AllTicketsQueryVariables>) {
-        return Apollo.useQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, options);
       }
 export function useAllTicketsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTicketsQuery, AllTicketsQueryVariables>) {
-          return Apollo.useLazyQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTicketsQuery, AllTicketsQueryVariables>(AllTicketsDocument, options);
         }
 export type AllTicketsQueryHookResult = ReturnType<typeof useAllTicketsQuery>;
 export type AllTicketsLazyQueryHookResult = ReturnType<typeof useAllTicketsLazyQuery>;
@@ -3002,10 +3308,12 @@ export const PricesToUpdateDocument = gql`
  * });
  */
 export function usePricesToUpdateQuery(baseOptions?: Apollo.QueryHookOptions<PricesToUpdateQuery, PricesToUpdateQueryVariables>) {
-        return Apollo.useQuery<PricesToUpdateQuery, PricesToUpdateQueryVariables>(PricesToUpdateDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PricesToUpdateQuery, PricesToUpdateQueryVariables>(PricesToUpdateDocument, options);
       }
 export function usePricesToUpdateLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PricesToUpdateQuery, PricesToUpdateQueryVariables>) {
-          return Apollo.useLazyQuery<PricesToUpdateQuery, PricesToUpdateQueryVariables>(PricesToUpdateDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PricesToUpdateQuery, PricesToUpdateQueryVariables>(PricesToUpdateDocument, options);
         }
 export type PricesToUpdateQueryHookResult = ReturnType<typeof usePricesToUpdateQuery>;
 export type PricesToUpdateLazyQueryHookResult = ReturnType<typeof usePricesToUpdateLazyQuery>;
@@ -3018,6 +3326,7 @@ export const GetTicketDocument = gql`
     name
     ticket_type
     latest_price
+    currency
   }
 }
     `;
@@ -3040,10 +3349,12 @@ export const GetTicketDocument = gql`
  * });
  */
 export function useGetTicketQuery(baseOptions: Apollo.QueryHookOptions<GetTicketQuery, GetTicketQueryVariables>) {
-        return Apollo.useQuery<GetTicketQuery, GetTicketQueryVariables>(GetTicketDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetTicketQuery, GetTicketQueryVariables>(GetTicketDocument, options);
       }
 export function useGetTicketLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTicketQuery, GetTicketQueryVariables>) {
-          return Apollo.useLazyQuery<GetTicketQuery, GetTicketQueryVariables>(GetTicketDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetTicketQuery, GetTicketQueryVariables>(GetTicketDocument, options);
         }
 export type GetTicketQueryHookResult = ReturnType<typeof useGetTicketQuery>;
 export type GetTicketLazyQueryHookResult = ReturnType<typeof useGetTicketLazyQuery>;
