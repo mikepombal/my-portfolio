@@ -91,7 +91,7 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
               : null
           }
           type={{
-            name: ComponentType.NUMBER,
+            name: ComponentType.MONEY,
             registration: register('totalValue', { required: true }),
             defaultValue: 0.0,
           }}

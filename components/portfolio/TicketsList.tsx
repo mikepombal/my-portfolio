@@ -157,7 +157,7 @@ export const TicketsList: React.FC<TicketsListProps> = ({
             );
             return (
               <div
-                className="border-2 border-yellow-600 mt-2 p-3 flex justify-between"
+                className="border-2 border-yellow-600 mt-2 p-3 flex justify-between bg-gray-100"
                 style={{
                   width: `${(value * 100) / maxValue}%`,
                   background: `linear-gradient(to right ${

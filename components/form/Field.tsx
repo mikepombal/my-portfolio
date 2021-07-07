@@ -19,6 +19,12 @@ interface Num {
   defaultValue?: number;
   registration: UseFormRegisterReturn;
 }
+
+interface Money {
+  name: ComponentType.MONEY;
+  defaultValue?: number;
+  registration: UseFormRegisterReturn;
+}
 interface Date {
   name: ComponentType.DATETIME;
   defaultValue?: string;
@@ -31,7 +37,7 @@ interface Select {
   registration: UseFormRegisterReturn;
 }
 
-type TypeComponent = Text | Num | Date | Select;
+type TypeComponent = Text | Num | Money | Date | Select;
 
 interface Component {
   id: string;
@@ -58,13 +64,32 @@ const getFieldComponent: React.FC<Component> = (props) => {
       return (
         <input
           type="number"
-          step="0.00000001"
+          step="1"
           id={id}
           defaultValue={type.defaultValue}
           readOnly={readOnly}
           className={`p-2 w-full ${readOnly && 'bg-green-300'}`}
           {...type.registration}
         />
+      );
+    }
+    case ComponentType.MONEY: {
+      return (
+        <div className="flex w-full">
+          <div className="p-2 pr-0 bg-white">£</div>
+          <input
+            type="number"
+            step="0.01"
+            min="0"
+            id={id}
+            defaultValue={type.defaultValue}
+            readOnly={readOnly}
+            className={`p-2 pl-0 w-full outline-none ${
+              readOnly && 'bg-green-300'
+            }`}
+            {...type.registration}
+          />
+        </div>
       );
     }
     case ComponentType.DATETIME: {
