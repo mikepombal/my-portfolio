@@ -12,7 +12,10 @@ interface Apollo extends AppProps {
 }
 
 const Apollo: React.FC<Apollo> = ({ Component, pageProps, user }) => {
-  const apolloClient = useApollo(user, pageProps.initialApolloState as Record<string, unknown>);
+  const apolloClient = useApollo(
+    user,
+    pageProps.initialApolloState as Record<string, unknown>
+  );
 
   return (
     <ApolloProvider client={apolloClient}>

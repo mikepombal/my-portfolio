@@ -1,20 +1,43 @@
 import { useMemo } from 'react';
-import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache, from } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { concatPagination } from '@apollo/client/utilities';
 import { User } from '../types/common';
+import fetchJson from '../lib/fetchJson';
 
 let apolloClient: ApolloClient<Record<string, unknown>>;
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({ message, locations, path, extensions }) => {
+      if (extensions?.code === 'invalid-jwt') {
+        fetchJson('/api/logout').then(() => (window.location.href = '/login'));
+      } else {
+        console.error(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        );
+      }
+    });
+  }
+
+  if (networkError) {
+    console.error(`[Network error]: ${networkError}`);
+  }
+});
+
+const httpLink = (user: User) =>
+  new HttpLink({
+    uri: user.graphql, // Server URL (must be absolute)
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+    credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+  });
 
 function createApolloClient(user: User) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: new HttpLink({
-      uri: user.graphql, // Server URL (must be absolute)
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-    }),
+    link: from([errorLink, httpLink(user)]),
     cache: new InMemoryCache({
       typePolicies: {
         Query: {
@@ -46,7 +69,10 @@ export function initializeApollo(
   return _apolloClient;
 }
 
-export function useApollo(user: User, initialState: Record<string, unknown> | null): ApolloClient<Record<string, unknown>> {
+export function useApollo(
+  user: User,
+  initialState: Record<string, unknown> | null
+): ApolloClient<Record<string, unknown>> {
   const store = useMemo(() => initializeApollo(user, initialState), [
     initialState,
     user,
