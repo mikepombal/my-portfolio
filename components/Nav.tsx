@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react';
 import Link from 'next/link';
-import { version } from '../package.json';
+import packageJson from '../package.json';
 import useUser from '../lib/useUser';
 import { useRouter } from 'next/router';
 import fetchJson from '../lib/fetchJson';
@@ -64,7 +64,9 @@ const Nav = (): JSX.Element => {
           </>
         )}
       </ul>
-      <div className="h-12 flex justify-center items-center">{version}</div>
+      <div className="h-12 flex justify-center items-center">
+        {packageJson.version}
+      </div>
     </nav>
   );
 };
