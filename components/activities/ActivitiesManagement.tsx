@@ -17,7 +17,7 @@ const ActivitiesManagement = (): JSX.Element => {
       variables: {
         ...data,
         date: new Date(data.date).toISOString(),
-        totalValue: data.totalValue * 100,
+        totalValue: Math.round(data.totalValue * 100),
       },
       refetchQueries: ['allActivities'],
     });

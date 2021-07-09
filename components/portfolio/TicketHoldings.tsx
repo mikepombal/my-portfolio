@@ -5,7 +5,7 @@ import {
 } from '../../types/generated/graphql';
 import Money from '../common/Money';
 import { Text } from './Text';
-import { TicketsList } from './TicketsList';
+import { SharesList } from './SharesList';
 
 interface TicketHoldingsProps {
   market: string;
@@ -42,7 +42,7 @@ const TicketHoldings: React.FC<TicketHoldingsProps> = ({
           )}
         </Text>
       </div>
-      <TicketsList
+      <SharesList
         market={market}
         ticket={ticket}
         value={

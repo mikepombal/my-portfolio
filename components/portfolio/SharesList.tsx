@@ -65,7 +65,7 @@ interface TicketsListProps {
   ticket: string;
   value?: number;
 }
-export const TicketsList: React.FC<TicketsListProps> = ({
+export const SharesList: React.FC<TicketsListProps> = ({
   market,
   ticket,
   value,
