@@ -27,7 +27,7 @@ export const SharesList: React.FC<SharesListProps> = ({
   );
 
   return (
-    <div className="p-4 mt-2">
+    <div className="px-2 mt-4">
       <div className="relative">
         <div
           className="border-l-4 border-dashed border-gray-400 absolute"

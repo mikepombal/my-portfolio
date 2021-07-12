@@ -12,6 +12,7 @@ import {
 } from '../../utils/calculations';
 import { SharesList } from './SharesList';
 import { Text } from './Text';
+import { Dispatch, ReactElement, useState } from 'react';
 
 type Activity = Array<
   Pick<Activities, 'market' | 'ticket' | 'type' | 'quantity' | 'totalValue'>
@@ -26,6 +27,30 @@ const defineList = (activities: Activity): number[] => {
   }, []);
 };
 
+interface RadioButtonProps {
+  label: string;
+  setValue: () => void;
+  isSelected: boolean;
+}
+const RadioButton: React.FC<RadioButtonProps> = ({
+  label,
+  setValue,
+  isSelected,
+}) => (
+  <button
+    className={` border-2 px-4 py-2 mr-2 rounded-full ${
+      isSelected
+        ? 'border-green-700 bg-green-700 text-white'
+        : 'border-green-700 bg-green-200 text-gray-700'
+    }`}
+    onClick={() => setValue()}
+  >
+    {label}
+  </button>
+);
+
+type View = 'List' | 'Dividends';
+
 interface TicketsListProps {
   market: string;
   ticket: string;
@@ -39,6 +64,7 @@ export const SharesDetails: React.FC<TicketsListProps> = ({
   const { loading, data } = useGetActivitiesForTicketQuery({
     variables: { market, ticket },
   });
+  const [view, setView] = useState<View>('List');
 
   if (loading) {
     return (
@@ -64,6 +90,23 @@ export const SharesDetails: React.FC<TicketsListProps> = ({
   const dividends = sumDividends(data.activities);
   const maxValue = Math.max(...holdings, value ?? 0);
 
+  const getView = (view: View): ReactElement => {
+    switch (view) {
+      case 'List':
+        return (
+          <SharesList
+            average={average}
+            data={data}
+            holdings={holdings}
+            maxValue={maxValue}
+            value={value}
+          />
+        );
+      case 'Dividends':
+        return <div>Dividends</div>;
+    }
+  };
+
   return (
     <div>
       <div className="flex">
@@ -80,13 +123,21 @@ export const SharesDetails: React.FC<TicketsListProps> = ({
           <Money value={dividends.toString()} currency={Currency_Enum.Gbx} />
         </Text>
       </div>
-      <SharesList
-        average={average}
-        data={data}
-        holdings={holdings}
-        maxValue={maxValue}
-        value={value}
-      />
+
+      <div className="flex ml-2 mt-2">
+        <RadioButton
+          label="Shares List"
+          setValue={() => setView('List')}
+          isSelected={view === 'List'}
+        />
+        <RadioButton
+          label="Dividends"
+          setValue={() => setView('Dividends')}
+          isSelected={view === 'Dividends'}
+        />
+      </div>
+
+      {getView(view)}
     </div>
   );
 };
