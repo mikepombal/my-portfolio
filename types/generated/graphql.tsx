@@ -2909,7 +2909,7 @@ export type GetActivitiesForTicketQuery = (
   { __typename?: 'query_root' }
   & { activities: Array<(
     { __typename?: 'activities' }
-    & Pick<Activities, 'market' | 'ticket' | 'type' | 'quantity' | 'totalValue'>
+    & Pick<Activities, 'market' | 'ticket' | 'type' | 'quantity' | 'totalValue' | 'date'>
   )> }
 );
 
@@ -3213,6 +3213,7 @@ export const GetActivitiesForTicketDocument = gql`
     type
     quantity
     totalValue
+    date
   }
 }
     `;

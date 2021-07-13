@@ -11,8 +11,9 @@ import {
   sumDividends,
 } from '../../utils/calculations';
 import { SharesList } from './SharesList';
+import { TicketDividends } from './TicketDividends';
 import { Text } from './Text';
-import { Dispatch, ReactElement, useState } from 'react';
+import { ReactElement, useState } from 'react';
 
 type Activity = Array<
   Pick<Activities, 'market' | 'ticket' | 'type' | 'quantity' | 'totalValue'>
@@ -103,7 +104,7 @@ export const SharesDetails: React.FC<TicketsListProps> = ({
           />
         );
       case 'Dividends':
-        return <div>Dividends</div>;
+        return <TicketDividends activities={data.activities} />;
     }
   };
 

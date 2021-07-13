@@ -25,6 +25,7 @@ gql`
       type
       quantity
       totalValue
+      date
     }
   }
 `;

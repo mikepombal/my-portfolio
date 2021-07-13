@@ -1,8 +1,5 @@
-import { Activities, Activity_Enum_Enum } from '../types/generated/graphql';
-
-type Activity = Array<
-  Pick<Activities, 'market' | 'ticket' | 'type' | 'quantity' | 'totalValue'>
->;
+import { Activity_Enum_Enum } from '../types/generated/graphql';
+import { Activity } from '../types/common';
 
 export const splitValue = (value: number, quantity: number): number[] => {
   const floor = Math.floor(value / quantity);
