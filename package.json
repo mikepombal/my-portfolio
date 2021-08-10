@@ -2,7 +2,7 @@
   "name": "with-typescript-eslint-jest",
   "author": "@erikdstock",
   "license": "MIT",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "scripts": {
     "dev": "next dev -p 3500",
     "build": "next build",
@@ -39,6 +39,7 @@
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
     "bcryptjs": "^2.4.3",
+    "date-fns": "^2.22.1",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5",
     "jsonwebtoken": "^8.5.1",
