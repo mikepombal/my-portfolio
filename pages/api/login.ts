@@ -30,16 +30,28 @@ const execute = async (
   return result;
 };
 
+interface SessionError {
+  data?: unknown;
+  response?: {
+    status: number;
+  };
+}
+
+function isSessionError(error: unknown): error is SessionError {
+  const _error = error as SessionError;
+  return (
+    _error.response?.status !== undefined &&
+    typeof _error.response?.status === 'number'
+  );
+}
 interface Request extends NextApiRequest {
   session: Session;
 }
 
 export default withSession(async (req: Request, res: NextApiResponse) => {
   try {
-    const {
-      username,
-      password,
-    }: { username: string; password: string } = await req.body;
+    const { username, password }: { username: string; password: string } =
+      await req.body;
 
     if (!process.env.JWT_SECRET_KEY) {
       return res.status(401).send('Missing JWT_SECRET_KEY');
@@ -98,7 +110,10 @@ export default withSession(async (req: Request, res: NextApiResponse) => {
     await req.session.save();
     res.json(user);
   } catch (error) {
-    const { response: fetchResponse } = error;
-    res.status(fetchResponse?.status || 500).json(error.data);
+    if (isSessionError(error)) {
+      res.status(error.response?.status || 500).json(error.data);
+    } else {
+      res.status(500);
+    }
   }
 });

@@ -1,3 +1,8 @@
+interface DataError {
+  data?: unknown;
+  message: string;
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default async function fetcher(input: RequestInfo, init?: RequestInit) {
   try {
@@ -20,8 +25,9 @@ export default async function fetcher(input: RequestInfo, init?: RequestInit) {
     error.data = data;
     throw error;
   } catch (error) {
-    if (!error.data) {
-      error.data = { message: error.message };
+    const _error = error as DataError;
+    if (!_error.data) {
+      _error.data = { message: _error.message };
     }
     throw error;
   }

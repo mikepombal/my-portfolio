@@ -4,6 +4,17 @@ import Layout from '../components/Layout';
 import LoginForm from '../components/LoginForm';
 import fetchJson from '../lib/fetchJson';
 
+interface MutateUserError {
+  data: {
+    message: string;
+  };
+}
+
+function isMutateUserError(error: unknown): error is MutateUserError {
+  const message = (error as MutateUserError).data?.message;
+  return message !== undefined && typeof message === 'string';
+}
+
 const Login = (): JSX.Element => {
   const { mutateUser } = useUser({
     redirectTo: '/',
@@ -30,7 +41,9 @@ const Login = (): JSX.Element => {
       );
     } catch (error) {
       console.error('An unexpected error happened:', error);
-      setErrorMsg(error.data.message);
+      if (isMutateUserError(error)) {
+        setErrorMsg(error.data.message);
+      }
     }
   }
 
