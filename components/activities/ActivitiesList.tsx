@@ -1,6 +1,6 @@
 import {
   useAllActivitiesQuery,
-  Activity_Enum_Enum,
+  Activity_Enum,
   Currency_Enum,
 } from '../../types/generated/graphql';
 import Money from '../common/Money';
@@ -28,7 +28,7 @@ const ActivitiesList: React.FC = () => {
           <li
             key={activity.id}
             className={`flex h-10 border-gray-800 border-dotted border-b ${
-              activity.type === Activity_Enum_Enum.Div ? 'bg-green-200' : ''
+              activity.type === Activity_Enum.Div ? 'bg-green-200' : ''
             }`}
           >
             <div className={`${commonStyle} w-24`}>

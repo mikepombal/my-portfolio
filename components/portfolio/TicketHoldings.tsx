@@ -1,6 +1,6 @@
 import {
   useGetTicketQuery,
-  Market_Enum_Enum,
+  Market_Enum,
   Currency_Enum,
 } from '../../types/generated/graphql';
 import Money from '../common/Money';
@@ -16,7 +16,7 @@ const TicketHoldings: React.FC<TicketHoldingsProps> = ({
   ticket,
 }): JSX.Element => {
   const { loading, data } = useGetTicketQuery({
-    variables: { ticket, market: market as Market_Enum_Enum },
+    variables: { ticket, market: market as Market_Enum },
   });
 
   if (loading) {

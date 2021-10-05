@@ -15,7 +15,7 @@ import {
   UpdateTicketPriceMutation,
   UpdateTicketPriceMutationVariables,
   UpdateTicketPriceDocument,
-  Market_Enum_Enum,
+  Market_Enum,
 } from '../../types/generated/graphql';
 
 const alpha = _alpha({ key: process.env.ALPHA_VANTAGE_KEY || '' });
@@ -74,7 +74,7 @@ const updateTicket = async (
   client: ApolloClient<NormalizedCacheObject>
 ) => {
   const [_market, ticket] = symbol.split(':');
-  const market = Object.values(Market_Enum_Enum).find((x) => x === _market);
+  const market = Object.values(Market_Enum).find((x) => x === _market);
 
   if (!market) {
     return Promise.reject(`The maket "${_market}" is not supported!`);

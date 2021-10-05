@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Market_Enum_Enum } from '../../types/generated/graphql';
+import { Market_Enum } from '../../types/generated/graphql';
 import { capitaliseString } from '../../utils/common';
 import useUser from '../../lib/useUser';
 import Layout from '../../components/Layout';
@@ -19,7 +19,7 @@ const PortfilioTicket: React.FC<{ noApollo: boolean }> = ({
         <div>loading...</div>
       ) : !Array.isArray(slug) ||
         slug.length < 2 ||
-        !(capitaliseString(slug[0]) in Market_Enum_Enum) ? (
+        !(capitaliseString(slug[0]) in Market_Enum) ? (
         'Error with the ticket request... please check it follows this rule `portfolio/[market]/[ticket] and is a valid combination`'
       ) : (
         <div className="w-full p-8">

@@ -4,8 +4,8 @@ gql`
   mutation insertTicket(
     $ticket: String!
     $name: String!
-    $ticket_type: ticket_type_enum_enum!
-    $market: market_enum_enum!
+    $ticket_type: ticket_type_enum!
+    $market: market_enum!
     $currency: currency_enum!
   ) {
     insert_tickets_one(
@@ -30,8 +30,8 @@ gql`
   mutation updateTicket(
     $ticket: String!
     $name: String!
-    $ticket_type: ticket_type_enum_enum!
-    $market: market_enum_enum!
+    $ticket_type: ticket_type_enum!
+    $market: market_enum!
     $currency: currency_enum!
   ) {
     update_tickets_by_pk(
@@ -50,7 +50,7 @@ gql`
 gql`
   mutation updateTicketPrice(
     $ticket: String!
-    $market: market_enum_enum!
+    $market: market_enum!
     $price: String!
     $timestamp: timestamptz!
   ) {

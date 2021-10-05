@@ -1,7 +1,7 @@
 import {
   useGetActivitiesForTicketQuery,
   Activities,
-  Activity_Enum_Enum,
+  Activity_Enum,
   Currency_Enum,
 } from '../../types/generated/graphql';
 import Money from '../common/Money';
@@ -21,7 +21,7 @@ type Activity = Array<
 
 const defineList = (activities: Activity): number[] => {
   return activities.reduce<number[]>((acc, a) => {
-    if (a.type !== Activity_Enum_Enum.Buy) {
+    if (a.type !== Activity_Enum.Buy) {
       return acc;
     }
     return [...acc, ...splitValue(a.totalValue, a.quantity)];

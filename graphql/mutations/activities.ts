@@ -7,7 +7,7 @@ gql`
     $market: String!
     $totalValue: numeric!
     $quantity: numeric!
-    $type: activity_enum_enum!
+    $type: activity_enum!
   ) {
     insert_activities_one(
       object: {

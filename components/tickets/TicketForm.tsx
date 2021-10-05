@@ -2,8 +2,8 @@ import { useForm } from 'react-hook-form';
 import {
   Currency_Enum,
   InsertTicketMutationVariables,
-  Market_Enum_Enum,
-  Ticket_Type_Enum_Enum,
+  Market_Enum,
+  Ticket_Type_Enum,
 } from '../../types/generated/graphql';
 import { Field, ComponentType } from '../form/Field';
 
@@ -54,9 +54,8 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           type={{
             name: ComponentType.SELECT,
             registration: register('ticket_type', { required: true }),
-            options: Object.values(Ticket_Type_Enum_Enum),
-            defaultValue:
-              selectedTicket?.ticket_type || Ticket_Type_Enum_Enum.Div1,
+            options: Object.values(Ticket_Type_Enum),
+            defaultValue: selectedTicket?.ticket_type || Ticket_Type_Enum.Div1,
           }}
         />
         <Field
@@ -65,8 +64,8 @@ const TicketForm: React.FC<TicketForm> = ({ onSubmit, selectedTicket }) => {
           type={{
             name: ComponentType.SELECT,
             registration: register('market', { required: true }),
-            options: Object.values(Market_Enum_Enum),
-            defaultValue: selectedTicket?.market || Market_Enum_Enum.Lon,
+            options: Object.values(Market_Enum),
+            defaultValue: selectedTicket?.market || Market_Enum.Lon,
           }}
         />
         <Field

@@ -70,7 +70,7 @@ export type Activities = {
   quantity: Scalars['numeric'];
   ticket: Scalars['String'];
   totalValue: Scalars['numeric'];
-  type: Activity_Enum_Enum;
+  type: Activity_Enum;
 };
 
 /** aggregated selection of "activities" */
@@ -150,7 +150,7 @@ export type Activities_Bool_Exp = {
   quantity?: Maybe<Numeric_Comparison_Exp>;
   ticket?: Maybe<String_Comparison_Exp>;
   totalValue?: Maybe<Numeric_Comparison_Exp>;
-  type?: Maybe<Activity_Enum_Enum_Comparison_Exp>;
+  type?: Maybe<Activity_Enum_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "activities" */
@@ -174,7 +174,7 @@ export type Activities_Insert_Input = {
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
   totalValue?: Maybe<Scalars['numeric']>;
-  type?: Maybe<Activity_Enum_Enum>;
+  type?: Maybe<Activity_Enum>;
 };
 
 /** aggregate max on columns */
@@ -283,7 +283,7 @@ export type Activities_Set_Input = {
   quantity?: Maybe<Scalars['numeric']>;
   ticket?: Maybe<Scalars['String']>;
   totalValue?: Maybe<Scalars['numeric']>;
-  type?: Maybe<Activity_Enum_Enum>;
+  type?: Maybe<Activity_Enum>;
 };
 
 /** aggregate stddev on columns */
@@ -409,148 +409,148 @@ export type Activities_Variance_Order_By = {
   totalValue?: Maybe<Order_By>;
 };
 
-/** columns and relationships of "activity_enum" */
-export type Activity_Enum = {
-  __typename?: 'activity_enum';
+/** columns and relationships of "activity" */
+export type Activity = {
+  __typename?: 'activity';
   type: Scalars['String'];
 };
 
-/** aggregated selection of "activity_enum" */
-export type Activity_Enum_Aggregate = {
-  __typename?: 'activity_enum_aggregate';
-  aggregate?: Maybe<Activity_Enum_Aggregate_Fields>;
-  nodes: Array<Activity_Enum>;
+/** aggregated selection of "activity" */
+export type Activity_Aggregate = {
+  __typename?: 'activity_aggregate';
+  aggregate?: Maybe<Activity_Aggregate_Fields>;
+  nodes: Array<Activity>;
 };
 
-/** aggregate fields of "activity_enum" */
-export type Activity_Enum_Aggregate_Fields = {
-  __typename?: 'activity_enum_aggregate_fields';
+/** aggregate fields of "activity" */
+export type Activity_Aggregate_Fields = {
+  __typename?: 'activity_aggregate_fields';
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Activity_Enum_Max_Fields>;
-  min?: Maybe<Activity_Enum_Min_Fields>;
+  max?: Maybe<Activity_Max_Fields>;
+  min?: Maybe<Activity_Min_Fields>;
 };
 
 
-/** aggregate fields of "activity_enum" */
-export type Activity_Enum_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Activity_Enum_Select_Column>>;
+/** aggregate fields of "activity" */
+export type Activity_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Activity_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "activity_enum" */
-export type Activity_Enum_Aggregate_Order_By = {
+/** order by aggregate values of table "activity" */
+export type Activity_Aggregate_Order_By = {
   count?: Maybe<Order_By>;
-  max?: Maybe<Activity_Enum_Max_Order_By>;
-  min?: Maybe<Activity_Enum_Min_Order_By>;
+  max?: Maybe<Activity_Max_Order_By>;
+  min?: Maybe<Activity_Min_Order_By>;
 };
 
-/** input type for inserting array relation for remote table "activity_enum" */
-export type Activity_Enum_Arr_Rel_Insert_Input = {
-  data: Array<Activity_Enum_Insert_Input>;
-  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+/** input type for inserting array relation for remote table "activity" */
+export type Activity_Arr_Rel_Insert_Input = {
+  data: Array<Activity_Insert_Input>;
+  on_conflict?: Maybe<Activity_On_Conflict>;
 };
 
-/** Boolean expression to filter rows from the table "activity_enum". All fields are combined with a logical 'AND'. */
-export type Activity_Enum_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Activity_Enum_Bool_Exp>>>;
-  _not?: Maybe<Activity_Enum_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Activity_Enum_Bool_Exp>>>;
+/** Boolean expression to filter rows from the table "activity". All fields are combined with a logical 'AND'. */
+export type Activity_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Activity_Bool_Exp>>>;
+  _not?: Maybe<Activity_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Activity_Bool_Exp>>>;
   type?: Maybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "activity_enum" */
-export enum Activity_Enum_Constraint {
+/** unique or primary key constraints on table "activity" */
+export enum Activity_Constraint {
   /** unique or primary key constraint */
   ActivityEnumPkey = 'activity_enum_pkey'
 }
 
-export enum Activity_Enum_Enum {
+export enum Activity_Enum {
   Buy = 'BUY',
   Div = 'DIV',
   Sell = 'SELL'
 }
 
-/** expression to compare columns of type activity_enum_enum. All fields are combined with logical 'AND'. */
-export type Activity_Enum_Enum_Comparison_Exp = {
-  _eq?: Maybe<Activity_Enum_Enum>;
-  _in?: Maybe<Array<Activity_Enum_Enum>>;
+/** expression to compare columns of type activity_enum. All fields are combined with logical 'AND'. */
+export type Activity_Enum_Comparison_Exp = {
+  _eq?: Maybe<Activity_Enum>;
+  _in?: Maybe<Array<Activity_Enum>>;
   _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Activity_Enum_Enum>;
-  _nin?: Maybe<Array<Activity_Enum_Enum>>;
+  _neq?: Maybe<Activity_Enum>;
+  _nin?: Maybe<Array<Activity_Enum>>;
 };
 
-/** input type for inserting data into table "activity_enum" */
-export type Activity_Enum_Insert_Input = {
+/** input type for inserting data into table "activity" */
+export type Activity_Insert_Input = {
   type?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type Activity_Enum_Max_Fields = {
-  __typename?: 'activity_enum_max_fields';
+export type Activity_Max_Fields = {
+  __typename?: 'activity_max_fields';
   type?: Maybe<Scalars['String']>;
 };
 
-/** order by max() on columns of table "activity_enum" */
-export type Activity_Enum_Max_Order_By = {
+/** order by max() on columns of table "activity" */
+export type Activity_Max_Order_By = {
   type?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type Activity_Enum_Min_Fields = {
-  __typename?: 'activity_enum_min_fields';
+export type Activity_Min_Fields = {
+  __typename?: 'activity_min_fields';
   type?: Maybe<Scalars['String']>;
 };
 
-/** order by min() on columns of table "activity_enum" */
-export type Activity_Enum_Min_Order_By = {
+/** order by min() on columns of table "activity" */
+export type Activity_Min_Order_By = {
   type?: Maybe<Order_By>;
 };
 
-/** response of any mutation on the table "activity_enum" */
-export type Activity_Enum_Mutation_Response = {
-  __typename?: 'activity_enum_mutation_response';
+/** response of any mutation on the table "activity" */
+export type Activity_Mutation_Response = {
+  __typename?: 'activity_mutation_response';
   /** number of affected rows by the mutation */
   affected_rows: Scalars['Int'];
   /** data of the affected rows by the mutation */
-  returning: Array<Activity_Enum>;
+  returning: Array<Activity>;
 };
 
-/** input type for inserting object relation for remote table "activity_enum" */
-export type Activity_Enum_Obj_Rel_Insert_Input = {
-  data: Activity_Enum_Insert_Input;
-  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+/** input type for inserting object relation for remote table "activity" */
+export type Activity_Obj_Rel_Insert_Input = {
+  data: Activity_Insert_Input;
+  on_conflict?: Maybe<Activity_On_Conflict>;
 };
 
-/** on conflict condition type for table "activity_enum" */
-export type Activity_Enum_On_Conflict = {
-  constraint: Activity_Enum_Constraint;
-  update_columns: Array<Activity_Enum_Update_Column>;
-  where?: Maybe<Activity_Enum_Bool_Exp>;
+/** on conflict condition type for table "activity" */
+export type Activity_On_Conflict = {
+  constraint: Activity_Constraint;
+  update_columns: Array<Activity_Update_Column>;
+  where?: Maybe<Activity_Bool_Exp>;
 };
 
-/** ordering options when selecting data from "activity_enum" */
-export type Activity_Enum_Order_By = {
+/** ordering options when selecting data from "activity" */
+export type Activity_Order_By = {
   type?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: "activity_enum" */
-export type Activity_Enum_Pk_Columns_Input = {
+/** primary key columns input for table: "activity" */
+export type Activity_Pk_Columns_Input = {
   type: Scalars['String'];
 };
 
-/** select columns of table "activity_enum" */
-export enum Activity_Enum_Select_Column {
+/** select columns of table "activity" */
+export enum Activity_Select_Column {
   /** column name */
   Type = 'type'
 }
 
-/** input type for updating data in table "activity_enum" */
-export type Activity_Enum_Set_Input = {
+/** input type for updating data in table "activity" */
+export type Activity_Set_Input = {
   type?: Maybe<Scalars['String']>;
 };
 
-/** update columns of table "activity_enum" */
-export enum Activity_Enum_Update_Column {
+/** update columns of table "activity" */
+export enum Activity_Update_Column {
   /** column name */
   Type = 'type'
 }
@@ -722,6 +722,7 @@ export enum Currency_Update_Column {
  *
  *
  * columns and relationships of "log"
+ *
  */
 export type Log = {
   __typename?: 'log';
@@ -1001,148 +1002,148 @@ export type Log_Variance_Order_By = {
   id?: Maybe<Order_By>;
 };
 
-/** columns and relationships of "market_enum" */
-export type Market_Enum = {
-  __typename?: 'market_enum';
+/** columns and relationships of "market" */
+export type Market = {
+  __typename?: 'market';
   market: Scalars['String'];
 };
 
-/** aggregated selection of "market_enum" */
-export type Market_Enum_Aggregate = {
-  __typename?: 'market_enum_aggregate';
-  aggregate?: Maybe<Market_Enum_Aggregate_Fields>;
-  nodes: Array<Market_Enum>;
+/** aggregated selection of "market" */
+export type Market_Aggregate = {
+  __typename?: 'market_aggregate';
+  aggregate?: Maybe<Market_Aggregate_Fields>;
+  nodes: Array<Market>;
 };
 
-/** aggregate fields of "market_enum" */
-export type Market_Enum_Aggregate_Fields = {
-  __typename?: 'market_enum_aggregate_fields';
+/** aggregate fields of "market" */
+export type Market_Aggregate_Fields = {
+  __typename?: 'market_aggregate_fields';
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Market_Enum_Max_Fields>;
-  min?: Maybe<Market_Enum_Min_Fields>;
+  max?: Maybe<Market_Max_Fields>;
+  min?: Maybe<Market_Min_Fields>;
 };
 
 
-/** aggregate fields of "market_enum" */
-export type Market_Enum_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Market_Enum_Select_Column>>;
+/** aggregate fields of "market" */
+export type Market_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Market_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "market_enum" */
-export type Market_Enum_Aggregate_Order_By = {
+/** order by aggregate values of table "market" */
+export type Market_Aggregate_Order_By = {
   count?: Maybe<Order_By>;
-  max?: Maybe<Market_Enum_Max_Order_By>;
-  min?: Maybe<Market_Enum_Min_Order_By>;
+  max?: Maybe<Market_Max_Order_By>;
+  min?: Maybe<Market_Min_Order_By>;
 };
 
-/** input type for inserting array relation for remote table "market_enum" */
-export type Market_Enum_Arr_Rel_Insert_Input = {
-  data: Array<Market_Enum_Insert_Input>;
-  on_conflict?: Maybe<Market_Enum_On_Conflict>;
+/** input type for inserting array relation for remote table "market" */
+export type Market_Arr_Rel_Insert_Input = {
+  data: Array<Market_Insert_Input>;
+  on_conflict?: Maybe<Market_On_Conflict>;
 };
 
-/** Boolean expression to filter rows from the table "market_enum". All fields are combined with a logical 'AND'. */
-export type Market_Enum_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Market_Enum_Bool_Exp>>>;
-  _not?: Maybe<Market_Enum_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Market_Enum_Bool_Exp>>>;
+/** Boolean expression to filter rows from the table "market". All fields are combined with a logical 'AND'. */
+export type Market_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Market_Bool_Exp>>>;
+  _not?: Maybe<Market_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Market_Bool_Exp>>>;
   market?: Maybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "market_enum" */
-export enum Market_Enum_Constraint {
+/** unique or primary key constraints on table "market" */
+export enum Market_Constraint {
   /** unique or primary key constraint */
   MarketEnumPkey = 'market_enum_pkey'
 }
 
-export enum Market_Enum_Enum {
+export enum Market_Enum {
   Lon = 'LON',
   Nasdaq = 'NASDAQ',
   Nyse = 'NYSE'
 }
 
-/** expression to compare columns of type market_enum_enum. All fields are combined with logical 'AND'. */
-export type Market_Enum_Enum_Comparison_Exp = {
-  _eq?: Maybe<Market_Enum_Enum>;
-  _in?: Maybe<Array<Market_Enum_Enum>>;
+/** expression to compare columns of type market_enum. All fields are combined with logical 'AND'. */
+export type Market_Enum_Comparison_Exp = {
+  _eq?: Maybe<Market_Enum>;
+  _in?: Maybe<Array<Market_Enum>>;
   _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Market_Enum_Enum>;
-  _nin?: Maybe<Array<Market_Enum_Enum>>;
+  _neq?: Maybe<Market_Enum>;
+  _nin?: Maybe<Array<Market_Enum>>;
 };
 
-/** input type for inserting data into table "market_enum" */
-export type Market_Enum_Insert_Input = {
+/** input type for inserting data into table "market" */
+export type Market_Insert_Input = {
   market?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type Market_Enum_Max_Fields = {
-  __typename?: 'market_enum_max_fields';
+export type Market_Max_Fields = {
+  __typename?: 'market_max_fields';
   market?: Maybe<Scalars['String']>;
 };
 
-/** order by max() on columns of table "market_enum" */
-export type Market_Enum_Max_Order_By = {
+/** order by max() on columns of table "market" */
+export type Market_Max_Order_By = {
   market?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type Market_Enum_Min_Fields = {
-  __typename?: 'market_enum_min_fields';
+export type Market_Min_Fields = {
+  __typename?: 'market_min_fields';
   market?: Maybe<Scalars['String']>;
 };
 
-/** order by min() on columns of table "market_enum" */
-export type Market_Enum_Min_Order_By = {
+/** order by min() on columns of table "market" */
+export type Market_Min_Order_By = {
   market?: Maybe<Order_By>;
 };
 
-/** response of any mutation on the table "market_enum" */
-export type Market_Enum_Mutation_Response = {
-  __typename?: 'market_enum_mutation_response';
+/** response of any mutation on the table "market" */
+export type Market_Mutation_Response = {
+  __typename?: 'market_mutation_response';
   /** number of affected rows by the mutation */
   affected_rows: Scalars['Int'];
   /** data of the affected rows by the mutation */
-  returning: Array<Market_Enum>;
+  returning: Array<Market>;
 };
 
-/** input type for inserting object relation for remote table "market_enum" */
-export type Market_Enum_Obj_Rel_Insert_Input = {
-  data: Market_Enum_Insert_Input;
-  on_conflict?: Maybe<Market_Enum_On_Conflict>;
+/** input type for inserting object relation for remote table "market" */
+export type Market_Obj_Rel_Insert_Input = {
+  data: Market_Insert_Input;
+  on_conflict?: Maybe<Market_On_Conflict>;
 };
 
-/** on conflict condition type for table "market_enum" */
-export type Market_Enum_On_Conflict = {
-  constraint: Market_Enum_Constraint;
-  update_columns: Array<Market_Enum_Update_Column>;
-  where?: Maybe<Market_Enum_Bool_Exp>;
+/** on conflict condition type for table "market" */
+export type Market_On_Conflict = {
+  constraint: Market_Constraint;
+  update_columns: Array<Market_Update_Column>;
+  where?: Maybe<Market_Bool_Exp>;
 };
 
-/** ordering options when selecting data from "market_enum" */
-export type Market_Enum_Order_By = {
+/** ordering options when selecting data from "market" */
+export type Market_Order_By = {
   market?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: "market_enum" */
-export type Market_Enum_Pk_Columns_Input = {
+/** primary key columns input for table: "market" */
+export type Market_Pk_Columns_Input = {
   market: Scalars['String'];
 };
 
-/** select columns of table "market_enum" */
-export enum Market_Enum_Select_Column {
+/** select columns of table "market" */
+export enum Market_Select_Column {
   /** column name */
   Market = 'market'
 }
 
-/** input type for updating data in table "market_enum" */
-export type Market_Enum_Set_Input = {
+/** input type for updating data in table "market" */
+export type Market_Set_Input = {
   market?: Maybe<Scalars['String']>;
 };
 
-/** update columns of table "market_enum" */
-export enum Market_Enum_Update_Column {
+/** update columns of table "market" */
+export enum Market_Update_Column {
   /** column name */
   Market = 'market'
 }
@@ -1154,10 +1155,10 @@ export type Mutation_Root = {
   delete_activities?: Maybe<Activities_Mutation_Response>;
   /** delete single row from the table: "activities" */
   delete_activities_by_pk?: Maybe<Activities>;
-  /** delete data from the table: "activity_enum" */
-  delete_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
-  /** delete single row from the table: "activity_enum" */
-  delete_activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** delete data from the table: "activity" */
+  delete_activity?: Maybe<Activity_Mutation_Response>;
+  /** delete single row from the table: "activity" */
+  delete_activity_by_pk?: Maybe<Activity>;
   /** delete data from the table: "currency" */
   delete_currency?: Maybe<Currency_Mutation_Response>;
   /** delete single row from the table: "currency" */
@@ -1166,16 +1167,16 @@ export type Mutation_Root = {
   delete_log?: Maybe<Log_Mutation_Response>;
   /** delete single row from the table: "log" */
   delete_log_by_pk?: Maybe<Log>;
-  /** delete data from the table: "market_enum" */
-  delete_market_enum?: Maybe<Market_Enum_Mutation_Response>;
-  /** delete single row from the table: "market_enum" */
-  delete_market_enum_by_pk?: Maybe<Market_Enum>;
+  /** delete data from the table: "market" */
+  delete_market?: Maybe<Market_Mutation_Response>;
+  /** delete single row from the table: "market" */
+  delete_market_by_pk?: Maybe<Market>;
   /** delete data from the table: "prices_update_due" */
   delete_prices_update_due?: Maybe<Prices_Update_Due_Mutation_Response>;
-  /** delete data from the table: "ticket_type_enum" */
-  delete_ticket_type_enum?: Maybe<Ticket_Type_Enum_Mutation_Response>;
-  /** delete single row from the table: "ticket_type_enum" */
-  delete_ticket_type_enum_by_pk?: Maybe<Ticket_Type_Enum>;
+  /** delete data from the table: "ticket_type" */
+  delete_ticket_type?: Maybe<Ticket_Type_Mutation_Response>;
+  /** delete single row from the table: "ticket_type" */
+  delete_ticket_type_by_pk?: Maybe<Ticket_Type>;
   /** delete data from the table: "tickets" */
   delete_tickets?: Maybe<Tickets_Mutation_Response>;
   /** delete single row from the table: "tickets" */
@@ -1188,10 +1189,10 @@ export type Mutation_Root = {
   insert_activities?: Maybe<Activities_Mutation_Response>;
   /** insert a single row into the table: "activities" */
   insert_activities_one?: Maybe<Activities>;
-  /** insert data into the table: "activity_enum" */
-  insert_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
-  /** insert a single row into the table: "activity_enum" */
-  insert_activity_enum_one?: Maybe<Activity_Enum>;
+  /** insert data into the table: "activity" */
+  insert_activity?: Maybe<Activity_Mutation_Response>;
+  /** insert a single row into the table: "activity" */
+  insert_activity_one?: Maybe<Activity>;
   /** insert data into the table: "currency" */
   insert_currency?: Maybe<Currency_Mutation_Response>;
   /** insert a single row into the table: "currency" */
@@ -1200,14 +1201,14 @@ export type Mutation_Root = {
   insert_log?: Maybe<Log_Mutation_Response>;
   /** insert a single row into the table: "log" */
   insert_log_one?: Maybe<Log>;
-  /** insert data into the table: "market_enum" */
-  insert_market_enum?: Maybe<Market_Enum_Mutation_Response>;
-  /** insert a single row into the table: "market_enum" */
-  insert_market_enum_one?: Maybe<Market_Enum>;
-  /** insert data into the table: "ticket_type_enum" */
-  insert_ticket_type_enum?: Maybe<Ticket_Type_Enum_Mutation_Response>;
-  /** insert a single row into the table: "ticket_type_enum" */
-  insert_ticket_type_enum_one?: Maybe<Ticket_Type_Enum>;
+  /** insert data into the table: "market" */
+  insert_market?: Maybe<Market_Mutation_Response>;
+  /** insert a single row into the table: "market" */
+  insert_market_one?: Maybe<Market>;
+  /** insert data into the table: "ticket_type" */
+  insert_ticket_type?: Maybe<Ticket_Type_Mutation_Response>;
+  /** insert a single row into the table: "ticket_type" */
+  insert_ticket_type_one?: Maybe<Ticket_Type>;
   /** insert data into the table: "tickets" */
   insert_tickets?: Maybe<Tickets_Mutation_Response>;
   /** insert a single row into the table: "tickets" */
@@ -1220,10 +1221,10 @@ export type Mutation_Root = {
   update_activities?: Maybe<Activities_Mutation_Response>;
   /** update single row of the table: "activities" */
   update_activities_by_pk?: Maybe<Activities>;
-  /** update data of the table: "activity_enum" */
-  update_activity_enum?: Maybe<Activity_Enum_Mutation_Response>;
-  /** update single row of the table: "activity_enum" */
-  update_activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** update data of the table: "activity" */
+  update_activity?: Maybe<Activity_Mutation_Response>;
+  /** update single row of the table: "activity" */
+  update_activity_by_pk?: Maybe<Activity>;
   /** update data of the table: "currency" */
   update_currency?: Maybe<Currency_Mutation_Response>;
   /** update single row of the table: "currency" */
@@ -1232,14 +1233,14 @@ export type Mutation_Root = {
   update_log?: Maybe<Log_Mutation_Response>;
   /** update single row of the table: "log" */
   update_log_by_pk?: Maybe<Log>;
-  /** update data of the table: "market_enum" */
-  update_market_enum?: Maybe<Market_Enum_Mutation_Response>;
-  /** update single row of the table: "market_enum" */
-  update_market_enum_by_pk?: Maybe<Market_Enum>;
-  /** update data of the table: "ticket_type_enum" */
-  update_ticket_type_enum?: Maybe<Ticket_Type_Enum_Mutation_Response>;
-  /** update single row of the table: "ticket_type_enum" */
-  update_ticket_type_enum_by_pk?: Maybe<Ticket_Type_Enum>;
+  /** update data of the table: "market" */
+  update_market?: Maybe<Market_Mutation_Response>;
+  /** update single row of the table: "market" */
+  update_market_by_pk?: Maybe<Market>;
+  /** update data of the table: "ticket_type" */
+  update_ticket_type?: Maybe<Ticket_Type_Mutation_Response>;
+  /** update single row of the table: "ticket_type" */
+  update_ticket_type_by_pk?: Maybe<Ticket_Type>;
   /** update data of the table: "tickets" */
   update_tickets?: Maybe<Tickets_Mutation_Response>;
   /** update single row of the table: "tickets" */
@@ -1264,13 +1265,13 @@ export type Mutation_RootDelete_Activities_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Activity_EnumArgs = {
-  where: Activity_Enum_Bool_Exp;
+export type Mutation_RootDelete_ActivityArgs = {
+  where: Activity_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Activity_Enum_By_PkArgs = {
+export type Mutation_RootDelete_Activity_By_PkArgs = {
   type: Scalars['String'];
 };
 
@@ -1300,13 +1301,13 @@ export type Mutation_RootDelete_Log_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Market_EnumArgs = {
-  where: Market_Enum_Bool_Exp;
+export type Mutation_RootDelete_MarketArgs = {
+  where: Market_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Market_Enum_By_PkArgs = {
+export type Mutation_RootDelete_Market_By_PkArgs = {
   market: Scalars['String'];
 };
 
@@ -1318,13 +1319,13 @@ export type Mutation_RootDelete_Prices_Update_DueArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Ticket_Type_EnumArgs = {
-  where: Ticket_Type_Enum_Bool_Exp;
+export type Mutation_RootDelete_Ticket_TypeArgs = {
+  where: Ticket_Type_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Ticket_Type_Enum_By_PkArgs = {
+export type Mutation_RootDelete_Ticket_Type_By_PkArgs = {
   type: Scalars['String'];
 };
 
@@ -1337,7 +1338,7 @@ export type Mutation_RootDelete_TicketsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Tickets_By_PkArgs = {
-  market: Market_Enum_Enum;
+  market: Market_Enum;
   ticket: Scalars['String'];
 };
 
@@ -1369,16 +1370,16 @@ export type Mutation_RootInsert_Activities_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_Activity_EnumArgs = {
-  objects: Array<Activity_Enum_Insert_Input>;
-  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+export type Mutation_RootInsert_ActivityArgs = {
+  objects: Array<Activity_Insert_Input>;
+  on_conflict?: Maybe<Activity_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Activity_Enum_OneArgs = {
-  object: Activity_Enum_Insert_Input;
-  on_conflict?: Maybe<Activity_Enum_On_Conflict>;
+export type Mutation_RootInsert_Activity_OneArgs = {
+  object: Activity_Insert_Input;
+  on_conflict?: Maybe<Activity_On_Conflict>;
 };
 
 
@@ -1411,30 +1412,30 @@ export type Mutation_RootInsert_Log_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_Market_EnumArgs = {
-  objects: Array<Market_Enum_Insert_Input>;
-  on_conflict?: Maybe<Market_Enum_On_Conflict>;
+export type Mutation_RootInsert_MarketArgs = {
+  objects: Array<Market_Insert_Input>;
+  on_conflict?: Maybe<Market_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Market_Enum_OneArgs = {
-  object: Market_Enum_Insert_Input;
-  on_conflict?: Maybe<Market_Enum_On_Conflict>;
+export type Mutation_RootInsert_Market_OneArgs = {
+  object: Market_Insert_Input;
+  on_conflict?: Maybe<Market_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Ticket_Type_EnumArgs = {
-  objects: Array<Ticket_Type_Enum_Insert_Input>;
-  on_conflict?: Maybe<Ticket_Type_Enum_On_Conflict>;
+export type Mutation_RootInsert_Ticket_TypeArgs = {
+  objects: Array<Ticket_Type_Insert_Input>;
+  on_conflict?: Maybe<Ticket_Type_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Ticket_Type_Enum_OneArgs = {
-  object: Ticket_Type_Enum_Insert_Input;
-  on_conflict?: Maybe<Ticket_Type_Enum_On_Conflict>;
+export type Mutation_RootInsert_Ticket_Type_OneArgs = {
+  object: Ticket_Type_Insert_Input;
+  on_conflict?: Maybe<Ticket_Type_On_Conflict>;
 };
 
 
@@ -1483,16 +1484,16 @@ export type Mutation_RootUpdate_Activities_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Activity_EnumArgs = {
-  _set?: Maybe<Activity_Enum_Set_Input>;
-  where: Activity_Enum_Bool_Exp;
+export type Mutation_RootUpdate_ActivityArgs = {
+  _set?: Maybe<Activity_Set_Input>;
+  where: Activity_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Activity_Enum_By_PkArgs = {
-  _set?: Maybe<Activity_Enum_Set_Input>;
-  pk_columns: Activity_Enum_Pk_Columns_Input;
+export type Mutation_RootUpdate_Activity_By_PkArgs = {
+  _set?: Maybe<Activity_Set_Input>;
+  pk_columns: Activity_Pk_Columns_Input;
 };
 
 
@@ -1527,30 +1528,30 @@ export type Mutation_RootUpdate_Log_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Market_EnumArgs = {
-  _set?: Maybe<Market_Enum_Set_Input>;
-  where: Market_Enum_Bool_Exp;
+export type Mutation_RootUpdate_MarketArgs = {
+  _set?: Maybe<Market_Set_Input>;
+  where: Market_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Market_Enum_By_PkArgs = {
-  _set?: Maybe<Market_Enum_Set_Input>;
-  pk_columns: Market_Enum_Pk_Columns_Input;
+export type Mutation_RootUpdate_Market_By_PkArgs = {
+  _set?: Maybe<Market_Set_Input>;
+  pk_columns: Market_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Ticket_Type_EnumArgs = {
-  _set?: Maybe<Ticket_Type_Enum_Set_Input>;
-  where: Ticket_Type_Enum_Bool_Exp;
+export type Mutation_RootUpdate_Ticket_TypeArgs = {
+  _set?: Maybe<Ticket_Type_Set_Input>;
+  where: Ticket_Type_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Ticket_Type_Enum_By_PkArgs = {
-  _set?: Maybe<Ticket_Type_Enum_Set_Input>;
-  pk_columns: Ticket_Type_Enum_Pk_Columns_Input;
+export type Mutation_RootUpdate_Ticket_Type_By_PkArgs = {
+  _set?: Maybe<Ticket_Type_Set_Input>;
+  pk_columns: Ticket_Type_Pk_Columns_Input;
 };
 
 
@@ -1580,7 +1581,6 @@ export type Mutation_RootUpdate_Users_By_PkArgs = {
   _set?: Maybe<Users_Set_Input>;
   pk_columns: Users_Pk_Columns_Input;
 };
-
 
 /** expression to compare columns of type numeric. All fields are combined with logical 'AND'. */
 export type Numeric_Comparison_Exp = {
@@ -1705,12 +1705,12 @@ export type Query_Root = {
   activities_aggregate: Activities_Aggregate;
   /** fetch data from the table: "activities" using primary key columns */
   activities_by_pk?: Maybe<Activities>;
-  /** fetch data from the table: "activity_enum" */
-  activity_enum: Array<Activity_Enum>;
-  /** fetch aggregated fields from the table: "activity_enum" */
-  activity_enum_aggregate: Activity_Enum_Aggregate;
-  /** fetch data from the table: "activity_enum" using primary key columns */
-  activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** fetch data from the table: "activity" */
+  activity: Array<Activity>;
+  /** fetch aggregated fields from the table: "activity" */
+  activity_aggregate: Activity_Aggregate;
+  /** fetch data from the table: "activity" using primary key columns */
+  activity_by_pk?: Maybe<Activity>;
   /** fetch data from the table: "currency" */
   currency: Array<Currency>;
   /** fetch aggregated fields from the table: "currency" */
@@ -1723,22 +1723,22 @@ export type Query_Root = {
   log_aggregate: Log_Aggregate;
   /** fetch data from the table: "log" using primary key columns */
   log_by_pk?: Maybe<Log>;
-  /** fetch data from the table: "market_enum" */
-  market_enum: Array<Market_Enum>;
-  /** fetch aggregated fields from the table: "market_enum" */
-  market_enum_aggregate: Market_Enum_Aggregate;
-  /** fetch data from the table: "market_enum" using primary key columns */
-  market_enum_by_pk?: Maybe<Market_Enum>;
+  /** fetch data from the table: "market" */
+  market: Array<Market>;
+  /** fetch aggregated fields from the table: "market" */
+  market_aggregate: Market_Aggregate;
+  /** fetch data from the table: "market" using primary key columns */
+  market_by_pk?: Maybe<Market>;
   /** fetch data from the table: "prices_update_due" */
   prices_update_due: Array<Prices_Update_Due>;
   /** fetch aggregated fields from the table: "prices_update_due" */
   prices_update_due_aggregate: Prices_Update_Due_Aggregate;
-  /** fetch data from the table: "ticket_type_enum" */
-  ticket_type_enum: Array<Ticket_Type_Enum>;
-  /** fetch aggregated fields from the table: "ticket_type_enum" */
-  ticket_type_enum_aggregate: Ticket_Type_Enum_Aggregate;
-  /** fetch data from the table: "ticket_type_enum" using primary key columns */
-  ticket_type_enum_by_pk?: Maybe<Ticket_Type_Enum>;
+  /** fetch data from the table: "ticket_type" */
+  ticket_type: Array<Ticket_Type>;
+  /** fetch aggregated fields from the table: "ticket_type" */
+  ticket_type_aggregate: Ticket_Type_Aggregate;
+  /** fetch data from the table: "ticket_type" using primary key columns */
+  ticket_type_by_pk?: Maybe<Ticket_Type>;
   /** fetch data from the table: "tickets" */
   tickets: Array<Tickets>;
   /** fetch aggregated fields from the table: "tickets" */
@@ -1781,27 +1781,27 @@ export type Query_RootActivities_By_PkArgs = {
 
 
 /** query root */
-export type Query_RootActivity_EnumArgs = {
-  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+export type Query_RootActivityArgs = {
+  distinct_on?: Maybe<Array<Activity_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
-  where?: Maybe<Activity_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Activity_Order_By>>;
+  where?: Maybe<Activity_Bool_Exp>;
 };
 
 
 /** query root */
-export type Query_RootActivity_Enum_AggregateArgs = {
-  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+export type Query_RootActivity_AggregateArgs = {
+  distinct_on?: Maybe<Array<Activity_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
-  where?: Maybe<Activity_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Activity_Order_By>>;
+  where?: Maybe<Activity_Bool_Exp>;
 };
 
 
 /** query root */
-export type Query_RootActivity_Enum_By_PkArgs = {
+export type Query_RootActivity_By_PkArgs = {
   type: Scalars['String'];
 };
 
@@ -1859,27 +1859,27 @@ export type Query_RootLog_By_PkArgs = {
 
 
 /** query root */
-export type Query_RootMarket_EnumArgs = {
-  distinct_on?: Maybe<Array<Market_Enum_Select_Column>>;
+export type Query_RootMarketArgs = {
+  distinct_on?: Maybe<Array<Market_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Market_Enum_Order_By>>;
-  where?: Maybe<Market_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Market_Order_By>>;
+  where?: Maybe<Market_Bool_Exp>;
 };
 
 
 /** query root */
-export type Query_RootMarket_Enum_AggregateArgs = {
-  distinct_on?: Maybe<Array<Market_Enum_Select_Column>>;
+export type Query_RootMarket_AggregateArgs = {
+  distinct_on?: Maybe<Array<Market_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Market_Enum_Order_By>>;
-  where?: Maybe<Market_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Market_Order_By>>;
+  where?: Maybe<Market_Bool_Exp>;
 };
 
 
 /** query root */
-export type Query_RootMarket_Enum_By_PkArgs = {
+export type Query_RootMarket_By_PkArgs = {
   market: Scalars['String'];
 };
 
@@ -1905,27 +1905,27 @@ export type Query_RootPrices_Update_Due_AggregateArgs = {
 
 
 /** query root */
-export type Query_RootTicket_Type_EnumArgs = {
-  distinct_on?: Maybe<Array<Ticket_Type_Enum_Select_Column>>;
+export type Query_RootTicket_TypeArgs = {
+  distinct_on?: Maybe<Array<Ticket_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Ticket_Type_Enum_Order_By>>;
-  where?: Maybe<Ticket_Type_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Ticket_Type_Order_By>>;
+  where?: Maybe<Ticket_Type_Bool_Exp>;
 };
 
 
 /** query root */
-export type Query_RootTicket_Type_Enum_AggregateArgs = {
-  distinct_on?: Maybe<Array<Ticket_Type_Enum_Select_Column>>;
+export type Query_RootTicket_Type_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ticket_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Ticket_Type_Enum_Order_By>>;
-  where?: Maybe<Ticket_Type_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Ticket_Type_Order_By>>;
+  where?: Maybe<Ticket_Type_Bool_Exp>;
 };
 
 
 /** query root */
-export type Query_RootTicket_Type_Enum_By_PkArgs = {
+export type Query_RootTicket_Type_By_PkArgs = {
   type: Scalars['String'];
 };
 
@@ -1952,7 +1952,7 @@ export type Query_RootTickets_AggregateArgs = {
 
 /** query root */
 export type Query_RootTickets_By_PkArgs = {
-  market: Market_Enum_Enum;
+  market: Market_Enum;
   ticket: Scalars['String'];
 };
 
@@ -1991,12 +1991,12 @@ export type Subscription_Root = {
   activities_aggregate: Activities_Aggregate;
   /** fetch data from the table: "activities" using primary key columns */
   activities_by_pk?: Maybe<Activities>;
-  /** fetch data from the table: "activity_enum" */
-  activity_enum: Array<Activity_Enum>;
-  /** fetch aggregated fields from the table: "activity_enum" */
-  activity_enum_aggregate: Activity_Enum_Aggregate;
-  /** fetch data from the table: "activity_enum" using primary key columns */
-  activity_enum_by_pk?: Maybe<Activity_Enum>;
+  /** fetch data from the table: "activity" */
+  activity: Array<Activity>;
+  /** fetch aggregated fields from the table: "activity" */
+  activity_aggregate: Activity_Aggregate;
+  /** fetch data from the table: "activity" using primary key columns */
+  activity_by_pk?: Maybe<Activity>;
   /** fetch data from the table: "currency" */
   currency: Array<Currency>;
   /** fetch aggregated fields from the table: "currency" */
@@ -2009,22 +2009,22 @@ export type Subscription_Root = {
   log_aggregate: Log_Aggregate;
   /** fetch data from the table: "log" using primary key columns */
   log_by_pk?: Maybe<Log>;
-  /** fetch data from the table: "market_enum" */
-  market_enum: Array<Market_Enum>;
-  /** fetch aggregated fields from the table: "market_enum" */
-  market_enum_aggregate: Market_Enum_Aggregate;
-  /** fetch data from the table: "market_enum" using primary key columns */
-  market_enum_by_pk?: Maybe<Market_Enum>;
+  /** fetch data from the table: "market" */
+  market: Array<Market>;
+  /** fetch aggregated fields from the table: "market" */
+  market_aggregate: Market_Aggregate;
+  /** fetch data from the table: "market" using primary key columns */
+  market_by_pk?: Maybe<Market>;
   /** fetch data from the table: "prices_update_due" */
   prices_update_due: Array<Prices_Update_Due>;
   /** fetch aggregated fields from the table: "prices_update_due" */
   prices_update_due_aggregate: Prices_Update_Due_Aggregate;
-  /** fetch data from the table: "ticket_type_enum" */
-  ticket_type_enum: Array<Ticket_Type_Enum>;
-  /** fetch aggregated fields from the table: "ticket_type_enum" */
-  ticket_type_enum_aggregate: Ticket_Type_Enum_Aggregate;
-  /** fetch data from the table: "ticket_type_enum" using primary key columns */
-  ticket_type_enum_by_pk?: Maybe<Ticket_Type_Enum>;
+  /** fetch data from the table: "ticket_type" */
+  ticket_type: Array<Ticket_Type>;
+  /** fetch aggregated fields from the table: "ticket_type" */
+  ticket_type_aggregate: Ticket_Type_Aggregate;
+  /** fetch data from the table: "ticket_type" using primary key columns */
+  ticket_type_by_pk?: Maybe<Ticket_Type>;
   /** fetch data from the table: "tickets" */
   tickets: Array<Tickets>;
   /** fetch aggregated fields from the table: "tickets" */
@@ -2067,27 +2067,27 @@ export type Subscription_RootActivities_By_PkArgs = {
 
 
 /** subscription root */
-export type Subscription_RootActivity_EnumArgs = {
-  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+export type Subscription_RootActivityArgs = {
+  distinct_on?: Maybe<Array<Activity_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
-  where?: Maybe<Activity_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Activity_Order_By>>;
+  where?: Maybe<Activity_Bool_Exp>;
 };
 
 
 /** subscription root */
-export type Subscription_RootActivity_Enum_AggregateArgs = {
-  distinct_on?: Maybe<Array<Activity_Enum_Select_Column>>;
+export type Subscription_RootActivity_AggregateArgs = {
+  distinct_on?: Maybe<Array<Activity_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Activity_Enum_Order_By>>;
-  where?: Maybe<Activity_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Activity_Order_By>>;
+  where?: Maybe<Activity_Bool_Exp>;
 };
 
 
 /** subscription root */
-export type Subscription_RootActivity_Enum_By_PkArgs = {
+export type Subscription_RootActivity_By_PkArgs = {
   type: Scalars['String'];
 };
 
@@ -2145,27 +2145,27 @@ export type Subscription_RootLog_By_PkArgs = {
 
 
 /** subscription root */
-export type Subscription_RootMarket_EnumArgs = {
-  distinct_on?: Maybe<Array<Market_Enum_Select_Column>>;
+export type Subscription_RootMarketArgs = {
+  distinct_on?: Maybe<Array<Market_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Market_Enum_Order_By>>;
-  where?: Maybe<Market_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Market_Order_By>>;
+  where?: Maybe<Market_Bool_Exp>;
 };
 
 
 /** subscription root */
-export type Subscription_RootMarket_Enum_AggregateArgs = {
-  distinct_on?: Maybe<Array<Market_Enum_Select_Column>>;
+export type Subscription_RootMarket_AggregateArgs = {
+  distinct_on?: Maybe<Array<Market_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Market_Enum_Order_By>>;
-  where?: Maybe<Market_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Market_Order_By>>;
+  where?: Maybe<Market_Bool_Exp>;
 };
 
 
 /** subscription root */
-export type Subscription_RootMarket_Enum_By_PkArgs = {
+export type Subscription_RootMarket_By_PkArgs = {
   market: Scalars['String'];
 };
 
@@ -2191,27 +2191,27 @@ export type Subscription_RootPrices_Update_Due_AggregateArgs = {
 
 
 /** subscription root */
-export type Subscription_RootTicket_Type_EnumArgs = {
-  distinct_on?: Maybe<Array<Ticket_Type_Enum_Select_Column>>;
+export type Subscription_RootTicket_TypeArgs = {
+  distinct_on?: Maybe<Array<Ticket_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Ticket_Type_Enum_Order_By>>;
-  where?: Maybe<Ticket_Type_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Ticket_Type_Order_By>>;
+  where?: Maybe<Ticket_Type_Bool_Exp>;
 };
 
 
 /** subscription root */
-export type Subscription_RootTicket_Type_Enum_AggregateArgs = {
-  distinct_on?: Maybe<Array<Ticket_Type_Enum_Select_Column>>;
+export type Subscription_RootTicket_Type_AggregateArgs = {
+  distinct_on?: Maybe<Array<Ticket_Type_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Ticket_Type_Enum_Order_By>>;
-  where?: Maybe<Ticket_Type_Enum_Bool_Exp>;
+  order_by?: Maybe<Array<Ticket_Type_Order_By>>;
+  where?: Maybe<Ticket_Type_Bool_Exp>;
 };
 
 
 /** subscription root */
-export type Subscription_RootTicket_Type_Enum_By_PkArgs = {
+export type Subscription_RootTicket_Type_By_PkArgs = {
   type: Scalars['String'];
 };
 
@@ -2238,7 +2238,7 @@ export type Subscription_RootTickets_AggregateArgs = {
 
 /** subscription root */
 export type Subscription_RootTickets_By_PkArgs = {
-  market: Market_Enum_Enum;
+  market: Market_Enum;
   ticket: Scalars['String'];
 };
 
@@ -2268,149 +2268,149 @@ export type Subscription_RootUsers_By_PkArgs = {
   username: Scalars['String'];
 };
 
-/** columns and relationships of "ticket_type_enum" */
-export type Ticket_Type_Enum = {
-  __typename?: 'ticket_type_enum';
+/** columns and relationships of "ticket_type" */
+export type Ticket_Type = {
+  __typename?: 'ticket_type';
   type: Scalars['String'];
 };
 
-/** aggregated selection of "ticket_type_enum" */
-export type Ticket_Type_Enum_Aggregate = {
-  __typename?: 'ticket_type_enum_aggregate';
-  aggregate?: Maybe<Ticket_Type_Enum_Aggregate_Fields>;
-  nodes: Array<Ticket_Type_Enum>;
+/** aggregated selection of "ticket_type" */
+export type Ticket_Type_Aggregate = {
+  __typename?: 'ticket_type_aggregate';
+  aggregate?: Maybe<Ticket_Type_Aggregate_Fields>;
+  nodes: Array<Ticket_Type>;
 };
 
-/** aggregate fields of "ticket_type_enum" */
-export type Ticket_Type_Enum_Aggregate_Fields = {
-  __typename?: 'ticket_type_enum_aggregate_fields';
+/** aggregate fields of "ticket_type" */
+export type Ticket_Type_Aggregate_Fields = {
+  __typename?: 'ticket_type_aggregate_fields';
   count?: Maybe<Scalars['Int']>;
-  max?: Maybe<Ticket_Type_Enum_Max_Fields>;
-  min?: Maybe<Ticket_Type_Enum_Min_Fields>;
+  max?: Maybe<Ticket_Type_Max_Fields>;
+  min?: Maybe<Ticket_Type_Min_Fields>;
 };
 
 
-/** aggregate fields of "ticket_type_enum" */
-export type Ticket_Type_Enum_Aggregate_FieldsCountArgs = {
-  columns?: Maybe<Array<Ticket_Type_Enum_Select_Column>>;
+/** aggregate fields of "ticket_type" */
+export type Ticket_Type_Aggregate_FieldsCountArgs = {
+  columns?: Maybe<Array<Ticket_Type_Select_Column>>;
   distinct?: Maybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "ticket_type_enum" */
-export type Ticket_Type_Enum_Aggregate_Order_By = {
+/** order by aggregate values of table "ticket_type" */
+export type Ticket_Type_Aggregate_Order_By = {
   count?: Maybe<Order_By>;
-  max?: Maybe<Ticket_Type_Enum_Max_Order_By>;
-  min?: Maybe<Ticket_Type_Enum_Min_Order_By>;
+  max?: Maybe<Ticket_Type_Max_Order_By>;
+  min?: Maybe<Ticket_Type_Min_Order_By>;
 };
 
-/** input type for inserting array relation for remote table "ticket_type_enum" */
-export type Ticket_Type_Enum_Arr_Rel_Insert_Input = {
-  data: Array<Ticket_Type_Enum_Insert_Input>;
-  on_conflict?: Maybe<Ticket_Type_Enum_On_Conflict>;
+/** input type for inserting array relation for remote table "ticket_type" */
+export type Ticket_Type_Arr_Rel_Insert_Input = {
+  data: Array<Ticket_Type_Insert_Input>;
+  on_conflict?: Maybe<Ticket_Type_On_Conflict>;
 };
 
-/** Boolean expression to filter rows from the table "ticket_type_enum". All fields are combined with a logical 'AND'. */
-export type Ticket_Type_Enum_Bool_Exp = {
-  _and?: Maybe<Array<Maybe<Ticket_Type_Enum_Bool_Exp>>>;
-  _not?: Maybe<Ticket_Type_Enum_Bool_Exp>;
-  _or?: Maybe<Array<Maybe<Ticket_Type_Enum_Bool_Exp>>>;
+/** Boolean expression to filter rows from the table "ticket_type". All fields are combined with a logical 'AND'. */
+export type Ticket_Type_Bool_Exp = {
+  _and?: Maybe<Array<Maybe<Ticket_Type_Bool_Exp>>>;
+  _not?: Maybe<Ticket_Type_Bool_Exp>;
+  _or?: Maybe<Array<Maybe<Ticket_Type_Bool_Exp>>>;
   type?: Maybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "ticket_type_enum" */
-export enum Ticket_Type_Enum_Constraint {
+/** unique or primary key constraints on table "ticket_type" */
+export enum Ticket_Type_Constraint {
   /** unique or primary key constraint */
   TicketTypePkey = 'ticket_type_pkey'
 }
 
-export enum Ticket_Type_Enum_Enum {
+export enum Ticket_Type_Enum {
   Div1 = 'div1',
   Div2 = 'div2',
   Mix = 'mix',
   Trading = 'trading'
 }
 
-/** expression to compare columns of type ticket_type_enum_enum. All fields are combined with logical 'AND'. */
-export type Ticket_Type_Enum_Enum_Comparison_Exp = {
-  _eq?: Maybe<Ticket_Type_Enum_Enum>;
-  _in?: Maybe<Array<Ticket_Type_Enum_Enum>>;
+/** expression to compare columns of type ticket_type_enum. All fields are combined with logical 'AND'. */
+export type Ticket_Type_Enum_Comparison_Exp = {
+  _eq?: Maybe<Ticket_Type_Enum>;
+  _in?: Maybe<Array<Ticket_Type_Enum>>;
   _is_null?: Maybe<Scalars['Boolean']>;
-  _neq?: Maybe<Ticket_Type_Enum_Enum>;
-  _nin?: Maybe<Array<Ticket_Type_Enum_Enum>>;
+  _neq?: Maybe<Ticket_Type_Enum>;
+  _nin?: Maybe<Array<Ticket_Type_Enum>>;
 };
 
-/** input type for inserting data into table "ticket_type_enum" */
-export type Ticket_Type_Enum_Insert_Input = {
+/** input type for inserting data into table "ticket_type" */
+export type Ticket_Type_Insert_Input = {
   type?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
-export type Ticket_Type_Enum_Max_Fields = {
-  __typename?: 'ticket_type_enum_max_fields';
+export type Ticket_Type_Max_Fields = {
+  __typename?: 'ticket_type_max_fields';
   type?: Maybe<Scalars['String']>;
 };
 
-/** order by max() on columns of table "ticket_type_enum" */
-export type Ticket_Type_Enum_Max_Order_By = {
+/** order by max() on columns of table "ticket_type" */
+export type Ticket_Type_Max_Order_By = {
   type?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type Ticket_Type_Enum_Min_Fields = {
-  __typename?: 'ticket_type_enum_min_fields';
+export type Ticket_Type_Min_Fields = {
+  __typename?: 'ticket_type_min_fields';
   type?: Maybe<Scalars['String']>;
 };
 
-/** order by min() on columns of table "ticket_type_enum" */
-export type Ticket_Type_Enum_Min_Order_By = {
+/** order by min() on columns of table "ticket_type" */
+export type Ticket_Type_Min_Order_By = {
   type?: Maybe<Order_By>;
 };
 
-/** response of any mutation on the table "ticket_type_enum" */
-export type Ticket_Type_Enum_Mutation_Response = {
-  __typename?: 'ticket_type_enum_mutation_response';
+/** response of any mutation on the table "ticket_type" */
+export type Ticket_Type_Mutation_Response = {
+  __typename?: 'ticket_type_mutation_response';
   /** number of affected rows by the mutation */
   affected_rows: Scalars['Int'];
   /** data of the affected rows by the mutation */
-  returning: Array<Ticket_Type_Enum>;
+  returning: Array<Ticket_Type>;
 };
 
-/** input type for inserting object relation for remote table "ticket_type_enum" */
-export type Ticket_Type_Enum_Obj_Rel_Insert_Input = {
-  data: Ticket_Type_Enum_Insert_Input;
-  on_conflict?: Maybe<Ticket_Type_Enum_On_Conflict>;
+/** input type for inserting object relation for remote table "ticket_type" */
+export type Ticket_Type_Obj_Rel_Insert_Input = {
+  data: Ticket_Type_Insert_Input;
+  on_conflict?: Maybe<Ticket_Type_On_Conflict>;
 };
 
-/** on conflict condition type for table "ticket_type_enum" */
-export type Ticket_Type_Enum_On_Conflict = {
-  constraint: Ticket_Type_Enum_Constraint;
-  update_columns: Array<Ticket_Type_Enum_Update_Column>;
-  where?: Maybe<Ticket_Type_Enum_Bool_Exp>;
+/** on conflict condition type for table "ticket_type" */
+export type Ticket_Type_On_Conflict = {
+  constraint: Ticket_Type_Constraint;
+  update_columns: Array<Ticket_Type_Update_Column>;
+  where?: Maybe<Ticket_Type_Bool_Exp>;
 };
 
-/** ordering options when selecting data from "ticket_type_enum" */
-export type Ticket_Type_Enum_Order_By = {
+/** ordering options when selecting data from "ticket_type" */
+export type Ticket_Type_Order_By = {
   type?: Maybe<Order_By>;
 };
 
-/** primary key columns input for table: "ticket_type_enum" */
-export type Ticket_Type_Enum_Pk_Columns_Input = {
+/** primary key columns input for table: "ticket_type" */
+export type Ticket_Type_Pk_Columns_Input = {
   type: Scalars['String'];
 };
 
-/** select columns of table "ticket_type_enum" */
-export enum Ticket_Type_Enum_Select_Column {
+/** select columns of table "ticket_type" */
+export enum Ticket_Type_Select_Column {
   /** column name */
   Type = 'type'
 }
 
-/** input type for updating data in table "ticket_type_enum" */
-export type Ticket_Type_Enum_Set_Input = {
+/** input type for updating data in table "ticket_type" */
+export type Ticket_Type_Set_Input = {
   type?: Maybe<Scalars['String']>;
 };
 
-/** update columns of table "ticket_type_enum" */
-export enum Ticket_Type_Enum_Update_Column {
+/** update columns of table "ticket_type" */
+export enum Ticket_Type_Update_Column {
   /** column name */
   Type = 'type'
 }
@@ -2420,11 +2420,11 @@ export type Tickets = {
   __typename?: 'tickets';
   currency: Currency_Enum;
   latest_price?: Maybe<Scalars['String']>;
-  market: Market_Enum_Enum;
+  market: Market_Enum;
   name: Scalars['String'];
   price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket: Scalars['String'];
-  ticket_type: Ticket_Type_Enum_Enum;
+  ticket_type: Ticket_Type_Enum;
   update_price: Scalars['Boolean'];
 };
 
@@ -2470,11 +2470,11 @@ export type Tickets_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Tickets_Bool_Exp>>>;
   currency?: Maybe<Currency_Enum_Comparison_Exp>;
   latest_price?: Maybe<String_Comparison_Exp>;
-  market?: Maybe<Market_Enum_Enum_Comparison_Exp>;
+  market?: Maybe<Market_Enum_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   price_timestamp?: Maybe<Timestamptz_Comparison_Exp>;
   ticket?: Maybe<String_Comparison_Exp>;
-  ticket_type?: Maybe<Ticket_Type_Enum_Enum_Comparison_Exp>;
+  ticket_type?: Maybe<Ticket_Type_Enum_Comparison_Exp>;
   update_price?: Maybe<Boolean_Comparison_Exp>;
 };
 
@@ -2488,11 +2488,11 @@ export enum Tickets_Constraint {
 export type Tickets_Insert_Input = {
   currency?: Maybe<Currency_Enum>;
   latest_price?: Maybe<Scalars['String']>;
-  market?: Maybe<Market_Enum_Enum>;
+  market?: Maybe<Market_Enum>;
   name?: Maybe<Scalars['String']>;
   price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket?: Maybe<Scalars['String']>;
-  ticket_type?: Maybe<Ticket_Type_Enum_Enum>;
+  ticket_type?: Maybe<Ticket_Type_Enum>;
   update_price?: Maybe<Scalars['Boolean']>;
 };
 
@@ -2566,7 +2566,7 @@ export type Tickets_Order_By = {
 
 /** primary key columns input for table: "tickets" */
 export type Tickets_Pk_Columns_Input = {
-  market: Market_Enum_Enum;
+  market: Market_Enum;
   ticket: Scalars['String'];
 };
 
@@ -2594,11 +2594,11 @@ export enum Tickets_Select_Column {
 export type Tickets_Set_Input = {
   currency?: Maybe<Currency_Enum>;
   latest_price?: Maybe<Scalars['String']>;
-  market?: Maybe<Market_Enum_Enum>;
+  market?: Maybe<Market_Enum>;
   name?: Maybe<Scalars['String']>;
   price_timestamp?: Maybe<Scalars['timestamptz']>;
   ticket?: Maybe<Scalars['String']>;
-  ticket_type?: Maybe<Ticket_Type_Enum_Enum>;
+  ticket_type?: Maybe<Ticket_Type_Enum>;
   update_price?: Maybe<Scalars['Boolean']>;
 };
 
@@ -2621,7 +2621,6 @@ export enum Tickets_Update_Column {
   /** column name */
   UpdatePrice = 'update_price'
 }
-
 
 /** expression to compare columns of type timestamptz. All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
@@ -2812,17 +2811,11 @@ export type InsertActivityMutationVariables = Exact<{
   market: Scalars['String'];
   totalValue: Scalars['numeric'];
   quantity: Scalars['numeric'];
-  type: Activity_Enum_Enum;
+  type: Activity_Enum;
 }>;
 
 
-export type InsertActivityMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_activities_one?: Maybe<(
-    { __typename?: 'activities' }
-    & Pick<Activities, 'id' | 'ticket' | 'market' | 'type' | 'quantity' | 'totalValue' | 'date'>
-  )> }
-);
+export type InsertActivityMutation = { __typename?: 'mutation_root', insert_activities_one?: { __typename?: 'activities', id: number, ticket: string, market: string, type: Activity_Enum, quantity: any, totalValue: any, date: any } | null | undefined };
 
 export type InsertLogMutationVariables = Exact<{
   contract: Scalars['String'];
@@ -2830,74 +2823,44 @@ export type InsertLogMutationVariables = Exact<{
 }>;
 
 
-export type InsertLogMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_log_one?: Maybe<(
-    { __typename?: 'log' }
-    & Pick<Log, 'id' | 'timestamp' | 'contract' | 'detail'>
-  )> }
-);
+export type InsertLogMutation = { __typename?: 'mutation_root', insert_log_one?: { __typename?: 'log', id: number, timestamp: any, contract: string, detail: string } | null | undefined };
 
 export type InsertTicketMutationVariables = Exact<{
   ticket: Scalars['String'];
   name: Scalars['String'];
-  ticket_type: Ticket_Type_Enum_Enum;
-  market: Market_Enum_Enum;
+  ticket_type: Ticket_Type_Enum;
+  market: Market_Enum;
   currency: Currency_Enum;
 }>;
 
 
-export type InsertTicketMutation = (
-  { __typename?: 'mutation_root' }
-  & { insert_tickets_one?: Maybe<(
-    { __typename?: 'tickets' }
-    & Pick<Tickets, 'ticket' | 'name' | 'ticket_type' | 'market' | 'currency'>
-  )> }
-);
+export type InsertTicketMutation = { __typename?: 'mutation_root', insert_tickets_one?: { __typename?: 'tickets', ticket: string, name: string, ticket_type: Ticket_Type_Enum, market: Market_Enum, currency: Currency_Enum } | null | undefined };
 
 export type UpdateTicketMutationVariables = Exact<{
   ticket: Scalars['String'];
   name: Scalars['String'];
-  ticket_type: Ticket_Type_Enum_Enum;
-  market: Market_Enum_Enum;
+  ticket_type: Ticket_Type_Enum;
+  market: Market_Enum;
   currency: Currency_Enum;
 }>;
 
 
-export type UpdateTicketMutation = (
-  { __typename?: 'mutation_root' }
-  & { update_tickets_by_pk?: Maybe<(
-    { __typename?: 'tickets' }
-    & Pick<Tickets, 'ticket' | 'market' | 'name' | 'ticket_type' | 'currency'>
-  )> }
-);
+export type UpdateTicketMutation = { __typename?: 'mutation_root', update_tickets_by_pk?: { __typename?: 'tickets', ticket: string, market: Market_Enum, name: string, ticket_type: Ticket_Type_Enum, currency: Currency_Enum } | null | undefined };
 
 export type UpdateTicketPriceMutationVariables = Exact<{
   ticket: Scalars['String'];
-  market: Market_Enum_Enum;
+  market: Market_Enum;
   price: Scalars['String'];
   timestamp: Scalars['timestamptz'];
 }>;
 
 
-export type UpdateTicketPriceMutation = (
-  { __typename?: 'mutation_root' }
-  & { update_tickets_by_pk?: Maybe<(
-    { __typename?: 'tickets' }
-    & Pick<Tickets, 'ticket' | 'market' | 'latest_price' | 'price_timestamp'>
-  )> }
-);
+export type UpdateTicketPriceMutation = { __typename?: 'mutation_root', update_tickets_by_pk?: { __typename?: 'tickets', ticket: string, market: Market_Enum, latest_price?: string | null | undefined, price_timestamp?: any | null | undefined } | null | undefined };
 
 export type AllActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllActivitiesQuery = (
-  { __typename?: 'query_root' }
-  & { activities: Array<(
-    { __typename?: 'activities' }
-    & Pick<Activities, 'id' | 'date' | 'ticket' | 'market' | 'type' | 'quantity' | 'totalValue'>
-  )> }
-);
+export type AllActivitiesQuery = { __typename?: 'query_root', activities: Array<{ __typename?: 'activities', id: number, date: any, ticket: string, market: string, type: Activity_Enum, quantity: any, totalValue: any }> };
 
 export type GetActivitiesForTicketQueryVariables = Exact<{
   market: Scalars['String'];
@@ -2905,53 +2868,29 @@ export type GetActivitiesForTicketQueryVariables = Exact<{
 }>;
 
 
-export type GetActivitiesForTicketQuery = (
-  { __typename?: 'query_root' }
-  & { activities: Array<(
-    { __typename?: 'activities' }
-    & Pick<Activities, 'market' | 'ticket' | 'type' | 'quantity' | 'totalValue' | 'date'>
-  )> }
-);
+export type GetActivitiesForTicketQuery = { __typename?: 'query_root', activities: Array<{ __typename?: 'activities', market: string, ticket: string, type: Activity_Enum, quantity: any, totalValue: any, date: any }> };
 
 export type AllTicketsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllTicketsQuery = (
-  { __typename?: 'query_root' }
-  & { tickets: Array<(
-    { __typename?: 'tickets' }
-    & Pick<Tickets, 'name' | 'ticket' | 'ticket_type' | 'market' | 'latest_price' | 'currency'>
-  )> }
-);
+export type AllTicketsQuery = { __typename?: 'query_root', tickets: Array<{ __typename?: 'tickets', name: string, ticket: string, ticket_type: Ticket_Type_Enum, market: Market_Enum, latest_price?: string | null | undefined, currency: Currency_Enum }> };
 
 export type PricesToUpdateQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PricesToUpdateQuery = (
-  { __typename?: 'query_root' }
-  & { prices_update_due: Array<(
-    { __typename?: 'prices_update_due' }
-    & Pick<Prices_Update_Due, 'ticket'>
-  )> }
-);
+export type PricesToUpdateQuery = { __typename?: 'query_root', prices_update_due: Array<{ __typename?: 'prices_update_due', ticket?: string | null | undefined }> };
 
 export type GetTicketQueryVariables = Exact<{
-  market: Market_Enum_Enum;
+  market: Market_Enum;
   ticket: Scalars['String'];
 }>;
 
 
-export type GetTicketQuery = (
-  { __typename?: 'query_root' }
-  & { tickets_by_pk?: Maybe<(
-    { __typename?: 'tickets' }
-    & Pick<Tickets, 'market' | 'ticket' | 'name' | 'ticket_type' | 'latest_price' | 'currency'>
-  )> }
-);
+export type GetTicketQuery = { __typename?: 'query_root', tickets_by_pk?: { __typename?: 'tickets', market: Market_Enum, ticket: string, name: string, ticket_type: Ticket_Type_Enum, latest_price?: string | null | undefined, currency: Currency_Enum } | null | undefined };
 
 
 export const InsertActivityDocument = gql`
-    mutation insertActivity($date: timestamptz!, $ticket: String!, $market: String!, $totalValue: numeric!, $quantity: numeric!, $type: activity_enum_enum!) {
+    mutation insertActivity($date: timestamptz!, $ticket: String!, $market: String!, $totalValue: numeric!, $quantity: numeric!, $type: activity_enum!) {
   insert_activities_one(
     object: {date: $date, market: $market, quantity: $quantity, ticket: $ticket, totalValue: $totalValue, type: $type}
   ) {
@@ -3034,7 +2973,7 @@ export type InsertLogMutationHookResult = ReturnType<typeof useInsertLogMutation
 export type InsertLogMutationResult = Apollo.MutationResult<InsertLogMutation>;
 export type InsertLogMutationOptions = Apollo.BaseMutationOptions<InsertLogMutation, InsertLogMutationVariables>;
 export const InsertTicketDocument = gql`
-    mutation insertTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!, $currency: currency_enum!) {
+    mutation insertTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum!, $market: market_enum!, $currency: currency_enum!) {
   insert_tickets_one(
     object: {name: $name, ticket: $ticket, ticket_type: $ticket_type, market: $market, currency: $currency}
   ) {
@@ -3077,7 +3016,7 @@ export type InsertTicketMutationHookResult = ReturnType<typeof useInsertTicketMu
 export type InsertTicketMutationResult = Apollo.MutationResult<InsertTicketMutation>;
 export type InsertTicketMutationOptions = Apollo.BaseMutationOptions<InsertTicketMutation, InsertTicketMutationVariables>;
 export const UpdateTicketDocument = gql`
-    mutation updateTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum_enum!, $market: market_enum_enum!, $currency: currency_enum!) {
+    mutation updateTicket($ticket: String!, $name: String!, $ticket_type: ticket_type_enum!, $market: market_enum!, $currency: currency_enum!) {
   update_tickets_by_pk(
     _set: {name: $name, ticket_type: $ticket_type, currency: $currency}
     pk_columns: {ticket: $ticket, market: $market}
@@ -3121,7 +3060,7 @@ export type UpdateTicketMutationHookResult = ReturnType<typeof useUpdateTicketMu
 export type UpdateTicketMutationResult = Apollo.MutationResult<UpdateTicketMutation>;
 export type UpdateTicketMutationOptions = Apollo.BaseMutationOptions<UpdateTicketMutation, UpdateTicketMutationVariables>;
 export const UpdateTicketPriceDocument = gql`
-    mutation updateTicketPrice($ticket: String!, $market: market_enum_enum!, $price: String!, $timestamp: timestamptz!) {
+    mutation updateTicketPrice($ticket: String!, $market: market_enum!, $price: String!, $timestamp: timestamptz!) {
   update_tickets_by_pk(
     _set: {latest_price: $price, price_timestamp: $timestamp}
     pk_columns: {ticket: $ticket, market: $market}
@@ -3320,7 +3259,7 @@ export type PricesToUpdateQueryHookResult = ReturnType<typeof usePricesToUpdateQ
 export type PricesToUpdateLazyQueryHookResult = ReturnType<typeof usePricesToUpdateLazyQuery>;
 export type PricesToUpdateQueryResult = Apollo.QueryResult<PricesToUpdateQuery, PricesToUpdateQueryVariables>;
 export const GetTicketDocument = gql`
-    query getTicket($market: market_enum_enum!, $ticket: String!) {
+    query getTicket($market: market_enum!, $ticket: String!) {
   tickets_by_pk(market: $market, ticket: $ticket) {
     market
     ticket

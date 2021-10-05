@@ -22,7 +22,7 @@ gql`
 `;
 
 gql`
-  query getTicket($market: market_enum_enum!, $ticket: String!) {
+  query getTicket($market: market_enum!, $ticket: String!) {
     tickets_by_pk(market: $market, ticket: $ticket) {
       market
       ticket

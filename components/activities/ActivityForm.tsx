@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import {
   InsertActivityMutationVariables,
-  Market_Enum_Enum,
-  Activity_Enum_Enum,
+  Market_Enum,
+  Activity_Enum,
 } from '../../types/generated/graphql';
 import { Field, ComponentType } from '../form/Field';
 import { getIsoCurrentDateTime } from '../../utils/common';
@@ -54,8 +54,8 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           type={{
             name: ComponentType.SELECT,
             registration: register('market', { required: true }),
-            options: Object.values(Market_Enum_Enum),
-            defaultValue: Market_Enum_Enum.Lon,
+            options: Object.values(Market_Enum),
+            defaultValue: Market_Enum.Lon,
           }}
         />
         <Field
@@ -64,8 +64,8 @@ const ActivityForm: React.FC<ActivityForm> = ({ onSubmit }) => {
           type={{
             name: ComponentType.SELECT,
             registration: register('type', { required: true }),
-            options: Object.values(Activity_Enum_Enum),
-            defaultValue: Activity_Enum_Enum.Buy,
+            options: Object.values(Activity_Enum),
+            defaultValue: Activity_Enum.Buy,
           }}
         />
         <Field

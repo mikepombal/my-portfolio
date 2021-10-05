@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { Activity_Enum_Enum } from '../../types/generated/graphql';
+import { Activity_Enum } from '../../types/generated/graphql';
 import { Activity } from '../../types/common';
 import { BarChart } from '../common/BarChart';
 
@@ -10,7 +10,7 @@ export const TicketDividends: React.FC<TicketDividendsProps> = ({
   activities,
 }) => {
   const dividendActivities = activities
-    .filter((a) => a.type === Activity_Enum_Enum.Div)
+    .filter((a) => a.type === Activity_Enum.Div)
     .map(({ totalValue, quantity, date }) => ({
       totalValue,
       quantity,

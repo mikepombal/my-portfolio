@@ -1,4 +1,4 @@
-import { Activity_Enum_Enum } from '../types/generated/graphql';
+import { Activity_Enum } from '../types/generated/graphql';
 import { Activity } from '../types/common';
 
 export const splitValue = (value: number, quantity: number): number[] => {
@@ -19,7 +19,7 @@ export const calculateDividendsPerShare = (
   length: number
 ): number[][] => {
   return activities.reduce<number[][]>((acc, a) => {
-    if (a.type !== Activity_Enum_Enum.Div) {
+    if (a.type !== Activity_Enum.Div) {
       return acc;
     }
     const split = splitValue(a.totalValue, a.quantity);
@@ -35,6 +35,6 @@ export const calculateAverage = (holdings: number[]): number =>
 
 export const sumDividends = (activities: Activity): number =>
   activities.reduce(
-    (acc, a) => (a.type === Activity_Enum_Enum.Div ? acc + a.totalValue : acc),
+    (acc, a) => (a.type === Activity_Enum.Div ? acc + a.totalValue : acc),
     0
   );
