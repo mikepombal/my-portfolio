@@ -18,18 +18,18 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
   return loading ? (
     <div>Loading</div>
   ) : (
-    <>
-      <div className="mt-8 flex bg-green-300 font-bold h-10 border-2 border-gray-800">
-        <div className={`${commonStyle} w-24`}>Ticket</div>
-        <div className={`${commonStyle} w-64`}>Name</div>
-        <div className={`${commonStyle} w-24`}>Type</div>
-        <div className={`${commonStyle} w-24`}>Market</div>
-        <div className={`${commonStyle} w-24`}>Currency</div>
-        <div className={`${commonStyle} w-24`}>Latest</div>
-        <div className={`${commonStyle} w-20`}>Holdings</div>
-        <div className={`${commonStyle} w-16`}>Edit</div>
+    <div className="flex flex-col h-full">
+      <div className="flex bg-green-300 font-bold border-2 border-gray-800 flex-grow-0">
+        <div className={`${commonStyle} w-24 py-2`}>Ticket</div>
+        <div className={`${commonStyle} w-64 py-2`}>Name</div>
+        <div className={`${commonStyle} w-24 py-2`}>Type</div>
+        <div className={`${commonStyle} w-24 py-2`}>Market</div>
+        <div className={`${commonStyle} w-24 py-2`}>Currency</div>
+        <div className={`${commonStyle} w-24 py-2`}>Latest</div>
+        <div className={`${commonStyle} w-20 py-2`}>Holdings</div>
+        <div className={`${commonStyle} w-16 py-2`}>Edit</div>
       </div>
-      <ul className="border-l-2 border-r-2 border-b-2 border-gray-800">
+      <ul className="border-l-2 border-r-2 border-b-2 border-gray-800 flex-grow overflow-scroll">
         {data?.tickets.map((ticket) => (
           <li
             key={ticket.ticket}
@@ -56,7 +56,7 @@ const TicketsList: React.FC<Prop> = ({ selectTicket }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

@@ -73,9 +73,9 @@ export function useApollo(
   user: User,
   initialState: Record<string, unknown> | null
 ): ApolloClient<Record<string, unknown>> {
-  const store = useMemo(() => initializeApollo(user, initialState), [
-    initialState,
-    user,
-  ]);
+  const store = useMemo(
+    () => initializeApollo(user, initialState),
+    [initialState, user]
+  );
   return store;
 }

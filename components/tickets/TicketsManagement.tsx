@@ -10,10 +10,8 @@ import Modal from '../Modal';
 import Button from '../Button';
 
 const TicketsManagement = (): JSX.Element => {
-  const [
-    selectedTicket,
-    setSelectedTicket,
-  ] = useState<InsertTicketMutationVariables | null>(null);
+  const [selectedTicket, setSelectedTicket] =
+    useState<InsertTicketMutationVariables | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [insertTicket] = useInsertTicketMutation();
   const [updateTicket] = useUpdateTicketMutation();
@@ -35,9 +33,11 @@ const TicketsManagement = (): JSX.Element => {
   };
 
   return (
-    <div>
-      <TicketsList selectTicket={setSelectedTicket} />
-      <div className="mt-4">
+    <div className="h-full flex flex-col pt-8">
+      <div className="flex-grow overflow-hidden">
+        <TicketsList selectTicket={setSelectedTicket} />
+      </div>
+      <div className="mt-4 flex-grow-0">
         <Button label="Add New Ticket" onClick={() => setIsAdding(true)} />
       </div>
       {(selectedTicket || isAdding) && (
