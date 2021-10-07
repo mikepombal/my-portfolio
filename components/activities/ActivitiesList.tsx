@@ -14,16 +14,16 @@ const ActivitiesList: React.FC = () => {
   return loading ? (
     <div>Loading</div>
   ) : (
-    <>
-      <div className="mt-8 flex bg-green-300 font-bold h-10 border-2 border-gray-800">
-        <div className={`${commonStyle} w-24`}>Date</div>
-        <div className={`${commonStyle} w-24`}>Ticket</div>
-        <div className={`${commonStyle} w-24`}>Market</div>
-        <div className={`${commonStyle} w-24`}>Type</div>
-        <div className={`${commonStyle} w-24`}>Quantity</div>
-        <div className={`${commonStyle} w-24`}>Value</div>
+    <div className="flex flex-col h-full">
+      <div className="flex bg-green-300 font-bold border-2 border-gray-800 flex-grow-0">
+        <div className={`${commonStyle} w-24 py-2`}>Date</div>
+        <div className={`${commonStyle} w-24 py-2`}>Ticket</div>
+        <div className={`${commonStyle} w-24 py-2`}>Market</div>
+        <div className={`${commonStyle} w-24 py-2`}>Type</div>
+        <div className={`${commonStyle} w-24 py-2`}>Quantity</div>
+        <div className={`${commonStyle} w-24 py-2`}>Value</div>
       </div>
-      <ul className="border-l-2 border-r-2 border-b-2 border-gray-800">
+      <ul className="border-2 border-t-0 border-gray-800 flex-grow overflow-scroll">
         {data?.activities.map((activity) => (
           <li
             key={activity.id}
@@ -44,7 +44,7 @@ const ActivitiesList: React.FC = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
