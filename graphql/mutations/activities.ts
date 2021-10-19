@@ -29,3 +29,11 @@ gql`
     }
   }
 `;
+
+gql`
+  mutation insertActivities($objects: [activities_insert_input!]!) {
+    insert_activities(objects: $objects) {
+      affected_rows
+    }
+  }
+`;

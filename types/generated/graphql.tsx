@@ -2817,6 +2817,13 @@ export type InsertActivityMutationVariables = Exact<{
 
 export type InsertActivityMutation = { __typename?: 'mutation_root', insert_activities_one?: { __typename?: 'activities', id: number, ticket: string, market: string, type: Activity_Enum, quantity: any, totalValue: any, date: any } | null | undefined };
 
+export type InsertActivitiesMutationVariables = Exact<{
+  objects: Array<Activities_Insert_Input> | Activities_Insert_Input;
+}>;
+
+
+export type InsertActivitiesMutation = { __typename?: 'mutation_root', insert_activities?: { __typename?: 'activities_mutation_response', affected_rows: number } | null | undefined };
+
 export type InsertLogMutationVariables = Exact<{
   contract: Scalars['String'];
   detail: Scalars['String'];
@@ -2935,6 +2942,39 @@ export function useInsertActivityMutation(baseOptions?: Apollo.MutationHookOptio
 export type InsertActivityMutationHookResult = ReturnType<typeof useInsertActivityMutation>;
 export type InsertActivityMutationResult = Apollo.MutationResult<InsertActivityMutation>;
 export type InsertActivityMutationOptions = Apollo.BaseMutationOptions<InsertActivityMutation, InsertActivityMutationVariables>;
+export const InsertActivitiesDocument = gql`
+    mutation insertActivities($objects: [activities_insert_input!]!) {
+  insert_activities(objects: $objects) {
+    affected_rows
+  }
+}
+    `;
+export type InsertActivitiesMutationFn = Apollo.MutationFunction<InsertActivitiesMutation, InsertActivitiesMutationVariables>;
+
+/**
+ * __useInsertActivitiesMutation__
+ *
+ * To run a mutation, you first call `useInsertActivitiesMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertActivitiesMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertActivitiesMutation, { data, loading, error }] = useInsertActivitiesMutation({
+ *   variables: {
+ *      objects: // value for 'objects'
+ *   },
+ * });
+ */
+export function useInsertActivitiesMutation(baseOptions?: Apollo.MutationHookOptions<InsertActivitiesMutation, InsertActivitiesMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertActivitiesMutation, InsertActivitiesMutationVariables>(InsertActivitiesDocument, options);
+      }
+export type InsertActivitiesMutationHookResult = ReturnType<typeof useInsertActivitiesMutation>;
+export type InsertActivitiesMutationResult = Apollo.MutationResult<InsertActivitiesMutation>;
+export type InsertActivitiesMutationOptions = Apollo.BaseMutationOptions<InsertActivitiesMutation, InsertActivitiesMutationVariables>;
 export const InsertLogDocument = gql`
     mutation insertLog($contract: String!, $detail: String!) {
   insert_log_one(object: {contract: $contract, detail: $detail}) {

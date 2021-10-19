@@ -1,4 +1,4 @@
-import { Activities } from '../types/generated/graphql';
+import { Activities, Market_Enum } from '../types/generated/graphql';
 export interface User {
   username: string;
   token: string;
@@ -12,3 +12,13 @@ export type Activity = Array<
     'market' | 'ticket' | 'type' | 'quantity' | 'totalValue' | 'date'
   >
 >;
+
+export type Activity2 = {
+  id: number;
+  ticket: Activities['ticket'];
+  market: Market_Enum;
+  type: Activities['type'];
+  date: string;
+  quantity: number;
+  totalValue: number;
+};

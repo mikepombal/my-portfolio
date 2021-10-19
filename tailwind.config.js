@@ -3,6 +3,10 @@ module.exports = {
   theme: {
     extend: {},
   },
-  variants: {},
-  plugins: []
+  variants: {
+    extend: {
+      margin: ['last'],
+    },
+  },
+  plugins: [],
 };

@@ -1,18 +1,24 @@
 import { useState } from 'react';
 import {
   InsertActivityMutationVariables,
+  InsertActivitiesMutationVariables,
   useInsertActivityMutation,
+  useInsertActivitiesMutation,
 } from '../../types/generated/graphql';
 import ActivitiesList from './ActivitiesList';
 import ActivityForm from './ActivityForm';
+import ActivitiesForm from './ActivitiesForm';
 import Modal from '../Modal';
 import Button from '../Button';
 
-const ActivitiesManagement = (): JSX.Element => {
-  const [isAdding, setIsAdding] = useState(false);
-  const [insertActivity] = useInsertActivityMutation();
+type ModalType = null | 'AddActivity' | 'AddBulk';
 
-  const onSubmit = async (data: InsertActivityMutationVariables) => {
+const ActivitiesManagement = (): JSX.Element => {
+  const [modal, setModal] = useState<ModalType>(null);
+  const [insertActivity] = useInsertActivityMutation();
+  const [insertActivities] = useInsertActivitiesMutation();
+
+  const onSubmitAddActivity = async (data: InsertActivityMutationVariables) => {
     await insertActivity({
       variables: {
         ...data,
@@ -21,7 +27,45 @@ const ActivitiesManagement = (): JSX.Element => {
       },
       refetchQueries: ['allActivities'],
     });
-    setIsAdding(false);
+    setModal(null);
+  };
+
+  const onSubmitAddBulkActivities = async (
+    data: InsertActivitiesMutationVariables
+  ) => {
+    await insertActivities({
+      variables: data,
+      refetchQueries: ['allActivities'],
+    });
+    setModal(null);
+  };
+
+  const renderModal = (m: ModalType) => {
+    switch (m) {
+      case 'AddActivity': {
+        return (
+          <Modal
+            onCancel={() => {
+              setModal(null);
+            }}
+          >
+            <ActivityForm onSubmit={onSubmitAddActivity} />
+          </Modal>
+        );
+      }
+      case 'AddBulk': {
+        return (
+          <Modal
+            onCancel={() => {
+              setModal(null);
+            }}
+          >
+            <ActivitiesForm onSubmit={onSubmitAddBulkActivities} />
+          </Modal>
+        );
+      }
+    }
+    return null;
   };
 
   return (
@@ -30,17 +74,14 @@ const ActivitiesManagement = (): JSX.Element => {
         <ActivitiesList />
       </div>
       <div className="mt-4 flex-grow-0">
-        <Button label="Add New Activity" onClick={() => setIsAdding(true)} />
+        <Button label="Add Activity" onClick={() => setModal('AddActivity')} />
+        <Button
+          label="Add Bulk Activities"
+          classname="ml-2"
+          onClick={() => setModal('AddBulk')}
+        />
       </div>
-      {isAdding && (
-        <Modal
-          onCancel={() => {
-            setIsAdding(false);
-          }}
-        >
-          <ActivityForm onSubmit={onSubmit} />
-        </Modal>
-      )}
+      {renderModal(modal)}
     </div>
   );
 };
